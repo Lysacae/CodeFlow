@@ -109,7 +109,7 @@ export function AdminPage() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6">
+    <div className="page">
       <div>
         <h1 className="text-3xl font-semibold">Admin</h1>
         <p className="mt-2 text-[var(--text-secondary)]">Comptes enregistrés sur CodeFlow.</p>

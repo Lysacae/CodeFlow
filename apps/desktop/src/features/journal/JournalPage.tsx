@@ -49,28 +49,32 @@ export function JournalPage() {
   });
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6">
-      <div>
-        <h1 className="text-3xl font-semibold">Journal des erreurs</h1>
-        <p className="mt-2 text-[var(--text-secondary)]">
+    <div className="page">
+      <div className="page-head">
+        <div>
+          <div className="label kicker">Télémétrie</div>
+          <h1>Journal des erreurs</h1>
+          <p className="sub">
           Seulement les échecs réellement rencontrés dans les exercices. Rien n'est inventé.
-        </p>
+          </p>
+        </div>
       </div>
 
-      <GlassCard className="grid gap-3 md:grid-cols-4">
-        <select className="rounded-[14px] border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-2" value={languageId} onChange={(e) => setLanguageId(e.target.value)}>
+      <GlassCard className="filters">
+        <div className="filter-grid">
+        <select className="select" value={languageId} onChange={(e) => setLanguageId(e.target.value)}>
           <option value="all">Tous les langages</option>
           {languages.map((lang) => (
             <option key={lang.id} value={lang.id}>{lang.name}</option>
           ))}
         </select>
-        <select className="rounded-[14px] border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-2" value={chapter} onChange={(e) => setChapter(e.target.value)}>
+        <select className="select" value={chapter} onChange={(e) => setChapter(e.target.value)}>
           <option value="all">Tous les chapitres</option>
           <option value="1">Chapitre 1</option>
           <option value="2">Chapitre 2</option>
           <option value="3">Chapitre 3</option>
         </select>
-        <select className="rounded-[14px] border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-2" value={kind} onChange={(e) => setKind(e.target.value)}>
+        <select className="select" value={kind} onChange={(e) => setKind(e.target.value)}>
           <option value="all">Tous les types</option>
           {KINDS.map((item) => (
             <option key={item} value={item}>{errorLabel(item)}</option>
@@ -80,9 +84,10 @@ export function JournalPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Rechercher"
-          className="rounded-[14px] border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-2 outline-none"
+          className="input"
         />
-        <label className="flex items-center gap-2 text-sm md:col-span-4">
+        </div>
+        <label className="check" style={{ marginTop: 16 }}>
           <input type="checkbox" checked={recurrentOnly} onChange={(e) => setRecurrentOnly(e.target.checked)} />
           Erreurs récurrentes seulement
         </label>

@@ -98,15 +98,15 @@ export function CodeEditor({
         });
 
   return (
-    <div className="relative flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--bg-secondary)]">
+    <div className="card editor relative flex flex-col">
       {running ? (
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-[var(--overlay-bg)] backdrop-blur-[2px]">
           <Spinner label="Exécution en cours…" />
         </div>
       ) : null}
 
-      <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-3">
-        <div className="text-sm text-[var(--text-secondary)]">Éditeur</div>
+      <div className="ed-head">
+        <div className="label">Éditeur</div>
         <div className="flex flex-wrap items-center justify-end gap-2">
           {extraActions}
           {onReset ? (

@@ -1,6 +1,6 @@
 [package]
 name = "codeflow"
-version = "1.4.0"
+version = "1.4.1"
 description = "CodeFlow — apprentissage de la programmation"
 authors = ["CodeFlow"]
 edition = "2021"

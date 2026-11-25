@@ -12,9 +12,11 @@ apps/desktop/dist/
 portable/runtimes/
 portable/_tmp/
 portable/CodeFlow/*.exe
+portable/CodeFlow/*.old
 /CodeFlow-portable.zip
 .cursor/
 .theme-c-ref/
+.theme-c-extract/
 *sb_secret*
 supabase.secret
 *.pem

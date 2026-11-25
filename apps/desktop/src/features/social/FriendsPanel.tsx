@@ -44,8 +44,8 @@ export function FriendsPanel({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 z-40 flex items-start justify-center bg-black/45 px-4 py-16" onClick={onClose}>
-      <div className="w-full max-w-lg" onClick={(event) => event.stopPropagation()}>
+    <div className="modal-layer" onClick={onClose}>
+      <div className="modal" onClick={(event) => event.stopPropagation()}>
       <GlassCard className="max-h-[80vh] overflow-y-auto">
         <div className="flex items-center justify-between gap-3">
           <h2 className="text-xl font-semibold">Amis</h2>

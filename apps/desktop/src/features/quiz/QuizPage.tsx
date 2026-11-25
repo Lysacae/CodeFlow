@@ -124,7 +124,7 @@ export function QuizPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
+    <div className="page narrow">
       <div>
         <Link
           to={`/learn/${languageId}`}

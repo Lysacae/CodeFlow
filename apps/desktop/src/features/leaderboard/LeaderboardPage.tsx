@@ -122,11 +122,12 @@ export function LeaderboardPage() {
         : "Progression des apprenants CodeFlow, triée par leçons et exercices validés.";
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6">
-      <div className="flex items-start justify-between gap-4">
+    <div className="page">
+      <div className="page-head">
         <div>
-          <h1 className="text-3xl font-semibold">Classement</h1>
-          <p className="mt-2 text-[var(--text-secondary)]">{intro}</p>
+          <div className="label kicker">Constellation</div>
+          <h1>Classement</h1>
+          <p className="sub">{intro}</p>
         </div>
         <div className="flex flex-col items-end gap-1">
           <button
@@ -135,7 +136,7 @@ export function LeaderboardPage() {
             title={remaining > 0 ? `Patientez ${remaining} s` : "Recharger le classement"}
             onClick={() => void refresh()}
             disabled={loading || refreshing}
-            className="flex h-10 w-10 items-center justify-center rounded-[14px] border border-[var(--border)] text-[var(--text-secondary)] transition hover:bg-[var(--surface)] hover:text-[var(--text)] disabled:opacity-50"
+            className="btn btn-secondary"
           >
             {refreshing ? (
               <Spinner size="sm" />
@@ -176,17 +177,13 @@ export function LeaderboardPage() {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="tabs">
         {tabs.map((item) => (
           <button
             key={item.id}
             type="button"
             onClick={() => setTab(item.id)}
-            className={
-              tab === item.id
-                ? "rounded-[14px] bg-[var(--surface-strong)] px-4 py-2 text-sm font-medium text-[var(--text)]"
-                : "rounded-[14px] border border-[var(--border)] px-4 py-2 text-sm text-[var(--text-secondary)]"
-            }
+            className={tab === item.id ? "tab active" : "tab"}
           >
             {item.label}
           </button>
@@ -202,10 +199,10 @@ export function LeaderboardPage() {
       {error ? <GlassCard className="text-sm text-[var(--error)]">{error}</GlassCard> : null}
 
       {!loading && !error ? (
-        <GlassCard className="overflow-hidden !p-0">
+        <GlassCard className="!p-2" >
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[36rem] text-left text-sm">
-              <thead className="border-b border-[var(--border)] bg-[var(--surface)] text-[var(--text-secondary)]">
+            <table className="tbl">
+              <thead>
                 <tr>
                   <th className="px-4 py-3 font-medium">#</th>
                   <th className="px-4 py-3 font-medium">Apprenant</th>
@@ -250,15 +247,12 @@ export function LeaderboardPage() {
                       <tr
                         key={entry.id}
                         onClick={() => navigate(`/profil/${entry.id}`)}
-                        className={
-                          isMe
-                            ? "cursor-pointer border-b border-[var(--border)] bg-[color-mix(in_srgb,var(--accent)_14%,transparent)]"
-                            : "cursor-pointer border-b border-[var(--border)] last:border-b-0 hover:bg-[var(--surface)]"
-                        }
+                        className={isMe ? "me" : undefined}
+                        style={{ cursor: "pointer" }}
                       >
-                        <td className="px-4 py-3 font-semibold tabular-nums">{index + 1}</td>
-                        <td className="px-4 py-3">
-                          <div className="flex items-center gap-3">
+                        <td><span className={`pos pos${Math.min(index + 1, 6)}`}>{String(index + 1).padStart(2, "0")}</span></td>
+                        <td>
+                          <div className="row gap-3">
                             {entry.avatarData ? (
                               <img
                                 src={entry.avatarData}

@@ -18,28 +18,28 @@ export function RevisionPage() {
   const mastered = studied.filter((card) => card.mastery >= 70 && card.successes >= 3);
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6">
-      <div>
-        <h1 className="text-3xl font-semibold">Révision</h1>
-        <p className="mt-2 max-w-2xl text-[var(--text-secondary)]">
+    <div className="page">
+      <div className="page-head">
+        <div>
+          <div className="label kicker">Mémoire orbitale</div>
+          <h1>Révision</h1>
+          <p className="sub">
           Les notions reviennent selon les réussites, les échecs, les indices et les solutions consultées.
           Une seule réussite ne marque pas la notion comme maîtrisée.
-        </p>
+          </p>
+        </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
-        <GlassCard>
-          <p className="text-sm text-[var(--text-secondary)]">À revoir</p>
-          <p className="mt-1 text-2xl font-semibold">{due.length}</p>
-        </GlassCard>
-        <GlassCard>
-          <p className="text-sm text-[var(--text-secondary)]">Maîtrise fragile</p>
-          <p className="mt-1 text-2xl font-semibold">{revisit.length}</p>
-        </GlassCard>
-        <GlassCard>
-          <p className="text-sm text-[var(--text-secondary)]">Maîtrisées</p>
-          <p className="mt-1 text-2xl font-semibold">{mastered.length}</p>
-        </GlassCard>
+      <div className="ds-grid" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+        <div className="card rev-stat">
+          <div><div className="label">À revoir</div><div className="stat-num" style={{ marginTop: 14 }}>{due.length}</div></div>
+        </div>
+        <div className="card rev-stat">
+          <div><div className="label">Maîtrise fragile</div><div className="stat-num" style={{ marginTop: 14 }}>{revisit.length}</div></div>
+        </div>
+        <div className="card rev-stat">
+          <div><div className="label">Maîtrisées</div><div className="stat-num" style={{ marginTop: 14 }}>{mastered.length}</div></div>
+        </div>
       </div>
 
       <Section

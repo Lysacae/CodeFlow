@@ -380,15 +380,13 @@ export function LessonPage() {
   const isTheoryOnly = lesson.kind !== "file-wizard" && !exercise;
 
   const renderSections = (sections: Section[]) => (
-    <GlassCard className="space-y-5 text-left">
+    <article className={focusMode ? "card focus-lesson" : "card lesson-card"}>
       {sections.map((section, index) => {
         if (section.type === "prose" && section.body) {
           return (
-            <div key={index} className="space-y-2">
-              {section.heading ? (
-                <p className="cf-kicker">{section.heading}</p>
-              ) : null}
-              <p className="prose-lesson">{renderProse(section.body)}</p>
+            <div key={index} className={focusMode ? "fl" : `ls-row${/retenir/i.test(section.heading ?? "") ? " key" : ""}`}>
+              {section.heading ? <div className={focusMode ? "label" : "ls-k label"}>{section.heading}</div> : <div />}
+              <p>{renderProse(section.body)}</p>
             </div>
           );
         }
@@ -397,30 +395,29 @@ export function LessonPage() {
         }
         return null;
       })}
-    </GlassCard>
+    </article>
   );
 
   const theoryBlocks = renderSections(lesson.sections);
 
   return (
-    <div className="mx-auto w-full max-w-6xl space-y-6">
+    <div className={focusMode ? "focus" : "page"} style={focusMode ? undefined : { maxWidth: 860 }}>
       {!focusMode ? (
-        <div className="text-center">
-          <Link
-            to={`/learn/${languageId}`}
-            className="text-sm text-[var(--text-secondary)] hover:text-[var(--text)]"
-          >
+        <div className="lesson-head">
+          <Link className="back" to={`/learn/${languageId}`}>
             ← Parcours {language.name}
           </Link>
-          <p className="cf-kicker mt-4">
-            Chapitre {level.chapter ?? 1} · Niveau {level.id} · {level.title}
-          </p>
-          <h1 className="mt-1 text-3xl font-semibold">{lesson.title}</h1>
+          <div className="crumbs">
+            <span>Chapitre {level.chapter ?? 1}</span><i /><span style={{ color: "var(--accent)" }}>Niveau {level.id}</span><i /><span>{level.title}</span>
+          </div>
+          <h1>{lesson.title}</h1>
         </div>
       ) : (
-        <div className="text-left">
-          <p className="text-sm text-[var(--text-secondary)]">Mode Focus</p>
-          <h1 className="text-2xl font-semibold">{lesson.title}</h1>
+        <div className="focus-head">
+          <div>
+            <div className="label" style={{ color: "var(--cyan)" }}>● Mode Focus</div>
+            <h1 style={{ fontSize: 26, marginTop: 6 }}>{lesson.title}</h1>
+          </div>
         </div>
       )}
 
@@ -460,7 +457,7 @@ export function LessonPage() {
       ) : null}
 
       {exercise ? (
-        <div className="grid gap-6 xl:grid-cols-[1fr_1.05fr]">
+        <div className="focus-grid">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}

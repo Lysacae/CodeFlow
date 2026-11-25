@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./tokens.css";
+@import "./piste.css";
 
 @theme {
   --color-bg: var(--bg-primary);
@@ -53,8 +54,14 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
 }
+
+h1 { font-size: var(--fs-2xl); line-height: var(--lh-tight); }
+h2 { font-size: var(--fs-xl); }
+h3 { font-size: var(--fs-lg); }
 
 body::before {
   content: "";

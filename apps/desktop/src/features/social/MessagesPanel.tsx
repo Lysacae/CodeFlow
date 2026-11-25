@@ -3,7 +3,6 @@ import { MESSAGE_EMOJIS } from "@/shared/lib/social";
 import { useAuthStore } from "@/shared/store/authStore";
 import { useSocialStore } from "@/shared/store/socialStore";
 import { Button } from "@/shared/ui/Button";
-import { GlassCard } from "@/shared/ui/GlassCard";
 
 function formatTime(iso: string) {
   const date = new Date(iso);
@@ -136,9 +135,9 @@ export function MessagesPanel({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/45 px-4 py-8" onClick={onClose}>
-      <div className="w-full max-w-4xl" onClick={(event) => event.stopPropagation()}>
-        <GlassCard className="flex h-[min(640px,86vh)] flex-col overflow-hidden !p-0">
+    <div className="modal-layer" onClick={onClose}>
+      <div className="modal msg-modal" onClick={(event) => event.stopPropagation()}>
+        <div className="flex h-[min(640px,86vh)] flex-col overflow-hidden">
           <div className="flex shrink-0 items-center justify-between border-b border-[var(--border)] px-4 py-3">
             <h2 className="text-lg font-semibold">Messagerie</h2>
             <Button variant="ghost" onClick={onClose}>Fermer</Button>
@@ -361,7 +360,7 @@ export function MessagesPanel({ onClose }: { onClose: () => void }) {
               )}
             </section>
           </div>
-        </GlassCard>
+        </div>
       </div>
     </div>
   );
