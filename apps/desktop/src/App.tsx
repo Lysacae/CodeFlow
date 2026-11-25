@@ -1,11 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
+import { invoke } from "@tauri-apps/api/core";
 import { AppRouter } from "@/app/router";
 import { DiscordPresence } from "@/features/discord/DiscordPresence";
+import { MaintenanceScreen } from "@/features/maintenance/MaintenanceScreen";
 import { SocialToasts } from "@/features/social/SocialToasts";
 import { UpdateDialog } from "@/features/update/UpdateDialog";
 import { apiLatestUpdate } from "@/shared/lib/api";
+import { MAINTENANCE_MODE, maintenanceBypassSync } from "@/shared/lib/maintenance";
 import { APP_VERSION, isNewerVersion } from "@/shared/lib/version";
+import { OrbitBackdrop } from "@/shared/ui/OrbitBackdrop";
 import { useUpdateStore } from "@/shared/store/updateStore";
 import { useAuthStore } from "@/shared/store/authStore";
 import { useOnboardingStore } from "@/shared/store/onboardingStore";
@@ -27,6 +31,28 @@ export default function App() {
   const dialogOpen = useUpdateStore((s) => s.dialogOpen);
   const setAvailable = useUpdateStore((s) => s.setAvailable);
   const closeDialog = useUpdateStore((s) => s.closeDialog);
+  const [bypass, setBypass] = useState<boolean | null>(() =>
+    maintenanceBypassSync() ? true : null,
+  );
+
+  useEffect(() => {
+    if (!MAINTENANCE_MODE || bypass === true) return;
+    let cancelled = false;
+    void (async () => {
+      let allowed = false;
+      try {
+        if ("__TAURI_INTERNALS__" in window) {
+          allowed = await invoke<boolean>("maintenance_bypass");
+        }
+      } catch {
+        allowed = false;
+      }
+      if (!cancelled) setBypass(allowed);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [bypass]);
 
   useEffect(() => {
     void loadSession();
@@ -80,23 +106,36 @@ export default function App() {
     };
   }, [setAvailable]);
 
-  if (!authReady || onboardingDone === null) {
+  if (!authReady || onboardingDone === null || (MAINTENANCE_MODE && bypass === null)) {
     return (
-      <div className="flex h-full items-center justify-center">
+      <div className="relative flex h-full items-center justify-center">
+        <OrbitBackdrop />
         <Spinner label="Chargement…" />
       </div>
     );
   }
 
+  if (MAINTENANCE_MODE && bypass !== true) {
+    return (
+      <div className="relative flex h-full w-full min-h-0 flex-col overflow-hidden">
+        <OrbitBackdrop />
+        <MaintenanceScreen />
+      </div>
+    );
+  }
+
   return (
-    <div className="flex h-full w-full min-h-0 flex-col overflow-hidden">
+    <div className="relative flex h-full w-full min-h-0 flex-col overflow-hidden">
+      <OrbitBackdrop />
       <BrowserRouter>
-        <DiscordPresence />
-        {update && dialogOpen ? (
-          <UpdateDialog update={update} onLater={closeDialog} />
-        ) : null}
-        <AppRouter />
-        <SocialToasts />
+        <div className="relative z-[1] flex h-full min-h-0 w-full flex-1 flex-col">
+          <DiscordPresence />
+          {update && dialogOpen ? (
+            <UpdateDialog update={update} onLater={closeDialog} />
+          ) : null}
+          <AppRouter />
+          <SocialToasts />
+        </div>
       </BrowserRouter>
     </div>
   );

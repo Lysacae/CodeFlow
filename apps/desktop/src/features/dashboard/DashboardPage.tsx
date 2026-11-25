@@ -39,13 +39,13 @@ export function DashboardPage() {
       <motion.section
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        className="grid gap-6 lg:grid-cols-[1.4fr_0.8fr]"
+        className="grid items-stretch gap-5 lg:grid-cols-[1fr_400px]"
       >
-        <GlassCard className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(108,140,255,0.18),transparent_45%)]" />
+        <GlassCard className="relative flex min-h-[280px] items-center overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(107,124,255,0.16),transparent_46%)]" />
           <div className="relative space-y-4">
-            <p className="text-sm text-[var(--text-secondary)]">Tableau de bord</p>
-            <h1 className="max-w-xl text-3xl font-semibold tracking-tight text-[var(--text)] md:text-4xl">
+            <p className="cf-kicker">Tableau de bord</p>
+            <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-[var(--text)]">
               {hasStarted
                 ? "Poursuivez votre apprentissage avec méthode."
                 : "Commencez votre apprentissage."}
@@ -81,9 +81,9 @@ export function DashboardPage() {
           </div>
         </GlassCard>
 
-        <GlassCard className="flex items-center justify-between gap-4">
+        <GlassCard className="flex items-center justify-between gap-6">
           <div>
-            <p className="text-sm text-[var(--text-secondary)]">Progression globale</p>
+            <p className="cf-kicker">Progression globale</p>
             <p className="mt-2 text-2xl font-semibold">{completed} leçons</p>
             <p className="text-sm text-[var(--text-secondary)]">
               terminées sur {totalLessons}
@@ -120,9 +120,9 @@ export function DashboardPage() {
       ) : null}
 
       <section>
-        <div className="mb-4">
-          <h2 className="text-xl font-semibold">Langages</h2>
-          <p className="text-sm text-[var(--text-secondary)]">
+        <div className="mb-4 flex flex-wrap items-baseline gap-3">
+          <h2 className="text-lg font-semibold">Langages</h2>
+          <p className="text-sm text-[var(--text-3)]">
             Sélectionnez un parcours pour commencer.
           </p>
         </div>

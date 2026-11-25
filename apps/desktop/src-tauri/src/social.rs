@@ -825,12 +825,46 @@ fn merge_learning(current: Option<&Value>, incoming: Option<&Value>) -> Value {
     json!({ "notions": notions, "journal": journal })
 }
 
+fn reset_stamp(value: &Value) -> &str {
+    value
+        .get("resetAt")
+        .and_then(|item| item.as_str())
+        .filter(|stamp| !stamp.is_empty())
+        .unwrap_or("")
+}
+
 fn merge_progression(current: &Value, incoming: &Value) -> Value {
     if !incoming.is_object() {
         return current.clone();
     }
     if !current.is_object() {
         return incoming.clone();
+    }
+    let current_reset = reset_stamp(current);
+    let incoming_reset = reset_stamp(incoming);
+    if current_reset != incoming_reset {
+        let (winner, other) = if incoming_reset > current_reset {
+            (incoming, current)
+        } else {
+            (current, incoming)
+        };
+        let mut out = winner.clone();
+        if let Some(obj) = out.as_object_mut() {
+            obj.insert(
+                "learning".into(),
+                merge_learning(winner.get("learning"), other.get("learning")),
+            );
+            let tutorial = winner
+                .get("tutorialDone")
+                .and_then(|v| v.as_bool())
+                .unwrap_or(false)
+                || other
+                    .get("tutorialDone")
+                    .and_then(|v| v.as_bool())
+                    .unwrap_or(false);
+            obj.insert("tutorialDone".into(), json!(tutorial));
+        }
+        return out;
     }
     let mut out = incoming.clone();
     let obj = out.as_object_mut().expect("object");
@@ -887,6 +921,16 @@ fn merge_progression(current: &Value, incoming: &Value) -> Value {
         "updatedAt".into(),
         json!(if at_current > at_incoming { at_current } else { at_incoming }),
     );
+    if obj.get("creditFloor").is_none() {
+        if let Some(floor) = current.get("creditFloor") {
+            obj.insert("creditFloor".into(), floor.clone());
+        }
+    }
+    if obj.get("resetAt").is_none() {
+        if let Some(stamp) = current.get("resetAt") {
+            obj.insert("resetAt".into(), stamp.clone());
+        }
+    }
     out
 }
 

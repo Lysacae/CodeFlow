@@ -44,6 +44,14 @@ export type UsageStats = {
   activeDays: string[];
 };
 
+/** Leçons, exercices, Q/R et succès déjà comptés au moment d'un reset admin. */
+export type CreditFloor = {
+  lessons: string[];
+  exercises: string[];
+  qaKeys: string[];
+  achievementIds: string[];
+};
+
 export type ProgressionDoc = {
   tutorialDone: boolean;
   claimedLessons: string[];
@@ -56,6 +64,8 @@ export type ProgressionDoc = {
   rankId: string;
   rankName: string;
   updatedAt: string;
+  resetAt: string;
+  creditFloor?: CreditFloor;
   learning: LearningState;
 };
 
@@ -119,8 +129,29 @@ export function emptyProgression(): ProgressionDoc {
     rankId: "bronze",
     rankName: "Bronze",
     updatedAt: "",
+    resetAt: "",
     learning: emptyLearning(),
   };
+}
+
+function readFloor(raw: unknown): CreditFloor | undefined {
+  if (!raw || typeof raw !== "object") return undefined;
+  const data = raw as Record<string, unknown>;
+  const floor: CreditFloor = {
+    lessons: asStringArray(data.lessons),
+    exercises: asStringArray(data.exercises),
+    qaKeys: asStringArray(data.qaKeys),
+    achievementIds: asStringArray(data.achievementIds),
+  };
+  if (
+    floor.lessons.length === 0 &&
+    floor.exercises.length === 0 &&
+    floor.qaKeys.length === 0 &&
+    floor.achievementIds.length === 0
+  ) {
+    return undefined;
+  }
+  return floor;
 }
 
 function asStringArray(value: unknown): string[] {
@@ -178,6 +209,8 @@ export function normalizeProgression(raw: unknown): ProgressionDoc {
     rankId: typeof data.rankId === "string" ? data.rankId : "bronze",
     rankName: typeof data.rankName === "string" ? data.rankName : "Bronze",
     updatedAt: typeof data.updatedAt === "string" ? data.updatedAt : "",
+    resetAt: typeof data.resetAt === "string" ? data.resetAt : "",
+    creditFloor: readFloor(data.creditFloor),
     learning: normalizeLearning(data.learning),
   };
 }
@@ -211,6 +244,17 @@ function union(a: string[], b: string[]): string[] {
 }
 
 export function mergeProgression(local: ProgressionDoc, remote: ProgressionDoc): ProgressionDoc {
+  const localReset = local.resetAt || "";
+  const remoteReset = remote.resetAt || "";
+  if (localReset !== remoteReset) {
+    const winner = localReset > remoteReset ? local : remote;
+    const other = winner === local ? remote : local;
+    return {
+      ...winner,
+      tutorialDone: winner.tutorialDone || other.tutorialDone,
+      learning: mergeLearning(winner.learning ?? emptyLearning(), other.learning ?? emptyLearning()),
+    };
+  }
   const stats = emptyStats();
   stats.themes = union(local.stats.themes, remote.stats.themes);
   stats.activeDays = union(local.stats.activeDays, remote.stats.activeDays).slice(-40);
@@ -250,6 +294,8 @@ export function mergeProgression(local: ProgressionDoc, remote: ProgressionDoc):
     qaGrants,
     qaSeenAttempts,
     stats,
+    resetAt: localReset,
+    creditFloor: newer.creditFloor ?? local.creditFloor ?? remote.creditFloor,
     learning: mergeLearning(local.learning ?? emptyLearning(), remote.learning ?? emptyLearning()),
   };
 }
@@ -285,10 +331,15 @@ export function absorbActivity(
   stats.friendPeak = Math.max(stats.friendPeak, extras.friendCount);
   stats.tutorial = stats.tutorial || doc.tutorialDone;
 
-  const claimed = new Set(doc.claimedLessons);
-  for (const id of progress.completedLessons) claimed.add(id);
+  const floorLessons = new Set(doc.creditFloor?.lessons ?? []);
+  const floorQa = new Set(doc.creditFloor?.qaKeys ?? []);
+  const claimed = new Set([...doc.claimedLessons].filter((id) => !floorLessons.has(id)));
+  for (const id of progress.completedLessons) {
+    if (!floorLessons.has(id)) claimed.add(id);
+  }
 
   const qaGrants = { ...doc.qaGrants };
+  for (const key of floorQa) delete qaGrants[key];
   const qaSeenAttempts = { ...doc.qaSeenAttempts };
   for (const language of languages) {
     const qa = progress.qa?.[language.id];
@@ -297,6 +348,7 @@ export function absorbActivity(
     const known = seen != null;
     for (const id of qa.correctIds) {
       const key = `${language.id}:${id}`;
+      if (floorQa.has(key)) continue;
       if (!qaGrants[key]) qaGrants[key] = 1;
     }
     if (!known) {
@@ -421,22 +473,35 @@ export function evaluateProgression(doc: ProgressionDoc, progress: ProgressSnaps
   programLangs: number;
 }): ProgressionDoc {
   let achievements = new Set(doc.achievements);
+  let suppressed = new Set(doc.creditFloor?.achievementIds ?? []);
+  for (const id of suppressed) achievements.delete(id);
   let xp = 0;
   let level = 1;
   let rank = rankForLevel(1);
   for (let pass = 0; pass < 4; pass += 1) {
     const ctx = buildCtx({ ...doc, achievements: [...achievements] }, progress, extras, rankIndex(rank.id));
+    const still = new Set<string>();
     for (const item of ACHIEVEMENTS) {
-      if (item.test(ctx)) achievements.add(item.id);
+      const passed = item.test(ctx);
+      if (suppressed.has(item.id) && passed) {
+        still.add(item.id);
+        continue;
+      }
+      if (passed) achievements.add(item.id);
     }
+    suppressed = still;
     const next = { ...doc, achievements: [...achievements] };
     xp = xpFrom(next);
     level = levelForXp(xp);
     rank = rankForLevel(level);
   }
+  const creditFloor = doc.creditFloor
+    ? { ...doc.creditFloor, achievementIds: [...suppressed] }
+    : undefined;
   return {
     ...doc,
     achievements: [...achievements],
+    creditFloor,
     xp,
     level,
     rankId: rank.id,

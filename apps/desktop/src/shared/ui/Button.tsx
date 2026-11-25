@@ -15,15 +15,15 @@ export function Button({
   return (
     <button
       className={clsx(
-        "inline-flex items-center justify-center gap-2 rounded-[14px] px-4 py-2.5 text-sm font-medium transition duration-200 disabled:cursor-not-allowed disabled:opacity-50",
+        "inline-flex h-[42px] items-center justify-center gap-2 rounded-full px-5 text-sm font-medium transition duration-200 disabled:cursor-not-allowed disabled:opacity-40",
         variant === "primary" &&
-          "bg-[var(--accent)] text-white shadow-[0_10px_30px_rgba(108,140,255,0.35)] hover:brightness-110",
+          "bg-[var(--accent)] text-[var(--text-on-accent)] shadow-[0_0_0_1px_color-mix(in_srgb,var(--accent)_40%,transparent),0_8px_30px_-8px_color-mix(in_srgb,var(--accent)_60%,transparent)] hover:brightness-110",
         variant === "secondary" &&
           "border border-[var(--border)] bg-[var(--surface)] text-[var(--text)] hover:bg-[var(--surface-strong)]",
         variant === "ghost" &&
           "text-[var(--text-secondary)] hover:bg-[var(--surface)] hover:text-[var(--text)]",
         variant === "danger" &&
-          "bg-[rgba(255,107,122,0.15)] text-[var(--error)] hover:bg-[rgba(255,107,122,0.25)]",
+          "border border-[color-mix(in_srgb,var(--error)_25%,transparent)] bg-[color-mix(in_srgb,var(--error)_12%,transparent)] text-[var(--error)] hover:bg-[color-mix(in_srgb,var(--error)_20%,transparent)]",
         className,
       )}
       {...props}

@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import { ACHIEVEMENTS } from "@/shared/lib/achievements";
+import { playRankUpSound } from "@/shared/lib/rankUpSound";
+import { rankById, rankIndex } from "@/shared/lib/ranks";
 import {
   apiAchievementRates,
   apiGetProgression,
@@ -24,6 +26,7 @@ import { useProgressStore } from "@/shared/store/progressStore";
 import { useSocialStore } from "@/shared/store/socialStore";
 
 export type UnlockToast = { key: string; id: string; title: string };
+export type RankUpNotice = { key: string; id: string; name: string };
 
 type ProgressionState = {
   ready: boolean;
@@ -31,6 +34,7 @@ type ProgressionState = {
   doc: ProgressionDoc;
   rates: Record<string, number>;
   unlocks: UnlockToast[];
+  rankUps: RankUpNotice[];
   reviewTutorial: boolean;
   tutorialLanguage: string | null;
   load: (userId: string) => Promise<void>;
@@ -90,18 +94,39 @@ function pushUnlocks(next: string[], canToast: boolean, seen: Set<string>) {
   }, 4200);
 }
 
+function pushRankUp(beforeId: string, afterId: string, canToast: boolean) {
+  if (!canToast) return;
+  if (rankIndex(afterId) <= rankIndex(beforeId)) return;
+  const rank = rankById(afterId);
+  playRankUpSound();
+  const item: RankUpNotice = {
+    key: `rank-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    id: rank.id,
+    name: rank.name,
+  };
+  useProgressionStore.setState({
+    rankUps: [...useProgressionStore.getState().rankUps, item].slice(-2),
+  });
+  window.setTimeout(() => {
+    useProgressionStore.setState({
+      rankUps: useProgressionStore.getState().rankUps.filter((notice) => notice.key !== item.key),
+    });
+  }, 4600);
+}
+
 export const useProgressionStore = create<ProgressionState>((set, get) => ({
   ready: false,
   bootstrapped: false,
   doc: emptyProgression(),
   rates: {},
   unlocks: [],
+  rankUps: [],
   reviewTutorial: false,
   tutorialLanguage: null,
   load: async (id) => {
     userId = id;
     const local = readLocal(id) ?? emptyProgression();
-    set({ doc: local, ready: false, bootstrapped: false, reviewTutorial: false, unlocks: [] });
+    set({ doc: local, ready: false, bootstrapped: false, reviewTutorial: false, unlocks: [], rankUps: [] });
     try {
       const remote = normalizeProgression(await apiGetProgression());
       const merged = mergeProgression(local, remote);
@@ -126,6 +151,7 @@ export const useProgressionStore = create<ProgressionState>((set, get) => ({
     const currentUser = userId;
     if (!currentUser) return;
     const before = get().doc.achievements;
+    const prevRank = get().doc.rankId;
     const canToast = get().bootstrapped;
     const seen = new Set(before);
     const progress = useProgressStore.getState().progress;
@@ -152,6 +178,7 @@ export const useProgressionStore = create<ProgressionState>((set, get) => ({
     }
     set({ doc: next, ready: true });
     pushUnlocks(next.achievements, canToast, seen);
+    pushRankUp(prevRank, next.rankId, canToast);
     writeLocal(currentUser, next);
     try {
       const saved = normalizeProgression(await apiPutProgression(next));
@@ -163,6 +190,7 @@ export const useProgressionStore = create<ProgressionState>((set, get) => ({
       );
       set({ doc: merged });
       pushUnlocks(merged.achievements, canToast, seen);
+      pushRankUp(next.rankId, merged.rankId, canToast);
       writeLocal(currentUser, merged);
       if (id === seq && progressionSignature(merged) !== progressionSignature(next)) {
         await apiPutProgression(merged);
@@ -202,6 +230,7 @@ export const useProgressionStore = create<ProgressionState>((set, get) => ({
       doc: emptyProgression(),
       rates: {},
       unlocks: [],
+      rankUps: [],
       reviewTutorial: false,
       tutorialLanguage: null,
     });

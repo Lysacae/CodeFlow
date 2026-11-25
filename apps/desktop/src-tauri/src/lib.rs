@@ -304,8 +304,10 @@ pub fn run() {
             storage::mark_tutorial_seen,
             dev::dev_list_accounts,
             dev::dev_delete_account,
+            dev::dev_reset_rank,
             dev::dev_reset_session,
             dev::dev_diagnostics,
+            dev::maintenance_bypass,
             discord_presence::discord_set_presence,
         ])
         .build(tauri::generate_context!())

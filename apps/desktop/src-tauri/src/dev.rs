@@ -1,4 +1,5 @@
 use serde::Serialize;
+use serde_json::{json, Value};
 use tauri::State;
 
 use crate::auth;
@@ -61,6 +62,82 @@ pub fn dev_delete_account(state: State<'_, DbState>, user_id: String) -> Result<
     let conn = state.0.lock().map_err(|_| "Base verrouillée".to_string())?;
     auth::purge_local_user_if_present(&conn, &user_id)?;
     Ok(())
+}
+
+fn json_strings(value: Option<&Value>) -> Vec<String> {
+    value
+        .and_then(|item| item.as_array())
+        .map(|items| {
+            items
+                .iter()
+                .filter_map(|item| item.as_str().map(|text| text.to_string()))
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
+/// Efface XP, rang et succès d'un compte (cloud), sans toucher aux leçons affichées.
+#[tauri::command]
+pub fn dev_reset_rank(state: State<'_, DbState>, user_id: String) -> Result<(), String> {
+    ensure_dev(&state)?;
+    let user_id = user_id.trim().to_string();
+    if user_id.is_empty() {
+        return Err("Compte introuvable.".into());
+    }
+    cloud::patch_app_metadata(&user_id, |meta| {
+        let progress = meta.get("progress").cloned().unwrap_or_else(|| json!({}));
+        let progression = meta.get("progression").cloned().unwrap_or_else(|| json!({}));
+        let lessons = json_strings(progress.get("completedLessons"));
+        let exercises = json_strings(progress.get("completedExercises"));
+        let mut qa_keys = Vec::new();
+        if let Some(entries) = progress.get("qa").and_then(|value| value.as_object()) {
+            for (language, value) in entries {
+                for id in json_strings(value.get("correctIds")) {
+                    qa_keys.push(format!("{language}:{id}"));
+                }
+            }
+        }
+        let achievements = json_strings(progression.get("achievements"));
+        let now = chrono::Utc::now().to_rfc3339_opts(chrono::SecondsFormat::Millis, true);
+        let mut next = progression.as_object().cloned().unwrap_or_default();
+        next.insert("xp".into(), json!(0));
+        next.insert("level".into(), json!(1));
+        next.insert("rankId".into(), json!("bronze"));
+        next.insert("rankName".into(), json!("Bronze"));
+        next.insert("achievements".into(), json!([]));
+        next.insert("claimedLessons".into(), json!([]));
+        next.insert("qaGrants".into(), json!({}));
+        next.insert("resetAt".into(), json!(now));
+        next.insert("updatedAt".into(), json!(now));
+        next.insert(
+            "creditFloor".into(),
+            json!({
+                "lessons": lessons,
+                "exercises": exercises,
+                "qaKeys": qa_keys,
+                "achievementIds": achievements,
+            }),
+        );
+        meta.insert("progression".into(), Value::Object(next));
+        Ok(())
+    })
+}
+
+#[tauri::command]
+pub fn maintenance_bypass() -> bool {
+    if std::env::var("CODEFLOW_BYPASS_MAINTENANCE")
+        .ok()
+        .as_deref()
+        == Some("1")
+    {
+        return true;
+    }
+    if let Ok(dir) = paths::app_data_dir() {
+        if dir.join("maintenance.bypass").is_file() {
+            return true;
+        }
+    }
+    false
 }
 
 #[tauri::command]

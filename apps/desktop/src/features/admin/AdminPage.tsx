@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { isDevTesting } from "@/shared/lib/devAccess";
-import { devDeleteAccount, devListAccounts, devResetSession } from "@/shared/lib/tauri";
+import { devDeleteAccount, devListAccounts, devResetRank, devResetSession } from "@/shared/lib/tauri";
+import { useProgressionStore } from "@/shared/store/progressionStore";
 import { apiPutProgress } from "@/shared/lib/api";
 import { useAuthStore } from "@/shared/store/authStore";
 import { useProgressStore } from "@/shared/store/progressStore";
 import { Button } from "@/shared/ui/Button";
+import { ConfirmDialog } from "@/shared/ui/ConfirmDialog";
 import { GlassCard } from "@/shared/ui/GlassCard";
 import { Spinner } from "@/shared/ui/Spinner";
 import type { UserPublic } from "@/shared/lib/tauri";
@@ -18,6 +20,7 @@ export function AdminPage() {
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [pending, setPending] = useState<UserPublic | null>(null);
+  const [rankTarget, setRankTarget] = useState<UserPublic | null>(null);
   const [resetting, setResetting] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
 
@@ -51,6 +54,29 @@ export function AdminPage() {
       setAccounts((current) => current.filter((item) => item.id !== account.id));
       setPending(null);
       setNotice(`Compte ${account.username} supprimé.`);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setBusyId(null);
+    }
+  };
+
+  const resetRank = async (account: UserPublic) => {
+    setBusyId(account.id);
+    setError(null);
+    setNotice(null);
+    try {
+      await devResetRank(account.id);
+      try {
+        localStorage.removeItem(`cf-prog-${account.id}`);
+      } catch {
+        /* quota ou mode privé */
+      }
+      if (account.id === user?.id) {
+        await useProgressionStore.getState().load(account.id);
+      }
+      setRankTarget(null);
+      setNotice(`Rang et succès de ${account.username} réinitialisés.`);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -135,14 +161,23 @@ export function AdminPage() {
                         ) : null}
                       </td>
                       <td className="px-4 py-3 text-right">
-                        <Button
-                          variant="danger"
-                          disabled={self || busyId === account.id}
-                          onClick={() => setPending(account)}
-                        >
-                          {busyId === account.id ? <Spinner size="sm" /> : null}
-                          Supprimer
-                        </Button>
+                        <div className="flex flex-wrap justify-end gap-2">
+                          <Button
+                            variant="secondary"
+                            disabled={busyId === account.id}
+                            onClick={() => setRankTarget(account)}
+                          >
+                            Rang et succès
+                          </Button>
+                          <Button
+                            variant="danger"
+                            disabled={self || busyId === account.id}
+                            onClick={() => setPending(account)}
+                          >
+                            {busyId === account.id ? <Spinner size="sm" /> : null}
+                            Supprimer
+                          </Button>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -161,6 +196,18 @@ export function AdminPage() {
         {notice ? <p className="text-sm text-[var(--success)]">{notice}</p> : null}
         {error ? <p className="text-sm text-[var(--error)]">{error}</p> : null}
       </GlassCard>
+
+      {rankTarget ? (
+        <ConfirmDialog
+          title={`Réinitialiser ${rankTarget.username}`}
+          body="Êtes-vous sûr ? L'XP, le rang et les succès de ce compte seront effacés dans le cloud. Les leçons déjà terminées restent visibles, mais ne redonnent pas ces points."
+          confirmLabel={busyId ? "Réinitialisation…" : "Réinitialiser"}
+          danger
+          busy={busyId !== null}
+          onCancel={() => setRankTarget(null)}
+          onConfirm={() => void resetRank(rankTarget)}
+        />
+      ) : null}
 
       {pending ? (
         <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/60 px-6 backdrop-blur-sm">

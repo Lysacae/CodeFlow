@@ -463,6 +463,11 @@ export async function devDeleteAccount(userId: string): Promise<void> {
   await invoke("dev_delete_account", { userId });
 }
 
+export async function devResetRank(userId: string): Promise<void> {
+  if (!isTauri()) return;
+  await invoke("dev_reset_rank", { userId });
+}
+
 export async function devResetSession(): Promise<ProgressSnapshot> {
   if (!isTauri()) return structuredClone(memoryProgress);
   return invoke<ProgressSnapshot>("dev_reset_session");

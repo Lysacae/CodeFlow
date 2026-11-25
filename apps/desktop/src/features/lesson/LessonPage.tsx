@@ -380,17 +380,15 @@ export function LessonPage() {
   const isTheoryOnly = lesson.kind !== "file-wizard" && !exercise;
 
   const renderSections = (sections: Section[]) => (
-    <GlassCard className="space-y-4 text-center">
+    <GlassCard className="space-y-5 text-left">
       {sections.map((section, index) => {
         if (section.type === "prose" && section.body) {
           return (
             <div key={index} className="space-y-2">
               {section.heading ? (
-                <p className="text-sm font-semibold text-[var(--text)]">{section.heading}</p>
+                <p className="cf-kicker">{section.heading}</p>
               ) : null}
-              <p className="prose-lesson text-left sm:text-center">
-                {renderProse(section.body)}
-              </p>
+              <p className="prose-lesson">{renderProse(section.body)}</p>
             </div>
           );
         }
@@ -414,7 +412,7 @@ export function LessonPage() {
           >
             ← Parcours {language.name}
           </Link>
-          <p className="mt-3 text-sm text-[var(--text-secondary)]">
+          <p className="cf-kicker mt-4">
             Chapitre {level.chapter ?? 1} · Niveau {level.id} · {level.title}
           </p>
           <h1 className="mt-1 text-3xl font-semibold">{lesson.title}</h1>

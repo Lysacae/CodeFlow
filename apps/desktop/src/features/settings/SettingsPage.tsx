@@ -13,9 +13,12 @@ import { APP_VERSION, isNewerVersion } from "@/shared/lib/version";
 import { useAuthStore } from "@/shared/store/authStore";
 import { useProgressStore } from "@/shared/store/progressStore";
 import { Button } from "@/shared/ui/Button";
+import { ConfirmDialog } from "@/shared/ui/ConfirmDialog";
 import { GlassCard } from "@/shared/ui/GlassCard";
 import { PasswordField } from "@/shared/ui/PasswordField";
 import { Spinner } from "@/shared/ui/Spinner";
+
+const DELETE_PHRASE = "Je confirme la suppression définitive";
 
 export function SettingsPage() {
   const { progress, updateTheme } = useProgressStore();
@@ -31,12 +34,17 @@ export function SettingsPage() {
   const dev = isDevTesting(useAuthStore((s) => s.user?.username));
   const deleteAccount = useAuthStore((s) => s.deleteAccount);
   const navigate = useNavigate();
-  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [deleteStep, setDeleteStep] = useState<0 | 1 | 2>(0);
+  const [deletePhrase, setDeletePhrase] = useState("");
   const [deletePassword, setDeletePassword] = useState("");
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
 
   const confirmDelete = async () => {
+    if (deletePhrase.trim() !== DELETE_PHRASE) {
+      setDeleteError("Recopiez exactement la phrase de confirmation.");
+      return;
+    }
     setDeleting(true);
     setDeleteError(null);
     try {
@@ -110,7 +118,7 @@ export function SettingsPage() {
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">
-      <div className="text-center sm:text-left">
+      <div className="text-left">
         <h1 className="text-3xl font-semibold">Paramètres</h1>
         <p className="mt-2 text-[var(--text-secondary)]">
           Personnalisez l'interface et les environnements.
@@ -211,8 +219,9 @@ export function SettingsPage() {
             disabled={deleting}
             onClick={() => {
               setDeletePassword("");
+              setDeletePhrase("");
               setDeleteError(null);
-              setConfirmOpen(true);
+              setDeleteStep(1);
             }}
           >
             Supprimer mon compte
@@ -232,14 +241,25 @@ export function SettingsPage() {
         ) : null}
       </div>
 
-      {confirmOpen ? (
+      {deleteStep === 1 ? (
+        <ConfirmDialog
+          title="Supprimer mon compte"
+          body="Êtes-vous sûr ? Cette action est définitive : pseudo, progression, projets et photo seront effacés."
+          confirmLabel="Continuer"
+          danger
+          onCancel={() => setDeleteStep(0)}
+          onConfirm={() => setDeleteStep(2)}
+        />
+      ) : null}
+
+      {deleteStep === 2 ? (
         <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/60 px-6 backdrop-blur-sm">
           <GlassCard className="w-full max-w-md space-y-4">
             <div>
               <h2 className="text-xl font-semibold">Supprimer mon compte</h2>
               <p className="mt-2 text-sm text-[var(--text-secondary)]">
-                Cette action est définitive. Votre pseudo, votre progression, vos projets
-                et votre photo seront effacés. Vous ne pourrez pas récupérer ce compte.
+                Deuxième vérification. Saisissez votre mot de passe, puis recopiez :{" "}
+                <span className="font-medium text-[var(--text)]">{DELETE_PHRASE}</span>
               </p>
             </div>
             <PasswordField
@@ -249,15 +269,26 @@ export function SettingsPage() {
               autoComplete="current-password"
               disabled={deleting}
             />
+            <input
+              value={deletePhrase}
+              onChange={(event) => setDeletePhrase(event.target.value)}
+              placeholder={DELETE_PHRASE}
+              disabled={deleting}
+              className="allow-select h-11 w-full rounded-[12px] border border-[var(--border-strong)] bg-[var(--surface-2)] px-4 text-sm text-[var(--text)] outline-none focus:border-[var(--accent)]"
+            />
             {deleteError ? <p className="text-sm text-[var(--error)]">{deleteError}</p> : null}
             <div className="flex gap-2">
-              <Button variant="secondary" className="flex-1" disabled={deleting} onClick={() => setConfirmOpen(false)}>
+              <Button variant="secondary" className="flex-1" disabled={deleting} onClick={() => setDeleteStep(0)}>
                 Annuler
               </Button>
               <Button
                 variant="danger"
                 className="flex-1"
-                disabled={deleting || deletePassword.length === 0}
+                disabled={
+                  deleting ||
+                  deletePassword.length === 0 ||
+                  deletePhrase.trim() !== DELETE_PHRASE
+                }
                 onClick={() => void confirmDelete()}
               >
                 {deleting ? <Spinner size="sm" /> : null}

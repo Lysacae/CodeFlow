@@ -77,7 +77,7 @@ export function PathPage() {
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">
-      <div className="flex flex-wrap items-start justify-between gap-4 text-center sm:text-left">
+      <div className="flex flex-wrap items-start justify-between gap-4 text-left">
         <div className="w-full sm:w-auto">
           <Link to="/" className="cursor-pointer text-sm text-[var(--text-secondary)] hover:text-[var(--text)]">
             ← Tableau de bord

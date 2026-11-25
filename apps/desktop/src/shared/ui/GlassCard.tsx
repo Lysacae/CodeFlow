@@ -27,7 +27,7 @@ export function GlassCard({
       transition={{ duration: 0.35, delay }}
       whileHover={onClick ? { y: -2, scale: 1.01 } : undefined}
       className={clsx(
-        "glass rounded-[var(--radius-lg)] p-5 text-left",
+        "glass rounded-[var(--radius-lg)] p-6 text-left",
         onClick && "cursor-pointer",
         className,
       )}
