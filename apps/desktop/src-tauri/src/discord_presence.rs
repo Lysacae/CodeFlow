@@ -13,8 +13,9 @@ use std::time::{Duration, SystemTime, UNIX_EPOCH};
 use discord_rich_presence::activity::{ActivityType, Assets};
 use discord_rich_presence::{activity, DiscordIpc, DiscordIpcClient};
 
-/// À remplacer par l'Application ID du portail Discord (application « CodeFlow »).
-const DISCORD_APPLICATION_ID: &str = "";
+/// Application ID du portail Discord (application « CodeFlow »).
+/// Surcharge possible à la compilation via `CODEFLOW_DISCORD_APP_ID`.
+const DISCORD_APPLICATION_ID: &str = "1575143806859485255";
 
 const LARGE_IMAGE_KEY: &str = "codeflow";
 

@@ -1,5 +1,5 @@
 /** Version embarquée (doit rester alignée avec tauri.conf / package.json). */
-export const APP_VERSION = "1.3.2";
+export const APP_VERSION = "1.3.3";
 
 export function compareSemver(a: string, b: string): number {
   const pa = a.split(".").map((n) => parseInt(n, 10) || 0);
