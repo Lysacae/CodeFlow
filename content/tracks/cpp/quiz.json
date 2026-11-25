@@ -1,0 +1,270 @@
+{
+  "language": "cpp",
+  "secondsPerQuestion": 25,
+  "questions": [
+    {
+      "id": "cpp-q01",
+      "prompt": "À quoi sert #include <iostream> ?",
+      "choices": [
+        "À pouvoir utiliser std::cout.",
+        "À créer une variable.",
+        "À terminer la fonction main.",
+        "À supprimer les erreurs."
+      ],
+      "answer": 0,
+      "explanation": "iostream déclare les outils d'affichage. La réponse juste est : À pouvoir utiliser std::cout. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q02",
+      "prompt": "Que fait std::endl ?",
+      "choices": [
+        "Il renvoie 0.",
+        "Il termine la ligne affichée.",
+        "Il inclut une bibliothèque.",
+        "Il compare deux nombres."
+      ],
+      "answer": 1,
+      "explanation": "Le texte suivant commence sur une nouvelle ligne. La réponse juste est : Il termine la ligne affichée. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q03",
+      "prompt": "Pourquoi une instruction se termine-t-elle souvent par ; ?",
+      "choices": [
+        "Pour ouvrir un bloc.",
+        "Pour écrire un commentaire.",
+        "Pour marquer la fin de l'instruction.",
+        "Pour inclure iostream."
+      ],
+      "answer": 2,
+      "explanation": "Le compilateur attend ce séparateur. La réponse juste est : Pour marquer la fin de l'instruction. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q04",
+      "prompt": "Que fait return 0; à la fin de main ?",
+      "choices": [
+        "Il affiche 0.",
+        "Il recommence main.",
+        "Il crée un tableau.",
+        "Il indique que le programme s'est terminé normalement."
+      ],
+      "answer": 3,
+      "explanation": "0 est le code de sortie habituel d'un succès. La réponse juste est : Il indique que le programme s'est terminé normalement. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q05",
+      "prompt": "Quand le bloc else s'exécute-t-il ?",
+      "choices": [
+        "Quand la condition du if est fausse.",
+        "Quand la condition est vraie.",
+        "Avant le if.",
+        "À la place de main."
+      ],
+      "answer": 0,
+      "explanation": "else est le chemin alternatif. La réponse juste est : Quand la condition du if est fausse. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q06",
+      "prompt": "Que signifie && ?",
+      "choices": [
+        "Un seul test suffit.",
+        "Les deux tests doivent être vrais.",
+        "On multiplie deux chaînes.",
+        "On inclut une bibliothèque."
+      ],
+      "answer": 1,
+      "explanation": "&& n'est vrai que si chaque côté l'est. La réponse juste est : Les deux tests doivent être vrais. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q07",
+      "prompt": "Quel est l'index du premier élément ?",
+      "choices": [
+        "1",
+        "2",
+        "0",
+        "La taille du tableau"
+      ],
+      "answer": 2,
+      "explanation": "Le premier élément est à l'index 0. La réponse juste est : 0 Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q08",
+      "prompt": "Que fait une fonction qui return un entier ?",
+      "choices": [
+        "Elle affiche forcément cette valeur.",
+        "Elle remplace main.",
+        "Elle interdit les variables.",
+        "Elle calcule une valeur que l'appelant peut réutiliser."
+      ],
+      "answer": 3,
+      "explanation": "L'appel se comporte comme la valeur renvoyée. La réponse juste est : Elle calcule une valeur que l'appelant peut réutiliser. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q09",
+      "prompt": "À quoi sert std::map<std::string, int> ?",
+      "choices": [
+        "À associer un texte à un entier.",
+        "À répéter un bloc.",
+        "À remplacer std::cout.",
+        "À compter les secondes."
+      ],
+      "answer": 0,
+      "explanation": "La clé texte permet de retrouver l'entier. La réponse juste est : À associer un texte à un entier. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q10",
+      "prompt": "Que vaut notes[\"Lea\"] si l'on a écrit notes[\"Lea\"] = 18 ?",
+      "choices": [
+        "Lea",
+        "18",
+        "0",
+        "La taille de la map"
+      ],
+      "answer": 1,
+      "explanation": "L'opérateur [] retrouve la valeur de la clé. La réponse juste est : 18 Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q11",
+      "prompt": "Que représente paire.second en parcourant une map ?",
+      "choices": [
+        "Le nom du fichier.",
+        "L'index 0.",
+        "La valeur associée à la clé.",
+        "Le code de retour de main."
+      ],
+      "answer": 2,
+      "explanation": "first est la clé, second est la valeur. La réponse juste est : La valeur associée à la clé. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q12",
+      "prompt": "Quand while (n > 0) s'arrête-t-il ?",
+      "choices": [
+        "Après un tour obligatoire même si n vaut 0.",
+        "Quand il voit #include.",
+        "Seulement si n est négatif au départ.",
+        "Quand n n'est plus supérieur à 0."
+      ],
+      "answer": 3,
+      "explanation": "Il faut faire évoluer n dans le bloc. La réponse juste est : Quand n n'est plus supérieur à 0. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q13",
+      "prompt": "À quoi sert break dans un switch ?",
+      "choices": [
+        "À quitter le cas en cours.",
+        "À inclure iostream.",
+        "À renvoyer une map.",
+        "À compter les espaces."
+      ],
+      "answer": 0,
+      "explanation": "Sans break, l'exécution continue dans le cas suivant. La réponse juste est : À quitter le cas en cours. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q14",
+      "prompt": "Quel cas traite une valeur non prévue ?",
+      "choices": [
+        "case 0 seulement.",
+        "default",
+        "Le premier case.",
+        "endl"
+      ],
+      "answer": 1,
+      "explanation": "default est le repli. La réponse juste est : default Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q15",
+      "prompt": "Que renvoie mot.size() pour \"codeflow\" ?",
+      "choices": [
+        "0",
+        "1",
+        "8",
+        "codeflow"
+      ],
+      "answer": 2,
+      "explanation": "size compte les caractères. La réponse juste est : 8 Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q16",
+      "prompt": "Comment compter les mots de \"un deux trois\" sans split ?",
+      "choices": [
+        "Diviser la chaîne par 2.",
+        "Afficher la chaîne telle quelle.",
+        "Utiliser return 0.",
+        "Partir de 1 et ajouter 1 à chaque espace."
+      ],
+      "answer": 3,
+      "explanation": "Deux espaces séparent trois mots. La réponse juste est : Partir de 1 et ajouter 1 à chaque espace. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q17",
+      "prompt": "Pourquoi passer une map par const référence à une fonction ?",
+      "choices": [
+        "Pour la lire sans la recopier entièrement.",
+        "Pour la supprimer.",
+        "Pour interdire return.",
+        "Pour remplacer main."
+      ],
+      "answer": 0,
+      "explanation": "const indique qu'on ne modifie pas la map, & évite la copie. La réponse juste est : Pour la lire sans la recopier entièrement. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q18",
+      "prompt": "Que fait std::map::at si la clé existe ?",
+      "choices": [
+        "Il crée toujours la clé avec la valeur 0 et n'échoue jamais.",
+        "Il renvoie la valeur associée.",
+        "Il affiche la clé.",
+        "Il termine main avec le code 1 dans tous les cas."
+      ],
+      "answer": 1,
+      "explanation": "at sert ici à lire le prix d'un article connu. La réponse juste est : Il renvoie la valeur associée. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q19",
+      "prompt": "Où commence l'exécution d'un programme C++ classique ?",
+      "choices": [
+        "Dans la première fonction écrite, quel que soit son nom.",
+        "Dans #include.",
+        "Dans la fonction main.",
+        "Dans default."
+      ],
+      "answer": 2,
+      "explanation": "main est le point d'entrée. La réponse juste est : Dans la fonction main. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q20",
+      "prompt": "Que fait un commentaire // ?",
+      "choices": [
+        "Il affiche la ligne.",
+        "Il crée une variable.",
+        "Il ferme une accolade.",
+        "Le compilateur ignore le reste de la ligne."
+      ],
+      "answer": 3,
+      "explanation": "Un commentaire n'est pas une instruction. La réponse juste est : Le compilateur ignore le reste de la ligne. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q21",
+      "prompt": "Pourquoi une boucle infinie est-elle un problème ?",
+      "choices": [
+        "La condition ne devient jamais fausse, le programme ne poursuit pas la suite.",
+        "Parce que C++ interdit while.",
+        "Parce que std::cout ne peut s'utiliser qu'une fois.",
+        "Parce que return est obligatoire dans une boucle."
+      ],
+      "answer": 0,
+      "explanation": "Il faut une étape qui rapproche le test de sa fin. La réponse juste est : La condition ne devient jamais fausse, le programme ne poursuit pas la suite. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "cpp-q22",
+      "prompt": "Pourquoi une fonction ligne dans le ticket ?",
+      "choices": [
+        "Parce qu'un programme ne peut additionner que dans main, sans fonction.",
+        "Pour calculer prix × quantité une fois, puis l'appeler pour chaque article.",
+        "Pour effacer la map.",
+        "Pour remplacer les guillemets."
+      ],
+      "answer": 1,
+      "explanation": "Le total est la somme des valeurs renvoyées. La réponse juste est : Pour calculer prix × quantité une fois, puis l'appeler pour chaque article. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    }
+  ]
+}

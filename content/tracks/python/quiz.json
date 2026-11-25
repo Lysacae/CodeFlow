@@ -1,0 +1,270 @@
+{
+  "language": "python",
+  "secondsPerQuestion": 25,
+  "questions": [
+    {
+      "id": "python-q01",
+      "prompt": "Que fait print ?",
+      "choices": [
+        "Il affiche une valeur dans la sortie.",
+        "Il efface l'écran.",
+        "Il crée un fichier.",
+        "Il arrête Python."
+      ],
+      "answer": 0,
+      "explanation": "print envoie son contenu dans la zone Sortie. La réponse juste est : Il affiche une valeur dans la sortie. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q02",
+      "prompt": "Pourquoi écrire des guillemets autour d'un message ?",
+      "choices": [
+        "Pour terminer l'instruction.",
+        "Pour indiquer que c'est du texte, pas un nom de variable.",
+        "Pour créer une boucle.",
+        "Pour importer un module."
+      ],
+      "answer": 1,
+      "explanation": "Sans guillemets, Python cherche une variable portant ce nom. La réponse juste est : Pour indiquer que c'est du texte, pas un nom de variable. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q03",
+      "prompt": "Dans quel ordre les lignes sont-elles exécutées ?",
+      "choices": [
+        "Au hasard.",
+        "De bas en haut.",
+        "De haut en bas.",
+        "Seulement la dernière ligne."
+      ],
+      "answer": 2,
+      "explanation": "L'interpréteur suit l'ordre d'écriture, sauf quand un appel de fonction s'intercale. La réponse juste est : De haut en bas. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q04",
+      "prompt": "À quoi sert l'indentation sous un if ?",
+      "choices": [
+        "À afficher un espace dans la sortie.",
+        "À créer une variable.",
+        "À fermer une parenthèse.",
+        "À montrer quelles lignes appartiennent au if."
+      ],
+      "answer": 3,
+      "explanation": "En Python, le décalage fait partie de la syntaxe du bloc. La réponse juste est : À montrer quelles lignes appartiennent au if. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q05",
+      "prompt": "Quand le bloc else s'exécute-t-il ?",
+      "choices": [
+        "Quand la condition du if est fausse.",
+        "Quand la condition du if est vraie.",
+        "Avant le if.",
+        "À chaque ligne."
+      ],
+      "answer": 0,
+      "explanation": "else est le chemin alternatif. La réponse juste est : Quand la condition du if est fausse. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q06",
+      "prompt": "À quoi sert elif ?",
+      "choices": [
+        "À répéter une boucle.",
+        "À tester un autre cas si le if précédent est faux.",
+        "À renvoyer une valeur.",
+        "À créer une liste."
+      ],
+      "answer": 1,
+      "explanation": "Un seul bloc parmi if / elif / else est choisi. La réponse juste est : À tester un autre cas si le if précédent est faux. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q07",
+      "prompt": "Que produit range(1, 4) ?",
+      "choices": [
+        "Les entiers 1, 2, 3 et 4.",
+        "Seulement 4.",
+        "Les entiers 1, 2 et 3.",
+        "Les entiers 0, 1, 2 et 3."
+      ],
+      "answer": 2,
+      "explanation": "La borne de fin est exclue. La réponse juste est : Les entiers 1, 2 et 3. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q08",
+      "prompt": "Quel est l'index du premier élément d'une liste ?",
+      "choices": [
+        "1",
+        "2",
+        "-1 seulement",
+        "0"
+      ],
+      "answer": 3,
+      "explanation": "Le premier élément s'obtient avec l'index 0. La réponse juste est : 0 Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q09",
+      "prompt": "Que fait le mot-clé def ?",
+      "choices": [
+        "Il définit une fonction.",
+        "Il affiche un texte.",
+        "Il compare deux nombres.",
+        "Il importe un module."
+      ],
+      "answer": 0,
+      "explanation": "def nomme un bloc réutilisable. La réponse juste est : Il définit une fonction. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q10",
+      "prompt": "Que fait return dans une fonction ?",
+      "choices": [
+        "Il affiche la valeur.",
+        "Il renvoie une valeur à l'appelant et quitte la fonction.",
+        "Il recommence la fonction à l'infini.",
+        "Il supprime la variable."
+      ],
+      "answer": 1,
+      "explanation": "L'appel peut ensuite utiliser cette valeur. La réponse juste est : Il renvoie une valeur à l'appelant et quitte la fonction. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q11",
+      "prompt": "Qu'est-ce qu'un dictionnaire ?",
+      "choices": [
+        "Une boucle qui compte à l'envers.",
+        "Un commentaire sur plusieurs lignes.",
+        "Une association entre des clés et des valeurs.",
+        "Un fichier exécutable."
+      ],
+      "answer": 2,
+      "explanation": "On retrouve une valeur grâce à sa clé. La réponse juste est : Une association entre des clés et des valeurs. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q12",
+      "prompt": "Que vaut notes[\"Lea\"] si notes = {\"Lea\": 18} ?",
+      "choices": [
+        "Lea",
+        "0",
+        "notes",
+        "18"
+      ],
+      "answer": 3,
+      "explanation": "Les crochets demandent la valeur de la clé Lea. La réponse juste est : 18 Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q13",
+      "prompt": "Quand une boucle while s'arrête-t-elle ?",
+      "choices": [
+        "Quand sa condition devient fausse.",
+        "Après exactement 3 tours, toujours.",
+        "Quand elle rencontre un print.",
+        "Jamais, si la condition est fausse dès le début elle tourne quand même."
+      ],
+      "answer": 0,
+      "explanation": "Si la condition est fausse au départ, le bloc ne s'exécute pas du tout. La réponse juste est : Quand sa condition devient fausse. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q14",
+      "prompt": "Que signifie and entre deux tests ?",
+      "choices": [
+        "Un seul test suffit.",
+        "Les deux tests doivent être vrais.",
+        "Les deux tests doivent être faux.",
+        "and répète le test dix fois."
+      ],
+      "answer": 1,
+      "explanation": "and n'est vrai que si chaque côté l'est. La réponse juste est : Les deux tests doivent être vrais. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q15",
+      "prompt": "Que signifie or entre deux tests ?",
+      "choices": [
+        "Les deux doivent être vrais.",
+        "Les deux doivent être faux.",
+        "Au moins un des deux tests doit être vrai.",
+        "or inverse le résultat."
+      ],
+      "answer": 2,
+      "explanation": "or réussit dès qu'un côté est vrai. La réponse juste est : Au moins un des deux tests doit être vrai. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q16",
+      "prompt": "À quoi sert case _ dans un match ?",
+      "choices": [
+        "Il arrête le programme.",
+        "Il renvoie 0.",
+        "Il ne peut jamais s'exécuter.",
+        "C'est le cas par défaut, si aucun autre cas ne correspond."
+      ],
+      "answer": 3,
+      "explanation": "_ accepte n'importe quelle valeur restante. La réponse juste est : C'est le cas par défaut, si aucun autre cas ne correspond. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q17",
+      "prompt": "Que renvoie \"codeflow\".upper() ?",
+      "choices": [
+        "CODEFLOW",
+        "codeflow",
+        "Codeflow",
+        "8"
+      ],
+      "answer": 0,
+      "explanation": "upper renvoie une nouvelle chaîne en majuscules. La réponse juste est : CODEFLOW Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q18",
+      "prompt": "Que vaut len(\"un deux trois\".split()) ?",
+      "choices": [
+        "2",
+        "3",
+        "14",
+        "1"
+      ],
+      "answer": 1,
+      "explanation": "split découpe la phrase en trois mots, len les compte. La réponse juste est : 3 Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q19",
+      "prompt": "Que fait une f-string comme f\"Bonjour {nom}\" ?",
+      "choices": [
+        "Elle supprime nom.",
+        "Elle crée une fonction.",
+        "Elle insère la valeur de nom dans le texte.",
+        "Elle compare nom à Bonjour."
+      ],
+      "answer": 2,
+      "explanation": "Les accolades marquent l'emplacement de la valeur. La réponse juste est : Elle insère la valeur de nom dans le texte. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q20",
+      "prompt": "Comment écrire un commentaire en Python ?",
+      "choices": [
+        "Avec // seulement.",
+        "Avec <!-- -->",
+        "Avec print.",
+        "Avec # devant le texte."
+      ],
+      "answer": 3,
+      "explanation": "Python ignore le reste de la ligne après #. La réponse juste est : Avec # devant le texte. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q21",
+      "prompt": "Qu'indique une NameError ?",
+      "choices": [
+        "Un nom est utilisé alors qu'il n'a pas été défini.",
+        "Il manque un guillemet.",
+        "La boucle est infinie.",
+        "Le fichier est trop long."
+      ],
+      "answer": 0,
+      "explanation": "Vérifiez l'orthographe de la variable ou de la fonction. La réponse juste est : Un nom est utilisé alors qu'il n'a pas été défini. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "python-q22",
+      "prompt": "Pourquoi placer un calcul dans une fonction ?",
+      "choices": [
+        "Parce qu'un programme ne peut avoir qu'une fonction.",
+        "Pour le nommer et le réutiliser sans le recopier.",
+        "Pour empêcher return.",
+        "Pour supprimer les variables."
+      ],
+      "answer": 1,
+      "explanation": "Chaque appel relance le même calcul avec d'éventuels paramètres différents. La réponse juste est : Pour le nommer et le réutiliser sans le recopier. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    }
+  ]
+}

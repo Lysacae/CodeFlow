@@ -1,0 +1,13 @@
+CodeFlow — version portable
+===========================
+
+1. Double-cliquez Lancer-CodeFlow.bat
+2. Si les langages manquent : ouvrez PowerShell ici et lancez
+   Set-ExecutionPolicy -Scope Process Bypass
+   .\setup-runtimes.ps1
+
+Compte : pseudo + mot de passe (photo facultative).
+Plusieurs comptes possibles sur la même machine.
+
+Si Windows bloque l'installateur (.exe signé non vérifié),
+utilisez cette version portable à la place.

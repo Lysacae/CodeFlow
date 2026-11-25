@@ -1,0 +1,40 @@
+{
+  "languages": [
+    {
+      "id": "python",
+      "name": "Python",
+      "tagline": "Le langage idéal pour commencer.",
+      "extension": ".py",
+      "accent": "#3776AB",
+      "monaco": "python",
+      "runtimeId": "python"
+    },
+    {
+      "id": "csharp",
+      "name": "C#",
+      "tagline": "Apprends à créer des applications et des logiciels.",
+      "extension": ".cs",
+      "accent": "#68217A",
+      "monaco": "csharp",
+      "runtimeId": "dotnet"
+    },
+    {
+      "id": "cpp",
+      "name": "C++",
+      "tagline": "Découvre les bases du développement performant.",
+      "extension": ".cpp",
+      "accent": "#00599C",
+      "monaco": "cpp",
+      "runtimeId": "cpp"
+    },
+    {
+      "id": "java",
+      "name": "Java",
+      "tagline": "Apprends à construire des applications robustes.",
+      "extension": ".java",
+      "accent": "#E76F00",
+      "monaco": "java",
+      "runtimeId": "java"
+    }
+  ]
+}

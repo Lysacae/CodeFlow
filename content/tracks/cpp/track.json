@@ -1,0 +1,2778 @@
+{
+  "language": "cpp",
+  "levels": [
+    {
+      "id": 1,
+      "title": "Découverte",
+      "summary": "Découvrir C++ : main, std::cout et compilation.",
+      "lessons": [
+        {
+          "id": "cpp-l1-what-is-programming",
+          "title": "Qu'est-ce que programmer en C++ ?",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Savoir ce qu'est un programme C++ : une suite d'ordres, pas une discussion."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : aucun. C'est le point de départ du parcours."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Programmer en C++, c'est écrire des instructions que le compilateur (g++ ou clang++) transforme en programme exécutable."
+            },
+            {
+              "type": "prose",
+              "body": "Le programme commence dans int main(). std::cout << \"Bonjour\" << std::endl; envoie une ligne vers la sortie."
+            },
+            {
+              "type": "prose",
+              "body": "Un point-virgule manquant, une accolade oubliée ou un en-tête absent empêchent la compilation."
+            },
+            {
+              "type": "code",
+              "code": "std::cout << \"Bonjour\" << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "std::cout << \"Bonjour\" << std::endl; est un ordre d'affichage. Le texte entre guillemets est la donnée. Le nom de l'instruction est le verbe."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La sortie ne contient que Bonjour, sans les guillemets et sans le nom de l'instruction."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Un programme ne fait que ce qui est écrit, dans l'ordre. Chaque instruction se termine par un point-virgule."
+            }
+          ]
+        },
+        {
+          "id": "cpp-l1-why",
+          "title": "À quoi sert C++ ?",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Expliquer pourquoi C++ convient pour débuter, sans le confondre avec les autres langages du tableau de bord."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Qu'est-ce que programmer en C++ ? ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "C++ laisse un contrôle fin sur la mémoire et la performance. On l'utilise pour des logiciels, des jeux et des outils système."
+            },
+            {
+              "type": "prose",
+              "body": "Les affichages passent par le flux std::cout, déclaré dans l'en-tête iostream."
+            },
+            {
+              "type": "prose",
+              "body": "Dans CodeFlow, vous commencez par un main minimal : inclure iostream, afficher avec std::cout, puis return 0."
+            },
+            {
+              "type": "code",
+              "code": "std::cout << \"Bonjour\" << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "L'exemple affiche un mot. Vous n'avez pas encore de variable : le message est écrit en toutes lettres."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Une seule ligne apparaît dans la Sortie."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "C++ reste lisible parce que l'affichage ressemble à une phrase. La rigueur (guillemets, point-virgule) vient juste après."
+            }
+          ]
+        },
+        {
+          "id": "cpp-l1-how",
+          "title": "Comment un programme C++ s'exécute",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Décrire ce qui se passe entre le clic sur Exécuter et le texte dans la Sortie, pour C++."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « À quoi sert C++ ? ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Exécuter compile votre fichier avec le compilateur C++, puis lance le programme produit. Si la compilation échoue, rien ne s'exécute."
+            },
+            {
+              "type": "prose",
+              "body": "Dans main, les instructions s'enchaînent de haut en bas. std::endl termine la ligne affichée par std::cout."
+            },
+            {
+              "type": "prose",
+              "body": "La Sortie montre le texte réellement écrit par std::cout, ou le message du compilateur."
+            },
+            {
+              "type": "code",
+              "code": "std::cout << \"Bonjour\" << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "le compilateur traduit le fichier en programme, puis ce programme affiche la sortie. Une ligne fausse arrête le processus et la Sortie montre l'erreur réelle, pas une simulation."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Un exemple correct affiche son message. Un exemple incorrect n'affiche pas un résultat inventé : il montre l'erreur."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Lisez toujours la Sortie après un essai. C'est le seul juge du programme."
+            }
+          ]
+        },
+        {
+          "id": "cpp-l1-source",
+          "title": "Lire du code source C++",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Distinguer le code source (le texte que vous tapez) du résultat affiché."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Comment un programme C++ s'exécute ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Le code source C++ est le texte que vous écrivez. #include <iostream> fournit std::cout. Chaque instruction se termine par un point-virgule."
+            },
+            {
+              "type": "code",
+              "code": "#include <iostream>\n\nint main() {\n    std::cout << \"Exemple\" << std::endl;\n    return 0;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Les guillemets font partie du source. Ils ne sont pas affichés. Sans eux, le mot serait un nom à chercher."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La Sortie montre le texte intérieur, pas les guillemets."
+            },
+            {
+              "type": "prose",
+              "body": "L'opérateur << envoie le texte vers std::cout. return 0 indique que main s'est terminé sans erreur."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Le source doit respecter la syntaxe de C++. Chaque instruction se termine par un point-virgule."
+            }
+          ]
+        },
+        {
+          "id": "cpp-l1-editor",
+          "title": "L'éditeur et le compilateur C++",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Utiliser l'éditeur, Exécuter, Réinitialiser et la zone Sortie sans les confondre."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Lire du code source C++ ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "L'éditeur colorie les mots de C++ (int, return, include) et numérote les lignes pour suivre une erreur du compilateur."
+            },
+            {
+              "type": "prose",
+              "body": "Exécuter compile puis lance le programme. Réinitialiser restaure le code de départ. La Sortie affiche le résultat ou l'erreur de compilation."
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "L'éditeur colorie le code. Exécuter lance vraiment l'outil du langage. Réinitialiser remet le texte de départ, pas votre dernière idée."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Tant que vous n'avez pas cliqué sur Exécuter, la Sortie ne change pas."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Le numéro de ligne à gauche sert à retrouver une erreur. Il ne fait pas partie du programme."
+            }
+          ]
+        },
+        {
+          "id": "cpp-l1-indent",
+          "title": "Blocs et accolades en C++",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Utiliser l'indentation pour lire un bloc, même si les accolades font foi."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « L'éditeur et le compilateur C++ ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "En C++, un bloc est délimité par des accolades { }. Le compilateur se fie à ces accolades. L'indentation montre quelles lignes sont dans le if."
+            },
+            {
+              "type": "code",
+              "code": "int age = 18;\nif (age >= 18) {\n    std::cout << \"Majeur\" << std::endl;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Un bloc est entouré d'accolades { }. Une ligne du bloc ne doit pas revenir au bord gauche trop tôt."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Un bloc bien formé s'exécute. Un décalage illégal est refusé avant le résultat."
+            },
+            {
+              "type": "prose",
+              "body": "Décalez std::cout à l'intérieur du if. Cette habitude évite les erreurs de lecture quand les programmes C++ grossissent."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Indentez pour vous relire. Les accolades, elles, décident du bloc."
+            }
+          ]
+        },
+        {
+          "id": "cpp-l1-errors",
+          "title": "Comprendre une erreur du compilateur C++",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Lire une erreur sans la prendre pour un échec définitif."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Blocs et accolades en C++ ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Le compilateur C++ s'arrête quand la syntaxe est fausse. Le programme n'est pas lancé tant que l'erreur n'est pas corrigée."
+            },
+            {
+              "type": "prose",
+              "body": "Repérez le numéro de ligne. Contrôlez les points-virgules, les guillemets, les accolades, et la présence de #include <iostream> si vous utilisez std::cout."
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Le message cite souvent un nom (SyntaxError, point-virgule, symbole introuvable) et une ligne. Corrigez cette ligne, puis relancez."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Après correction, l'erreur disparaît et la Sortie montre le résultat, ou une erreur suivante plus précise."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Une erreur de syntaxe empêche l'exécution. Une erreur plus tard veut dire que la lecture a réussi, puis qu'une opération a échoué."
+            }
+          ]
+        }
+      ],
+      "chapter": 1
+    },
+    {
+      "id": 2,
+      "title": "Premier programme",
+      "summary": "Afficher du texte et créer un fichier.",
+      "lessons": [
+        {
+          "id": "cpp-l2-print",
+          "title": "Afficher du texte",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Afficher un texte exact, accents et ponctuation compris."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Comprendre une erreur du compilateur C++ ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Un programme est une suite d'instructions.\n\nCommençons par afficher un message."
+            },
+            {
+              "type": "prose",
+              "body": "std::cout envoie du texte vers la sortie. << ajoute le contenu. std::endl termine la ligne."
+            },
+            {
+              "type": "code",
+              "code": "#include <iostream>\n\nint main() {\n    std::cout << \"Bonjour !\" << std::endl;\n    return 0;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "std::cout << \"Bienvenue dans la programmation !\" << std::endl; envoie cette phrase. Les guillemets ne sortent pas."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La Sortie doit être exactement : Bienvenue dans la programmation !"
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Changer le texte entre guillemets change la sortie. Le reste de l'instruction reste."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-l2-ex1",
+            "prompt": "Objectif. Afficher un texte exact, accents et ponctuation compris.\n\nMarche à suivre. Vous allez utiliser la commande d'affichage de C++. Elle envoie du texte dans la zone Sortie. Le texte à afficher doit être entre guillemets. Modifiez le programme de départ : remplacez le texte actuel par exactement Bienvenue dans la programmation ! (accents et ponctuation inclus).\n\nContraintes. La sortie comparée est exactement « Bienvenue dans la programmation ! ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nFaites afficher : Bienvenue dans la programmation !",
+            "hint": "Remplace uniquement le texte entre guillemets.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    std::cout << \"Bonjour !\" << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "Bienvenue dans la programmation !",
+              "checks": {
+                "mustInclude": [
+                  {
+                    "text": "Bienvenue dans la programmation !",
+                    "message": "Affichez exactement le message demandé, accent et point d'exclamation compris."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "Bonjour",
+                    "message": "Remplacez le texte de départ. Bonjour ne doit plus apparaître."
+                  }
+                ]
+              }
+            },
+            "objective": "Afficher un texte exact, accents et ponctuation compris.",
+            "concept": "Afficher du texte"
+          }
+        },
+        {
+          "id": "cpp-l2-lines",
+          "title": "Plusieurs messages",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Produire deux lignes distinctes, dans l'ordre demandé."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Afficher du texte ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Chaque affichage produit une ligne. Le texte va entre les guillemets, à la place de la chaîne vide. L'ordre des lignes est l'ordre des instructions."
+            },
+            {
+              "type": "code",
+              "code": "std::cout << \"Ligne 1\" << std::endl;\nstd::cout << \"Ligne 2\" << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Chaque affichage écrit une ligne puis passe à la suivante. Deux instructions donnent deux lignes. Une seule instruction avec les deux mots les collerait."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Première ligne, puis seconde ligne. Rien entre les deux, rien après."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "L'ordre des lignes du source est l'ordre des lignes affichées."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-l2-ex2",
+            "prompt": "Objectif. Produire deux lignes distinctes, dans l'ordre demandé.\n\nMarche à suivre. Deux affichages vides sont déjà écrits. Premier cout : \"CodeFlow\". Second cout : \"C++\". Gardez les deux lignes et std::endl.\n\nContraintes. La sortie comparée est exactement « CodeFlow↵C++ ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez CodeFlow puis C++, chacun sur sa propre ligne.",
+            "hint": "Premier cout : \"CodeFlow\". Second cout : \"C++\". Gardez les deux lignes et std::endl.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    std::cout << \"\" << std::endl;\n    std::cout << \"\" << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "CodeFlow\nC++",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "(print[\\s\\S]{0,200}print|WriteLine[\\s\\S]{0,200}WriteLine|cout[\\s\\S]{0,240}cout|println[\\s\\S]{0,200}println)",
+                    "message": "Deux affichages sont nécessaires, un pour chaque ligne."
+                  }
+                ]
+              }
+            },
+            "objective": "Produire deux lignes distinctes, dans l'ordre demandé.",
+            "concept": "Plusieurs messages"
+          }
+        },
+        {
+          "id": "cpp-l2-comments",
+          "title": "Les commentaires",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Mettre une note dans le source sans qu'elle s'affiche."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Plusieurs messages ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Un commentaire documente le code sans être exécuté.\n\nIci, il commence par //."
+            },
+            {
+              "type": "code",
+              "code": "#include <iostream>\n\nint main() {\n    // Affiche un message\n    std::cout << \"Bonjour !\" << std::endl;\n    return 0;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Une ligne qui commence par // est un commentaire : le compilateur l'ignore. Le commentaire peut expliquer une ligne. Il ne remplace pas l'instruction."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La Sortie ignore le commentaire. Seul l'affichage réel apparaît."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Un commentaire ne corrige pas une erreur et ne compte pas comme du code pour un exercice."
+            }
+          ]
+        },
+        {
+          "id": "cpp-l2-syntax",
+          "title": "Les règles d'écriture essentielles",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Voir pourquoi un texte a des guillemets et une instruction a sa ponctuation."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Les commentaires ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "En C++, main est le point d'entrée. return 0; signale une fin normale."
+            },
+            {
+              "type": "code",
+              "code": "std::cout << \"Bonjour\" << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Chaque instruction se termine par un point-virgule. Les guillemets entourent le texte. Les parenthèses, quand il y en a, entourent l'argument."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Une forme correcte s'exécute. Une forme cassée s'arrête sur une erreur de syntaxe."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Ne fermez pas un guillemet trop tôt : le reste de la phrase serait lu comme du code."
+            }
+          ]
+        },
+        {
+          "id": "cpp-l2-first-file",
+          "title": "Créer ton premier fichier",
+          "kind": "file-wizard",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Créer un fichier C++ dont le nom et le contenu se correspondent."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Les règles d'écriture essentielles ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Un fichier .cpp conserve votre programme.\n\nVous choisirez l'emplacement sur votre ordinateur."
+            },
+            {
+              "type": "prose",
+              "body": "Donnez un nom clair, sans espaces."
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Le fichier enregistré contient le source. CodeFlow l'exécute comme les exercices, dans le bac à sable."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Après enregistrement, le parcours peut continuer. Le fichier reste dans le carnet."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Le nom du fichier rappelle le langage. Le contenu, lui, doit rester un programme valide."
+            }
+          ],
+          "fileWizard": {
+            "defaultName": "bonjour",
+            "extension": ".cpp",
+            "starterCode": "#include <iostream>\n\nint main() {\n    std::cout << \"Bienvenue dans la programmation !\" << std::endl;\n    return 0;\n}",
+            "requireClassNameMatch": false,
+            "notes": [
+              "Choisissez l'emplacement via la fenêtre d'enregistrement.",
+              "L'extension .cpp identifie un fichier C++."
+            ]
+          }
+        }
+      ],
+      "chapter": 1
+    },
+    {
+      "id": 3,
+      "title": "Variables",
+      "summary": "Stocker et réutiliser des informations.",
+      "lessons": [
+        {
+          "id": "cpp-l3-declare",
+          "title": "Déclarer une variable",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Créer une variable et afficher son contenu, pas son nom."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Créer ton premier fichier ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Une variable est un espace nommé qui stocke une valeur.\n\nOn lui donne un nom pour la réutiliser."
+            },
+            {
+              "type": "prose",
+              "body": "En C++, on précise le type : std::string ville = \"Lyon\";"
+            },
+            {
+              "type": "code",
+              "code": "#include <iostream>\n#include <string>\n\nint main() {\n    std::string ville = \"Lyon\";\n    std::cout << ville << std::endl;\n    return 0;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Le nom est à gauche du signe =. La valeur est à droite. L'affichage reçoit le nom, sans guillemets, pour lire la boîte."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La Sortie montre la valeur, ici Paris, pas le mot ville."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "print du nom et print du texte entre guillemets ne sont pas le même geste."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-l3-ex1",
+            "prompt": "Objectif. Créer une variable et afficher son contenu, pas son nom.\n\nMarche à suivre. Une variable est une boîte nommée qui stocke une valeur. Ici, créez une variable ville qui contient le texte Paris (entre guillemets). Ensuite, affichez le contenu de ville — pas le mot « ville » entre guillemets, mais la variable elle-même.\n\nContraintes. La sortie comparée est exactement « Paris ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nCréez ville = \"Paris\", puis affichez cette variable.",
+            "hint": "ville = \"Paris\", puis affichez ville.",
+            "starterCode": "#include <iostream>\n#include <string>\n\nint main() {\n    std::string ville = \"\";\n    std::cout << ville << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "Paris",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "ville\\s*=\\s*[\"']Paris[\"']",
+                    "message": "La variable ville doit contenir Paris."
+                  },
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*ville\\b",
+                    "message": "Affichez la variable ville, pas le texte Paris entre guillemets."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*\"Paris\"",
+                    "message": "N'écrivez pas l'affichage du mot Paris. Affichez la variable ville."
+                  }
+                ]
+              }
+            },
+            "objective": "Créer une variable et afficher son contenu, pas son nom.",
+            "concept": "Déclarer une variable"
+          }
+        },
+        {
+          "id": "cpp-l3-types",
+          "title": "Types de données",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Reconnaître un texte, un nombre entier et une valeur vraie ou fausse."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Déclarer une variable ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "`int` désigne un nombre entier.\n\nUn entier est un nombre sans virgule : 0, 1, 18, -3.\n\nOn l'utilise pour compter, un âge, un score ou une quantité.\n\nExemple : `int age = 18;` range le nombre 18 dans une case nommée age."
+            },
+            {
+              "type": "prose",
+              "body": "Le type décrit la nature de la valeur : texte, entier, décimal, vrai/faux.\n\nIl limite les opérations possibles."
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Les guillemets fabriquent un texte. Un nombre s'écrit sans guillemets. Mélanger les deux dans un calcul change le sens, ou provoque une erreur."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Afficher un nombre montre ses chiffres. Afficher un texte montre les caractères."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Le type décide des opérations permises. On additionne des nombres. On colle des textes."
+            }
+          ]
+        },
+        {
+          "id": "cpp-l3-modify",
+          "title": "Modifier une variable",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Remplacer la valeur d'une variable, puis afficher la valeur actuelle."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Types de données ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Une variable peut recevoir une nouvelle valeur.\n\nL'ancienne est remplacée.\n\nDans l'exemple, score vaut d'abord 1, puis 2. On n'affiche que la dernière valeur."
+            },
+            {
+              "type": "code",
+              "code": "#include <iostream>\n\nint main() {\n    int score = 1;\n    score = 2;\n    std::cout << score << std::endl;\n    return 0;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "La deuxième affectation écrase la première. L'ancienne valeur n'est plus là. L'affichage placé après les deux lignes voit la dernière."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La Sortie montre 10, pas 0, parce que l'affichage est après le remplacement."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "L'ordre des lignes compte. Afficher entre les deux affectations montrerait encore 0."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-l3-ex-score",
+            "prompt": "Objectif. Remplacer la valeur d'une variable, puis afficher la valeur actuelle.\n\nMarche à suivre. On peut changer la valeur d'une variable : on réécrit son nom, puis =, puis la nouvelle valeur. L'ancienne est remplacée. Étape 1 : score vaut 0. Étape 2 : une deuxième ligne score = 10 remplace 0 par 10. Étape 3 : affichez la variable score, pas le nombre 10 tout seul. La Sortie montre seulement la dernière valeur : 10.\n\nContraintes. La sortie comparée est exactement « 10 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nscore = 0, puis score = 10, puis affichez score.",
+            "hint": "Deux affectations (0 puis 10), puis affichez la variable score.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    int score = 0;\n    score = 0; // remplacez ce 0 par 10\n    std::cout << score << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "10",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "score\\s*=\\s*0(?!\\d)",
+                    "message": "Commencez par donner la valeur 0 à score."
+                  },
+                  {
+                    "pattern": "score\\s*=\\s*10(?!\\d)",
+                    "message": "Remplacez ensuite cette valeur : écrivez score = 10."
+                  },
+                  {
+                    "pattern": "score\\s*=\\s*0(?!\\d)[\\s\\S]*score\\s*=\\s*10(?!\\d)",
+                    "message": "Écrivez d'abord score = 0, puis score = 10. La deuxième valeur remplace la première."
+                  },
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*score\\b",
+                    "message": "Affichez la variable score, pas le nombre 10 directement."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*10(?!\\d)",
+                    "message": "N'affichez pas 10 tout seul. La leçon demande d'afficher la variable score après l'avoir modifiée."
+                  }
+                ]
+              }
+            },
+            "objective": "Remplacer la valeur d'une variable, puis afficher la valeur actuelle.",
+            "concept": "Modifier une variable"
+          }
+        },
+        {
+          "id": "cpp-l3-numbers",
+          "title": "Nombres et calculs",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Calculer avec des variables numériques et afficher le calcul, pas le résultat figé."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Modifier une variable ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "`int` désigne un nombre entier.\n\nUn entier est un nombre sans virgule : 0, 1, 18, -3.\n\nOn l'utilise pour compter, un âge, un score ou une quantité.\n\nExemple : `int age = 18;` range le nombre 18 dans une case nommée age."
+            },
+            {
+              "type": "prose",
+              "body": "Les opérateurs + - * / calculent à partir de nombres."
+            },
+            {
+              "type": "code",
+              "code": "#include <iostream>\n\nint main() {\n    int a = 4;\n    int b = 2;\n    std::cout << (a + b) << std::endl;\n    return 0;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "+ additionne, - soustrait, * multiplie, / divise. Les noms a et b portent les nombres. L'affichage reçoit a + b."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "7 et 3 donnent 10. La Sortie montre 10 parce que le calcul a été fait, pas parce que 10 était écrit en dur."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Des guillemets autour de 7 en feraient un texte. Le calcul n'aurait plus le même sens."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-l3-ex2",
+            "prompt": "Objectif. Calculer avec des variables numériques et afficher le calcul, pas le résultat figé.\n\nMarche à suivre. Les nombres se calculent avec + - * /. Placez 7 dans a et 3 dans b. Affichez le résultat de a + b (pas le texte \"a + b\", le calcul).\n\nContraintes. La sortie comparée est exactement « 10 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\na = 7, b = 3, affichez leur somme (10).",
+            "hint": "Affichez a + b, avec a = 7 et b = 3.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    int a = 0;\n    int b = 0;\n    std::cout << (a + b) << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "10",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "\\ba\\s*=\\s*7(?!\\d)",
+                    "message": "Placez 7 dans a."
+                  },
+                  {
+                    "pattern": "\\bb\\s*=\\s*3(?!\\d)",
+                    "message": "Placez 3 dans b."
+                  },
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*\\(?\\s*a\\s*\\+\\s*b",
+                    "message": "Affichez le calcul a + b, pas le nombre 10 directement."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*10(?!\\d)",
+                    "message": "N'affichez pas 10 tout seul. Affichez le calcul a + b."
+                  }
+                ]
+              }
+            },
+            "objective": "Calculer avec des variables numériques et afficher le calcul, pas le résultat figé.",
+            "concept": "Nombres et calculs"
+          }
+        }
+      ],
+      "chapter": 1
+    },
+    {
+      "id": 4,
+      "title": "Logique",
+      "summary": "Conditions et répétitions.",
+      "lessons": [
+        {
+          "id": "cpp-l4-conditions",
+          "title": "Conditions",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "N'afficher un message que si une comparaison est vraie."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Nombres et calculs ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "if exécute un bloc seulement si le test est vrai.\n\nscore >= 10 se lit « score est supérieur ou égal à 10 ». Le bloc du if est ce qui est indenté, ou ce qui est entre accolades."
+            },
+            {
+              "type": "code",
+              "code": "int score = 15;\nif (score >= 10) {\n    std::cout << \"OK\" << std::endl;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "La comparaison se lit : score est-il supérieur ou égal à 10 ? Si oui, le bloc s'exécute. Sinon, il est sauté."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Avec 12, le message Réussi apparaît. Avec 9, il n'apparaîtrait pas."
+            },
+            {
+              "type": "prose",
+              "body": "15 >= 10 est vrai, donc OK s'affiche. Votre exercice a déjà score = 12 et un print vide à compléter."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Afficher Réussi sans le test réussit la sortie de cet exemple et rate l'objectif."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-l4-ex1",
+            "prompt": "Objectif. N'afficher un message que si une comparaison est vraie.\n\nMarche à suivre. score vaut 12. Le if score >= 10 est déjà écrit, avec un affichage vide. Entre les guillemets du cout, écrivez Réussi. Laissez if (score >= 10) tel quel. 12 est supérieur ou égal à 10, donc le message doit apparaître.\n\nContraintes. La sortie comparée est exactement « Réussi ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nSi score >= 10, affichez Réussi.",
+            "hint": "Entre les guillemets du cout, écrivez Réussi. Laissez if (score >= 10) tel quel.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    int score = 12;\n    if (score >= 10) {\n        std::cout << \"\" << std::endl;\n    }\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "Réussi",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "if\\s*\\(\\s*score\\s*>=\\s*10\\s*\\)[\\s\\S]*?<<\\s*\"Réussi\"",
+                    "message": "Le if doit tester score >= 10 et afficher Réussi. Un affichage sans condition ne suffit pas."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "^(?![\\s\\S]*\\bif\\b)[\\s\\S]*(?:std::)?cout\\s*<<\\s*\"Réussi\"",
+                    "message": "Utilisez if. Afficher seulement Réussi ne montre pas le test sur score."
+                  }
+                ]
+              }
+            },
+            "objective": "N'afficher un message que si une comparaison est vraie.",
+            "concept": "Conditions"
+          }
+        },
+        {
+          "id": "cpp-l4-else",
+          "title": "À quoi sert else ?",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Prévoir le cas où le test est faux, avec else."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Conditions ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "if traite le cas « oui ».\n\nelse traite le cas « non ».\n\nEnsemble, ils couvrent les deux possibilités d'un test."
+            },
+            {
+              "type": "prose",
+              "body": "Exemple : si la température est basse, afficher Froid ; sinon, afficher Doux.\n\nSans else, le programme resterait silencieux quand il ne fait pas froid."
+            },
+            {
+              "type": "code",
+              "code": "#include <iostream>\n\nint main() {\n    int temperature = 20;\n    if (temperature > 25) {\n        std::cout << \"Chaud\" << std::endl;\n    } else {\n        std::cout << \"Frais\" << std::endl;\n    }\n    return 0;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "if prend le cas vrai. else prend le cas faux. Les deux blocs ne s'exécutent pas ensemble."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La valeur de départ rend un seul des deux messages vrai. L'autre doit quand même être écrit : il sert pour une autre valeur."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Sans else, un test faux n'affiche rien. Ce n'est pas ce que demande l'exercice."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-l4-ex2",
+            "prompt": "Objectif. Prévoir le cas où le test est faux, avec else.\n\nMarche à suivre. else signifie « sinon » : le cas où le if est faux. Sans else, si le test échoue, rien ne s'affiche. Avec else, vous choisissez toujours un message. temperature vaut déjà 5. Si temperature est inférieure à 10, affichez Froid. Sinon, affichez Doux. Comme 5 < 10, la Sortie doit être Froid. Le else doit quand même être écrit : il sert pour les autres températures.\n\nContraintes. La sortie comparée est exactement « Froid ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nComplétez le if et le else : Froid si temperature < 10, sinon Doux.",
+            "hint": "if temperature < 10 : Froid, sinon Doux.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    int temperature = 5;\n    if (temperature < 10) {\n        std::cout << \"\" << std::endl;\n    } else {\n        std::cout << \"\" << std::endl;\n    }\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "Froid",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "if\\s*\\(\\s*temperature\\s*<\\s*10\\s*\\)[\\s\\S]*?<<\\s*\"Froid\"[\\s\\S]*?else(?!\\s+if)[\\s\\S]*?<<\\s*\"Doux\"",
+                    "message": "Écrivez un if sur temperature < 10 qui affiche Froid, et un else qui affiche Doux. Afficher seulement Froid ne suffit pas."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "^(?![\\s\\S]*\\belse\\b)[\\s\\S]*<<\\s*\"Froid\"",
+                    "message": "Il manque else. Afficher seulement Froid ne montre pas les deux cas du test."
+                  }
+                ]
+              }
+            },
+            "objective": "Prévoir le cas où le test est faux, avec else.",
+            "concept": "À quoi sert else ?"
+          }
+        },
+        {
+          "id": "cpp-l4-compare",
+          "title": "Comparer des valeurs",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Choisir le bon signe de comparaison."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « À quoi sert else ? ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "= range une valeur dans une variable. == compare deux valeurs et répond vrai ou faux.\n\n< inférieur, > supérieur, <= inférieur ou égal, >= supérieur ou égal, != différent."
+            },
+            {
+              "type": "code",
+              "code": "int age = 18;\nstd::cout << (age >= 18) << std::endl;\nstd::cout << (age == 17) << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "== teste l'égalité. != teste la différence. <, >, <= et >= comparent l'ordre. Un seul = est une affectation, pas un test."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Une comparaison vaut vrai ou faux. Elle ne s'affiche pas toute seule : elle décide d'un bloc."
+            },
+            {
+              "type": "prose",
+              "body": "Le premier test est vrai (18 est bien >= 18). Le second est faux (18 n'est pas égal à 17). On n'écrit pas = dans un test à la place de ==."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Ne confondez pas = et ==. Le premier range une valeur. Le second pose une question."
+            }
+          ]
+        },
+        {
+          "id": "cpp-l4-loops",
+          "title": "Introduction aux boucles",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Répéter un affichage avec une boucle, au lieu de recopier les lignes."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Comparer des valeurs ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Une boucle for répète un bloc. On donne un départ, un test d'arrêt, et un pas.\n\nL'exemple tourne pour i = 0 puis i = 1, et s'arrête quand i atteint 2."
+            },
+            {
+              "type": "code",
+              "code": "for (int i = 0; i < 2; i++) {\n    std::cout << i << std::endl;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "La boucle donne à i les valeurs prévues, une par tour. L'affichage de i est dans le corps, donc il se répète."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Vous voyez 0, puis 1, puis 2, chacun sur sa ligne."
+            },
+            {
+              "type": "prose",
+              "body": "Cet exemple affiche 0 puis 1. i < 2 s'arrête avant 2."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Trois affichages copiés hors de la boucle imitent la sortie et ratent la notion."
+            }
+          ]
+        }
+      ],
+      "chapter": 1
+    },
+    {
+      "id": 5,
+      "title": "Premiers exercices",
+      "summary": "Appliquer les bases sur de petits programmes.",
+      "lessons": [
+        {
+          "id": "cpp-l5-combine",
+          "title": "Multiplier deux nombres",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Reprendre un calcul déjà vu avec de nouveaux nombres, sans guide ligne à ligne."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Introduction aux boucles ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Vous combinez deux variables numériques et un opérateur.\n\nCette fois, ce n'est pas une somme : c'est un produit (*)."
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Vous placez 4 et 6, puis vous affichez le produit. Le programme de départ a des zéros : ils doivent changer."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "4 × 6 font 24."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "C'est le même geste que l'addition, avec une multiplication. Le résultat figé est refusé."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-l5-ex1",
+            "prompt": "Objectif. Reprendre un calcul déjà vu avec de nouveaux nombres, sans guide ligne à ligne.\n\nMarche à suivre. Reprenez les variables et le calcul, avec des nombres différents. Stockez 4 dans x et 6 dans y. Affichez le produit x * y.\n\nContraintes. La sortie comparée est exactement « 24 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nx = 4, y = 6, affichez le produit (24).",
+            "hint": "std::cout << x * y << std::endl;",
+            "starterCode": "#include <iostream>\n\nint main() {\n    int x = 0;\n    int y = 0;\n    std::cout << x * y << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "24",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "\\bx\\s*=\\s*4(?!\\d)",
+                    "message": "Placez 4 dans x."
+                  },
+                  {
+                    "pattern": "\\by\\s*=\\s*6(?!\\d)",
+                    "message": "Placez 6 dans y."
+                  },
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*x\\s*\\*\\s*y\\b",
+                    "message": "Affichez le produit x * y, pas le nombre 24 directement."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*24(?!\\d)",
+                    "message": "N'affichez pas 24 tout seul. Affichez x * y."
+                  }
+                ]
+              }
+            },
+            "objective": "Reprendre un calcul déjà vu avec de nouveaux nombres, sans guide ligne à ligne.",
+            "concept": "Multiplier deux nombres"
+          }
+        },
+        {
+          "id": "cpp-l5-fix",
+          "title": "Corriger une erreur",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Réparer une ligne qui ne peut pas être lue, puis vérifier la Sortie."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Multiplier deux nombres ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Le programme ne démarre pas : un guillemet ferme le texte, mais aucun guillemet ne l'ouvre.\n\nIl manque le guillemet ouvrant. La ligne doit devenir std::cout << \"CodeFlow\" << std::endl;."
+            },
+            {
+              "type": "code",
+              "code": "std::cout << \"CodeFlow\" << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Le mot CodeFlow est un texte. Il lui manque le guillemet ouvrant. Une fois les deux guillemets en place, l'instruction redevient un affichage."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La Sortie est CodeFlow."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Ajouter un commentaire ne répare pas la syntaxe. Il faut corriger la ligne elle-même."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-l5-ex2",
+            "prompt": "Objectif. Réparer une ligne qui ne peut pas être lue, puis vérifier la Sortie.\n\nMarche à suivre. Il manque le guillemet ouvrant. La ligne doit devenir std::cout << \"CodeFlow\" << std::endl;. Exécutez après la correction.\n\nContraintes. La sortie comparée est exactement « CodeFlow ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nCorrigez le programme pour afficher CodeFlow.",
+            "hint": "Il manque le guillemet ouvrant. La ligne doit devenir std::cout << \"CodeFlow\" << std::endl;.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    std::cout << CodeFlow\" << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "CodeFlow",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "[\"']CodeFlow[\"']",
+                    "message": "CodeFlow doit être un texte entre guillemets."
+                  }
+                ]
+              }
+            },
+            "objective": "Réparer une ligne qui ne peut pas être lue, puis vérifier la Sortie.",
+            "concept": "Corriger une erreur"
+          }
+        },
+        {
+          "id": "cpp-l5-else",
+          "title": "Comprendre else",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Prévoir le cas où le test est faux, avec else."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Corriger une erreur ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "else = le chemin alternatif.\n\nSi la condition du if est fausse, c'est le bloc else qui s'exécute.\n\nSans else, le programme ne dirait rien quand le test échoue."
+            },
+            {
+              "type": "code",
+              "code": "int age = 20;\nif (age >= 18) {\n    std::cout << \"Majeur\" << std::endl;\n} else {\n    std::cout << \"Mineur\" << std::endl;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "if prend le cas vrai. else prend le cas faux. Les deux blocs ne s'exécutent pas ensemble."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La valeur de départ rend un seul des deux messages vrai. L'autre doit quand même être écrit : il sert pour une autre valeur."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Sans else, un test faux n'affiche rien. Ce n'est pas ce que demande l'exercice."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-l5-ex-else",
+            "prompt": "Objectif. Prévoir le cas où le test est faux, avec else.\n\nMarche à suivre. else sert quand le if est faux. age vaut 15. Si age >= 18, affichez Majeur. Sinon (else), affichez Mineur. Comme 15 < 18, la Sortie doit être Mineur — c'est le rôle de else.\n\nContraintes. La sortie comparée est exactement « Mineur ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nage = 15 : Majeur si >= 18, sinon Mineur.",
+            "hint": "Écrivez if … else … avec les deux messages.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    int age = 15;\n    if (age >= 18) {\n        std::cout << \"\" << std::endl;\n    } else {\n        std::cout << \"\" << std::endl;\n    }\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "Mineur",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "if\\s*\\(\\s*age\\s*>=\\s*18\\s*\\)[\\s\\S]*?<<\\s*\"Majeur\"[\\s\\S]*?else(?!\\s+if)[\\s\\S]*?<<\\s*\"Mineur\"",
+                    "message": "Écrivez if age >= 18 qui affiche Majeur, et else qui affiche Mineur."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "^(?![\\s\\S]*\\belse\\b)[\\s\\S]*<<\\s*\"Mineur\"",
+                    "message": "Il manque else. Afficher seulement Mineur ne suffit pas."
+                  }
+                ]
+              }
+            },
+            "objective": "Prévoir le cas où le test est faux, avec else.",
+            "concept": "Comprendre else"
+          }
+        },
+        {
+          "id": "cpp-l5-decision",
+          "title": "Petite décision",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Compléter un test déjà commencé, sans l'effacer."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Comprendre else ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "if n'affiche le message que si le test est vrai. Ici le test sera points >= 10. 15 >= 10 est vrai, donc le message s'affiche."
+            },
+            {
+              "type": "code",
+              "code": "int points = 4;\nif (points >= 10) {\n    std::cout << \"Validé\" << std::endl;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "points vaut 15, le seuil est 10. Le bloc indenté affiche Validé seulement parce que le test est vrai."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La Sortie est Validé."
+            },
+            {
+              "type": "prose",
+              "body": "Avec 4, rien ne s'affiche, parce que 4 >= 10 est faux. Votre exercice part de 15, donc le message doit sortir. Le texte Validé va entre guillemets."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Gardez le if. Un affichage seul ne montre pas la décision."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-l5-ex3",
+            "prompt": "Objectif. Compléter un test déjà commencé, sans l'effacer.\n\nMarche à suivre. points vaut 15. Entre les guillemets, écrivez Validé : std::cout << \"Validé\" << std::endl;. N'effacez pas le if : un affichage seul de Validé n'explique pas la condition.\n\nContraintes. La sortie comparée est exactement « Validé ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAvec points = 15, affichez Validé si points >= 10.",
+            "hint": "Entre les guillemets, écrivez Validé : std::cout << \"Validé\" << std::endl;.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    int points = 15;\n    if (points >= 10) {\n        std::cout << \"\" << std::endl;\n    }\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "Validé",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "if\\s*\\(\\s*points\\s*>=\\s*10\\s*\\)[\\s\\S]*?<<\\s*\"Validé\"",
+                    "message": "Le if doit tester points >= 10 et afficher Validé."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "^(?![\\s\\S]*\\bif\\b)[\\s\\S]*(?:std::)?cout\\s*<<\\s*\"Validé\"",
+                    "message": "Utilisez if. Afficher seulement Validé ne suffit pas."
+                  }
+                ]
+              }
+            },
+            "objective": "Compléter un test déjà commencé, sans l'effacer.",
+            "concept": "Petite décision"
+          }
+        }
+      ],
+      "chapter": 1
+    },
+    {
+      "id": 6,
+      "chapter": 2,
+      "title": "Texte et formatage",
+      "summary": "Manipuler le texte plus précisément en C++.",
+      "lessons": [
+        {
+          "id": "cpp-c2-strings",
+          "title": "Revoir les chaînes de caractères",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Relire un texte C++ : guillemets, variable, et affichage sont trois choses différentes."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Petite décision ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Une chaîne est du texte : lettres, espaces, chiffres. On l'écrit entre guillemets doubles, par exemple \"CodeFlow\".\n\nSans guillemets, C++ croit que le mot est un nom de variable, et le programme s'arrête."
+            },
+            {
+              "type": "prose",
+              "body": "Vous pouvez coller deux morceaux avec +. L'espace, s'il doit apparaître, se place dans l'un des textes.\n\nExemple qui n'est pas l'exercice : prenom vaut Lea, et on affiche Bonjour Lea."
+            },
+            {
+              "type": "code",
+              "code": "std::string prenom = \"Lea\";\nstd::cout << \"Bonjour \" << prenom << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "La variable contient le texte. L'affichage de la variable montre son contenu. L'affichage d'un autre texte entre guillemets ignore la variable."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Vous voyez la valeur stockée, pas le nom de la variable."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Un texte peut contenir des espaces. Ils comptent dans la Sortie."
+            }
+          ]
+        },
+        {
+          "id": "cpp-c2-compose",
+          "title": "Composer un message",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Assembler un salut et une variable déjà remplie."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Revoir les chaînes de caractères ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Pour composer un message, gardez le nom dans une variable et collez un texte fixe devant.\n\nDeux façons équivalentes ici : std::cout << \"Bonjour \" << nom << std::endl;.\n\nN'écrivez pas le message final en un seul texte : le contrôle refuse Bonjour CodeFlow tapé tel quel."
+            },
+            {
+              "type": "code",
+              "code": "std::string prenom = \"Alex\";\nstd::cout << \"Bonjour \" << prenom << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "L'espace est dans le texte fixe. La variable apporte le nom. L'affichage reçoit l'assemblage."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La Sortie est Bonjour CodeFlow."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Ne remplacez pas la variable par le mot CodeFlow dans les guillemets."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c2-ex1",
+            "prompt": "Objectif. Assembler un salut et une variable déjà remplie.\n\nMarche à suivre. La variable nom contient déjà CodeFlow. Ne la renommez pas. Ajoutez une ligne d'affichage qui colle le texte \"Bonjour \" (avec l'espace avant la fin des guillemets) et la variable nom. Écrivez exactement : std::cout << \"Bonjour \" << nom << std::endl;\n\nContraintes. La sortie comparée est exactement « Bonjour CodeFlow ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez Bonjour CodeFlow en utilisant la variable nom.",
+            "hint": "std::cout << \"Bonjour \" << nom << std::endl;",
+            "starterCode": "#include <iostream>\n#include <string>\n\nint main() {\n    std::string nom = \"CodeFlow\";\n    \n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "Bonjour CodeFlow",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*\"Bonjour \"[\\s\\S]*<<\\s*nom\\b",
+                    "message": "Affichez Bonjour, un espace, puis la variable nom. Pas le texte tout fait."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*\"Bonjour CodeFlow\"",
+                    "message": "N'affichez pas Bonjour CodeFlow en un seul texte. Utilisez nom."
+                  }
+                ]
+              }
+            },
+            "objective": "Assembler un salut et une variable déjà remplie.",
+            "concept": "Composer un message"
+          }
+        },
+        {
+          "id": "cpp-c2-escape",
+          "title": "Caractères spéciaux",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Placer un caractère spécial dans un texte sans casser les guillemets."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Composer un message ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Un guillemet ouvre ou ferme un texte. Pour afficher un guillemet à l'intérieur, on écrit \\\" (un antislash puis un guillemet).\n\nSi vous ouvrez un guillemet et que vous oubliez de le fermer, le message d'erreur parle souvent d'une parenthèse ou d'une chaîne jamais fermée."
+            },
+            {
+              "type": "code",
+              "code": "std::cout << \"Il a dit \\\"ok\\\"\" << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Une barre oblique inverse annonce un caractère spécial : souvent un guillemet à l'intérieur du texte, ou un passage à la ligne."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La Sortie montre le caractère voulu, pas la barre oblique, sauf si la leçon demande de l'afficher."
+            },
+            {
+              "type": "prose",
+              "body": "Compte les guillemets : un pour ouvrir, des guillemets échappés au milieu, un pour fermer. L'exercice suivant n'utilise pas encore cette séquence : retenez surtout qu'un texte doit être refermé."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Un guillemet non annoncé ferme le texte trop tôt et provoque une erreur de syntaxe."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "chapter": 2,
+      "title": "Décisions avancées",
+      "summary": "Enchaîner plusieurs conditions avec précision.",
+      "lessons": [
+        {
+          "id": "cpp-c2-else-if",
+          "title": "Plusieurs cas possibles",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Enchaîner plusieurs cas exclusifs : un seul message doit sortir."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Caractères spéciaux ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Quand il y a plus de deux cas, on enchaîne if, puis else if, puis else.\n\nLe programme prend le premier test vrai et ignore le reste. else n'a pas de test : c'est « dans tous les autres cas »."
+            },
+            {
+              "type": "code",
+              "code": "int note = 7;\nif (note < 10) {\n    std::cout << \"Faible\" << std::endl;\n} else if (note < 14) {\n    std::cout << \"Moyen\" << std::endl;\n} else {\n    std::cout << \"Bien\" << std::endl;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Le premier test vrai gagne. Les suivants ne sont pas lus. else n'est pris que si tous les tests ont échoué."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "note vaut 14. 14 < 10 est faux, 14 < 14 est faux, donc else affiche Bien."
+            },
+            {
+              "type": "prose",
+              "body": "Dans cet exemple, note vaut 7, donc le premier test (note < 10) est vrai et le programme affiche Faible. Votre exercice utilise 14, qui ne passe ni le premier ni le deuxième test."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "L'ordre des seuils compte. Un seuil large placé en premier avale les cas plus précis."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c2-ex2",
+            "prompt": "Objectif. Enchaîner plusieurs cas exclusifs : un seul message doit sortir.\n\nMarche à suivre. Le squelette if / else if / else est déjà dans l'éditeur. note vaut 14. Remplissez les trois textes vides, dans cet ordre : Faible, puis Moyen, puis Bien. 14 n'est pas inférieur à 10, et 14 n'est pas inférieur à 14. Aucun des deux tests n'est vrai, donc c'est le else qui s'exécute.\n\nContraintes. La sortie comparée est exactement « Bien ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAvec note = 14, affichez Bien.",
+            "hint": "Le else affiche Bien. Les deux tests au-dessus affichent Faible puis Moyen.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    int note = 14;\n    if (note < 10) {\n        std::cout << \"\" << std::endl;\n    } else if (note < 14) {\n        std::cout << \"\" << std::endl;\n    } else {\n        std::cout << \"\" << std::endl;\n    }\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "Bien",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "if\\s*\\(\\s*note\\b[\\s\\S]*?else\\s+if\\s*\\(\\s*note\\b[\\s\\S]*?else(?!\\s+if)[\\s\\S]*?\"Bien\"",
+                    "message": "Enchaînez if, else if et else sur la variable note. Le else doit afficher Bien."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "^(?![\\s\\S]*else\\s+if)[\\s\\S]*(?:Console\\.WriteLine|System\\.out\\.println|(?:std::)?cout\\s*<<)\\s*\\(?\\s*\"Bien\"",
+                    "message": "Utilisez if, else if et else. Afficher seulement Bien ne suffit pas."
+                  }
+                ]
+              }
+            },
+            "objective": "Enchaîner plusieurs cas exclusifs : un seul message doit sortir.",
+            "concept": "Plusieurs cas possibles"
+          }
+        },
+        {
+          "id": "cpp-c2-and-or",
+          "title": "Combiner des tests",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Combiner deux comparaisons dans un même test."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Plusieurs cas possibles ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "&& exige que les deux tests soient vrais. || réussit si au moins un des deux est vrai.\n\nExemple : age >= 18 && age < 26 est vrai seulement si l'âge est dans cet intervalle."
+            },
+            {
+              "type": "code",
+              "code": "int age = 20;\nif (age >= 18 && age < 26) {\n    std::cout << \"Jeune adulte\" << std::endl;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "et (and, &&) exige que les deux côtés soient vrais. ou (or, ||) suffit qu'un côté soit vrai."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Le bloc ne s'exécute que si la combinaison entière est vraie."
+            },
+            {
+              "type": "prose",
+              "body": "On n'écrit pas 18 <= age < 26 dans ces langages comme en mathématiques. On écrit deux comparaisons reliées par and ou &&."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Écrivez deux comparaisons complètes. Un mot seul entre les deux n'est pas un test."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "chapter": 2,
+      "title": "Boucles utiles",
+      "summary": "Répéter sans recopier le même code.",
+      "lessons": [
+        {
+          "id": "cpp-c2-for",
+          "title": "Parcourir une plage",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Choisir les bornes d'une boucle pour obtenir 1, 2 et 3."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Combiner des tests ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Une boucle répète un bloc. Ici, i prend les valeurs une par une, et on affiche i à chaque tour.\n\nL'exemple ci-dessous affiche 1 puis 2. Ce n'est pas encore 1, 2 et 3 : l'exercice demande une valeur de plus."
+            },
+            {
+              "type": "code",
+              "code": "for (int i = 1; i <= 2; i++) {\n    std::cout << i << std::endl;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Le compteur part de 1 et continue tant qu'il n'a pas dépassé 3."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Trois lignes : 1, 2, 3. Pas de 0, pas de 4."
+            },
+            {
+              "type": "prose",
+              "body": "Dans la boucle, écrivez std::cout << i << std::endl;. i va de 1 à 3 inclus."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Affichez i dans la boucle. N'écrivez pas les trois nombres à la main."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c2-ex3",
+            "prompt": "Objectif. Choisir les bornes d'une boucle pour obtenir 1, 2 et 3.\n\nMarche à suivre. Le départ de la boucle est déjà écrit. Dans la boucle, écrivez std::cout << i << std::endl;. i va de 1 à 3 inclus. N'écrivez pas trois affichages séparés de 1, puis 2, puis 3 : le contrôle exige une boucle.\n\nContraintes. La sortie comparée est exactement « 1↵2↵3 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez 1, puis 2, puis 3, chacun sur sa ligne.",
+            "hint": "Dans la boucle, écrivez std::cout << i << std::endl;. i va de 1 à 3 inclus.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    for (int i = 1; i <= 3; i++) {\n        \n    }\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "1\n2\n3",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "\\b(for|foreach|while)\\b",
+                    "message": "Utilisez une boucle (for ou while). Recopier les affichages un par un ne compte pas."
+                  },
+                  {
+                    "pattern": "cout\\s*<<\\s*i\\b",
+                    "message": "Affichez la variable de boucle i. Ne recopiez pas les nombres un par un."
+                  }
+                ]
+              }
+            },
+            "objective": "Choisir les bornes d'une boucle pour obtenir 1, 2 et 3.",
+            "concept": "Parcourir une plage"
+          }
+        },
+        {
+          "id": "cpp-c2-accumulate",
+          "title": "Accumuler une valeur",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Ajouter une valeur à un total à chaque tour de boucle."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Parcourir une plage ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Accumuler, c'est garder un total et lui ajouter quelque chose à chaque tour.\n\nOn part de total = 0. Au premier tour on ajoute 1 (total vaut 1), au second on ajoute encore 1 (total vaut 2)."
+            },
+            {
+              "type": "code",
+              "code": "int total = 0;\nfor (int i = 0; i < 2; i++) {\n    total = total + 1;\n}\nstd::cout << total << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "total commence à 0, avant la boucle. Dans la boucle, total devient total plus la valeur du tour. L'affichage est après la boucle, une seule fois."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Le total final apparaît une fois, pas une ligne par tour."
+            },
+            {
+              "type": "prose",
+              "body": "Cet exemple affiche 2, parce que la boucle tourne deux fois. L'ajout est dans la boucle, l'affichage est après."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Afficher le total dans la boucle montrerait les totaux intermédiaires. Ce n'est pas la même consigne."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "chapter": 2,
+      "title": "Tableaux",
+      "summary": "Ranger plusieurs valeurs sous un même nom.",
+      "lessons": [
+        {
+          "id": "cpp-c2-collections",
+          "title": "Stocker plusieurs valeurs",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Lire une case précise d'une collection, en commençant à l'index 0."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Accumuler une valeur ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Une liste (ou un tableau) range plusieurs valeurs dans des cases, de gauche à droite.\n\nLa première case n'a pas le numéro 1. Elle a le numéro 0. Ce numéro s'appelle l'index. On compte 0, 1, 2… et non 1, 2, 3."
+            },
+            {
+              "type": "prose",
+              "body": "Exemple avec d'autres nombres que l'exercice. int nombres[3] = {2, 4, 6};\n\n- index 0 : première case, la valeur 2\n- index 1 : deuxième case, la valeur 4\n- index 2 : troisième case, la valeur 6\n\nLe nombre écrit dans la case n'est pas l'index. 2 est une valeur. 0 est le numéro de la première case."
+            },
+            {
+              "type": "code",
+              "code": "int nombres[3] = {2, 4, 6};\nstd::cout << nombres[0] << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "La première case est l'index 0, la deuxième l'index 1. Le nom de la collection suivi de l'index lit la case. Ce n'est pas un texte."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "valeurs[0] vaut 10. L'affichage montre 10."
+            },
+            {
+              "type": "prose",
+              "body": "Cette ligne affiche 2, pas 0. On n'écrit pas de guillemets autour de l'index.\n\nstd::cout << \"valeurs[0]\" est faux : les guillemets transforment l'accès en texte, ou laissent une chaîne ouverte (SyntaxError). valeurs[10] est faux aussi : 10 est une valeur, pas le numéro de case. La première case est toujours l'index 0."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Écrire 10 directement ne lit pas la collection. L'index 1 lirait 20, pas la première case."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c2-ex4",
+            "prompt": "Objectif. Lire une case précise d'une collection, en commençant à l'index 0.\n\nMarche à suivre. La liste valeurs contient déjà 10, puis 20. La première case est l'index 0, donc la valeur 10. La deuxième case est l'index 1, donc 20. Ajoutez exactement cette ligne, sans guillemets autour de valeurs[0] : std::cout << valeurs[0] << std::endl; N'écrivez pas 10 tout seul, ni \"10\". Le contrôle vérifie que vous lisez la case 0.\n\nContraintes. La sortie comparée est exactement « 10 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez 10 en lisant la première case.",
+            "hint": "std::cout << valeurs[0] << std::endl;",
+            "starterCode": "#include <iostream>\n\nint main() {\n    int valeurs[2] = {10, 20};\n    \n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "10",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "valeurs\\s*\\[\\s*0\\s*\\]",
+                    "message": "Affichez la première valeur avec l'index 0 : valeurs[0]."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*10(?!\\d)",
+                    "message": "N'affichez pas 10 tout seul. Affichez valeurs[0]."
+                  }
+                ]
+              }
+            },
+            "objective": "Lire une case précise d'une collection, en commençant à l'index 0.",
+            "concept": "Stocker plusieurs valeurs"
+          }
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "chapter": 2,
+      "title": "Fonctions",
+      "summary": "Découper un programme en actions réutilisables.",
+      "lessons": [
+        {
+          "id": "cpp-c2-functions",
+          "title": "Créer une action nommée",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Définir une fonction, puis l'appeler. La définition seule n'affiche rien."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Stocker plusieurs valeurs ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Une fonction regroupe des instructions sous un nom. On la définit une fois, puis on l'appelle par son nom suivi de parenthèses.\n\nSans l'appel, le bloc ne s'exécute pas."
+            },
+            {
+              "type": "code",
+              "code": "void dire() {\n    std::cout << \"Ok\" << std::endl;\n}\n\n// dans main :\ndire();"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Le corps de la fonction est le bloc indenté ou entre accolades. L'appel, plus bas, exécute ce corps."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "L'appel affiche Pret. Sans appel, la Sortie reste vide même si la fonction est correcte."
+            },
+            {
+              "type": "prose",
+              "body": "Cet exemple affiche Ok, pas Pret. Dans dire(), écrivez std::cout << \"Pret\" << std::endl;. main appelle déjà dire()."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Remplacer l'appel par un affichage direct saute la notion d'appel."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c2-ex5",
+            "prompt": "Objectif. Définir une fonction, puis l'appeler. La définition seule n'affiche rien.\n\nMarche à suivre. Le squelette de la fonction dire est déjà là, ainsi que l'appel dire(). Dans dire(), écrivez std::cout << \"Pret\" << std::endl;. main appelle déjà dire().\n\nContraintes. La sortie comparée est exactement « Pret ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement Pret.",
+            "hint": "Dans dire(), écrivez std::cout << \"Pret\" << std::endl;. main appelle déjà dire().",
+            "starterCode": "#include <iostream>\n\nvoid dire() {\n}\n\nint main() {\n    dire();\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "Pret",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "void\\s+dire\\s*\\([\\s\\S]{0,800}dire\\s*\\(",
+                    "message": "Définissez la fonction puis appelez-la. Un affichage isolé ne suffit pas."
+                  }
+                ],
+                "mustInclude": [
+                  {
+                    "text": "Pret",
+                    "message": "Le corps doit afficher Pret."
+                  }
+                ]
+              }
+            },
+            "objective": "Définir une fonction, puis l'appeler. La définition seule n'affiche rien.",
+            "concept": "Créer une action nommée"
+          }
+        },
+        {
+          "id": "cpp-c2-project",
+          "title": "Mini-projet : diagnostic",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Assembler un test et deux messages pour décrire un niveau."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Créer une action nommée ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Un diagnostic combine une variable et un if / else.\n\nSi le test est vrai, on affiche le premier message. Sinon, le else affiche l'autre. Les deux messages doivent être écrits, même si un seul s'affiche."
+            },
+            {
+              "type": "code",
+              "code": "int niveau = 3;\nif (niveau >= 5) {\n    std::cout << \"Haut\" << std::endl;\n} else {\n    std::cout << \"Bas\" << std::endl;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Le seuil est 80. Au-dessus ou égal, un message. En dessous, l'autre. Les deux textes doivent être présents."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "Avec 85, la Sortie est Niveau eleve, sans accent : c'est le texte exact demandé."
+            },
+            {
+              "type": "prose",
+              "body": "Ici niveau vaut 3, le test >= 5 est faux, donc Bas s'affiche. Votre exercice utilise charge = 85 et le seuil 80, donc le if sera vrai."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Le else reste écrit même s'il ne s'exécute pas pour 85. Il documente l'autre cas."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c2-ex6",
+            "prompt": "Objectif. Assembler un test et deux messages pour décrire un niveau.\n\nMarche à suivre. charge vaut déjà 85. Le if et le else sont préparés, avec des textes vides. Dans le if : std::cout << \"Niveau eleve\" << std::endl;. Dans le else : std::cout << \"Niveau normal\" << std::endl;. 85 est bien supérieur ou égal à 80, donc le if s'exécute. Le else doit quand même contenir Niveau normal.\n\nContraintes. La sortie comparée est exactement « Niveau eleve ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAvec charge = 85, affichez Niveau eleve.",
+            "hint": "Dans le if : std::cout << \"Niveau eleve\" << std::endl;. Dans le else : std::cout << \"Niveau normal\" << std::endl;.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    int charge = 85;\n    if (charge >= 80) {\n        std::cout << \"\" << std::endl;\n    } else {\n        std::cout << \"\" << std::endl;\n    }\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "Niveau eleve",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "if\\s*\\(\\s*charge\\s*>=\\s*80\\s*\\)[\\s\\S]*?<<\\s*\"Niveau eleve\"[\\s\\S]*?else(?!\\s+if)[\\s\\S]*?<<\\s*\"Niveau normal\"",
+                    "message": "Testez charge >= 80. Affichez Niveau eleve, sinon Niveau normal."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "^(?![\\s\\S]*\\bif\\b)[\\s\\S]*(?:std::)?cout\\s*<<\\s*\"Niveau eleve\"",
+                    "message": "Utilisez if et else. Afficher seulement Niveau eleve ne suffit pas."
+                  }
+                ]
+              }
+            },
+            "objective": "Assembler un test et deux messages pour décrire un niveau.",
+            "concept": "Mini-projet : diagnostic"
+          }
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "chapter": 3,
+      "title": "Fonctions qui renvoient",
+      "summary": "Calculer une valeur et la réutiliser, au lieu de seulement afficher.",
+      "lessons": [
+        {
+          "id": "cpp-c3-return",
+          "title": "Renvoyer un résultat",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Renvoyer une valeur avec return, pour que l'appelant puisse l'afficher."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Mini-projet : diagnostic ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "return renvoie une valeur à l'endroit de l'appel. L'appel se comporte alors comme ce nombre : on peut l'afficher ou l'utiliser dans un calcul.\n\nSans return, l'appelant ne reçoit pas le résultat."
+            },
+            {
+              "type": "code",
+              "code": "int doubleDe(int n) {\n    return n * 2;\n}\n\n// dans main :\nstd::cout << doubleDe(3) << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "return quitte la fonction et donne le résultat à l'endroit de l'appel. Un affichage dans la fonction ne remplace pas ce retour."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "L'appelant affiche ce qui a été renvoyé. Sans return utile, l'appelant n'a pas le calcul."
+            },
+            {
+              "type": "prose",
+              "body": "Cet exemple affiche 6, parce que 3 × 2 = 6. L'exercice suivant multiplie un prix par une quantité, avec d'autres nombres."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "return 0 est un résultat figé. Le return du calcul sert pour toutes les valeurs."
+            }
+          ]
+        },
+        {
+          "id": "cpp-c3-produit",
+          "title": "Écrire une fonction produit",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Faire renvoyer le produit de deux paramètres, pas un nombre écrit en dur."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Renvoyer un résultat ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Les paramètres prix et quantite sont les valeurs reçues à l'appel. produit(2, 2) met 2 dans prix et 2 dans quantite.\n\nreturn 0 renvoie toujours zéro, quel que soit l'appel. Il faut renvoyer le calcul."
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "prix * quantite est recalculé à chaque appel. L'affichage est déjà écrit autour de l'appel : ne le remplacez pas."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "produit(2, 2) affiche 4."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "return 4 ne marcherait que pour cet appel. L'exercice le refuse."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c3-ex-produit",
+            "prompt": "Objectif. Faire renvoyer le produit de deux paramètres, pas un nombre écrit en dur.\n\nMarche à suivre. La fonction produit existe, mais elle renvoie 0. L'appel produit(2, 2) est déjà affiché. Remplacez return 0; par return prix * quantite; 2 fois 2 font 4. N'écrivez pas return 4 : le contrôle veut le calcul, pas le résultat figé.\n\nContraintes. La sortie comparée est exactement « 4 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 4.",
+            "hint": "return prix * quantite",
+            "starterCode": "#include <iostream>\n\nint produit(int prix, int quantite) {\n    return 0;\n}\n\nint main() {\n    std::cout << produit(2, 2) << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "4",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "return\\s+(prix\\s*\\*\\s*quantite|quantite\\s*\\*\\s*prix)",
+                    "message": "La fonction doit renvoyer prix * quantite, pas un nombre fixé."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "return\\s+4(?!\\d)",
+                    "message": "Ne renvoyez pas 4 directement. Renvoyez prix * quantite."
+                  }
+                ]
+              }
+            },
+            "objective": "Faire renvoyer le produit de deux paramètres, pas un nombre écrit en dur.",
+            "concept": "Écrire une fonction produit"
+          }
+        },
+        {
+          "id": "cpp-c3-somme",
+          "title": "Additionner deux résultats",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Réutiliser la même fonction deux fois et additionner les retours."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Écrire une fonction produit ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Chaque appel est indépendant. produit(8, 1) calcule 8 × 1. produit(3, 2) calcule 3 × 2. On additionne ces deux résultats, puis on affiche la somme.\n\nSi produit renvoie encore 0, les deux appels valent 0 et la somme vaut 0."
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Chaque appel a ses propres arguments. Les deux résultats sont des nombres. Leur somme s'affiche une fois."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "8 × 1 et 3 × 2 font 8 et 6, donc 14."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Gardez les deux appels. print(14) efface le calcul."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c3-ex-somme",
+            "prompt": "Objectif. Réutiliser la même fonction deux fois et additionner les retours.\n\nMarche à suivre. Deux appels sont déjà additionnés dans l'affichage : produit(8, 1) + produit(3, 2). Le return doit être prix * quantite. N'affichez pas 14 directement. 8 × 1 = 8 et 3 × 2 = 6, donc 8 + 6 = 14.\n\nContraintes. La sortie comparée est exactement « 14 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 14.",
+            "hint": "return prix * quantite",
+            "starterCode": "#include <iostream>\n\nint produit(int prix, int quantite) {\n    return 0;\n}\n\nint main() {\n    std::cout << produit(8, 1) + produit(3, 2) << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "14",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "return\\s+(prix\\s*\\*\\s*quantite|quantite\\s*\\*\\s*prix)",
+                    "message": "produit doit renvoyer prix * quantite."
+                  },
+                  {
+                    "pattern": "produit\\s*\\(\\s*8\\s*,\\s*1\\s*\\)",
+                    "message": "Gardez l'appel produit(8, 1)."
+                  },
+                  {
+                    "pattern": "produit\\s*\\(\\s*3\\s*,\\s*2\\s*\\)",
+                    "message": "Gardez l'appel produit(3, 2)."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*14(?!\\d)",
+                    "message": "N'affichez pas 14 tout seul. Additionnez les deux appels."
+                  }
+                ]
+              }
+            },
+            "objective": "Réutiliser la même fonction deux fois et additionner les retours.",
+            "concept": "Additionner deux résultats"
+          }
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "chapter": 3,
+      "title": "Tableaux associatifs",
+      "summary": "Retrouver une valeur à partir d'une clé, avec un std::map.",
+      "lessons": [
+        {
+          "id": "cpp-c3-dict",
+          "title": "Associer une clé et une valeur",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Lire une valeur à partir d'une clé texte, pas d'un index."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Additionner deux résultats ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Un tableau associatif retrouve une valeur par une clé, pas par l'index 0.\n\nLa clé est un texte écrit entre guillemets, exactement comme elle a été rangée : majuscules et accents comptent."
+            },
+            {
+              "type": "code",
+              "code": "std::map<std::string, int> ages;\nages[\"Léa\"] = 9;\nages[\"Sam\"] = 11;\nstd::cout << ages[\"Sam\"] << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "La clé est entre guillemets, parce que c'est un texte. La table rend le nombre associé. Une clé absente est une erreur d'exécution."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La clé Lea vaut 18."
+            },
+            {
+              "type": "prose",
+              "body": "Cet exemple affiche 11, la valeur de Sam, pas 9. Votre exercice lit une autre clé, Lea, dans une autre table."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "18 écrit tout seul ne consulte pas la table. Max vaudrait 12, ce n'est pas la clé demandée."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c3-ex-lookup",
+            "prompt": "Objectif. Lire une valeur à partir d'une clé texte, pas d'un index.\n\nMarche à suivre. La table notes contient déjà Lea = 18 et Max = 12. std::cout << notes[\"Max\"] lit la mauvaise clé. Remplacez \"Max\" par \"Lea\". N'écrivez pas 18 tout seul. Le contrôle vérifie que vous lisez la clé Lea.\n\nContraintes. La sortie comparée est exactement « 18 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 18.",
+            "hint": "std::cout << notes[\"Max\"] lit la mauvaise clé. Remplacez \"Max\" par \"Lea\".",
+            "starterCode": "#include <iostream>\n#include <map>\n#include <string>\n\nint main() {\n    std::map<std::string, int> notes;\n    notes[\"Lea\"] = 18;\n    notes[\"Max\"] = 12;\n    std::cout << notes[\"Max\"] << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "18",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "notes(?:\\.at\\s*\\(\\s*\"Lea\"\\s*\\)|\\s*\\[\\s*\"Lea\"\\s*\\])",
+                    "message": "Affichez la valeur associée à la clé Lea, pas le nombre 18."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*18(?!\\d)",
+                    "message": "N'affichez pas 18 tout seul. Lisez la clé Lea."
+                  }
+                ]
+              }
+            },
+            "objective": "Lire une valeur à partir d'une clé texte, pas d'un index.",
+            "concept": "Associer une clé et une valeur"
+          }
+        },
+        {
+          "id": "cpp-c3-dict-sum",
+          "title": "Parcourir toutes les valeurs",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Parcourir une table et additionner ses valeurs."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Associer une clé et une valeur ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Pour additionner toutes les valeurs, partez de total = 0, visitez chaque paire avec une boucle, et ajoutez la valeur au total.\n\nL'affichage se place après la boucle, une seule fois."
+            },
+            {
+              "type": "code",
+              "code": "std::map<std::string, int> sac;\nsac[\"a\"] = 1;\nsac[\"b\"] = 1;\nint total = 0;\nfor (const auto& paire : sac) {\n    total = total + paire.second;\n}\nstd::cout << total << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "La boucle visite chaque entrée. total augmente de la valeur, pas de la clé. L'affichage du total est après la boucle."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "4 et 2 font 6. Une seule ligne : 6."
+            },
+            {
+              "type": "prose",
+              "body": "Cet exemple affiche 2 (1 + 1). Votre stock vaut 4 + 2."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Laisser l'affichage avant la boucle montre 0. Il faut le déplacer après."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c3-ex-sum",
+            "prompt": "Objectif. Parcourir une table et additionner ses valeurs.\n\nMarche à suivre. stock contient pomme = 4 et pain = 2. total vaut 0, et il est affiché trop tôt : sans boucle, la sortie reste 0. Avant l'affichage, ajoutez for (const auto& paire : stock) { total = total + paire.second; }. 4 + 2 = 6. N'écrivez pas 6 directement.\n\nContraintes. La sortie comparée est exactement « 6 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 6.",
+            "hint": "Avant l'affichage, ajoutez for (const auto& paire : stock) { total = total + paire.second; }.",
+            "starterCode": "#include <iostream>\n#include <map>\n#include <string>\n\nint main() {\n    std::map<std::string, int> stock;\n    stock[\"pomme\"] = 4;\n    stock[\"pain\"] = 2;\n    int total = 0;\n    std::cout << total << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "6",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "\\b(for|foreach|while)\\b",
+                    "message": "Utilisez une boucle (for ou while). Recopier les affichages un par un ne compte pas."
+                  },
+                  {
+                    "pattern": "total\\s*(\\+=|=[^=;\\n]*\\+)",
+                    "message": "Ajoutez chaque valeur au total dans la boucle. N'écrivez pas 6 directement."
+                  }
+                ]
+              }
+            },
+            "objective": "Parcourir une table et additionner ses valeurs.",
+            "concept": "Parcourir toutes les valeurs"
+          }
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "chapter": 3,
+      "title": "Répéter et choisir",
+      "summary": "Contrôler précisément combien de fois un bloc s'exécute, puis choisir un cas.",
+      "lessons": [
+        {
+          "id": "cpp-c3-while",
+          "title": "Répéter tant qu'une condition est vraie",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Répéter tant qu'une condition reste vraie, et modifier ce qui la rendra fausse."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Parcourir toutes les valeurs ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "while répète le bloc tant que le test est vrai.\n\nIl faut changer la variable du test dans le bloc. Sinon le test reste vrai et le programme ne s'arrête plus."
+            },
+            {
+              "type": "code",
+              "code": "int n = 2;\nwhile (n > 0) {\n    std::cout << n << std::endl;\n    n = n - 1;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "while teste, exécute le corps, puis reteste. Si le compteur ne change pas, la boucle ne s'arrête pas et le délai coupe le programme."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "En affichant n puis en retirant 1, vous obtenez 3, 2, 1."
+            },
+            {
+              "type": "prose",
+              "body": "Ici n commence à 2. Premier tour : on affiche 2, n devient 1. Deuxième tour : on affiche 1, n devient 0. Ensuite n > 0 est faux, la boucle s'arrête. La sortie est 2 puis 1, pas 3, 2, 1."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "L'affichage est dans la boucle. La diminution aussi. L'un sans l'autre ne convient pas."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c3-ex-while",
+            "prompt": "Objectif. Répéter tant qu'une condition reste vraie, et modifier ce qui la rendra fausse.\n\nMarche à suivre. n vaut 3. Écrivez while (n > 0) { std::cout << n << std::endl; n = n - 1; }. Sans n = n - 1, la boucle ne s'arrête pas. Ordre à chaque tour : d'abord afficher n, ensuite retirer 1. Vous devez voir 3, puis 2, puis 1.\n\nContraintes. La sortie comparée est exactement « 3↵2↵1 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez 3, puis 2, puis 1, chacun sur sa ligne.",
+            "hint": "Écrivez while (n > 0) { std::cout << n << std::endl; n = n - 1; }. Sans n = n - 1, la boucle ne s'arrête pas.",
+            "starterCode": "#include <iostream>\n\nint main() {\n    int n = 3;\n    \n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "3\n2\n1",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "\\bwhile\\b[\\s\\S]{0,800}?n\\s*(=\\s*n\\s*-\\s*1|-=\\s*1|--)",
+                    "message": "Utilisez while, affichez n, puis diminuez n. Trois affichages copiés ne comptent pas."
+                  }
+                ]
+              }
+            },
+            "objective": "Répéter tant qu'une condition reste vraie, et modifier ce qui la rendra fausse.",
+            "concept": "Répéter tant qu'une condition est vraie"
+          }
+        },
+        {
+          "id": "cpp-c3-branch",
+          "title": "Choisir avec switch",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Ajouter un cas précis avant le cas par défaut."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Répéter tant qu'une condition est vraie ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "switch compare une valeur à des cas. break termine le cas. Sans break, l'exécution continue dans le cas suivant. default sert quand aucun cas ne correspond."
+            },
+            {
+              "type": "code",
+              "code": "int couleur = 1;\nswitch (couleur) {\n    case 1:\n        std::cout << \"Rouge\" << std::endl;\n        break;\n    default:\n        std::cout << \"Autre\" << std::endl;\n        break;\n}"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Les cas sont testés dans l'ordre. Le cas par défaut ne doit pas passer devant le cas 3, sinon il vole l'exécution."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "jour vaut 3, donc Mercredi."
+            },
+            {
+              "type": "prose",
+              "body": "couleur vaut 1, donc Rouge s'affiche. Votre variable jour vaut 3, et le cas 3 n'existe pas encore : le cas par défaut affiche Autre tant que vous ne l'ajoutez pas."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Un affichage de Mercredi hors du cas 3 ne répond pas à la consigne."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c3-ex-branch",
+            "prompt": "Objectif. Ajouter un cas précis avant le cas par défaut.\n\nMarche à suivre. jour vaut 3. Le cas 1 et le cas par défaut sont déjà écrits. Avant default, ajoutez case 3: puis std::cout << \"Mercredi\" << std::endl; puis break; Placez ce cas avant le cas par défaut, sinon le défaut s'exécute avant.\n\nContraintes. La sortie comparée est exactement « Mercredi ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement Mercredi.",
+            "hint": "Avant default, ajoutez case 3: puis std::cout << \"Mercredi\" << std::endl; puis break;",
+            "starterCode": "#include <iostream>\n\nint main() {\n    int jour = 3;\n    switch (jour) {\n        case 1:\n            std::cout << \"Lundi\" << std::endl;\n            break;\n        default:\n            std::cout << \"Autre\" << std::endl;\n            break;\n    }\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "Mercredi",
+              "checks": {
+                "mustInclude": [
+                  {
+                    "text": "Mercredi",
+                    "message": "Le cas 3 doit afficher Mercredi."
+                  }
+                ],
+                "mustMatch": [
+                  {
+                    "pattern": "case\\s+3\\s*:",
+                    "message": "Ajoutez un cas 3. Afficher Mercredi sans switch/match ne suffit pas."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "^(?![\\s\\S]*case\\s+3\\s*:)[\\s\\S]*(?:std::)?cout\\s*<<\\s*\"Mercredi\"",
+                    "message": "Ajoutez le cas 3. Un affichage isolé de Mercredi ne suffit pas."
+                  }
+                ]
+              }
+            },
+            "objective": "Ajouter un cas précis avant le cas par défaut.",
+            "concept": "Choisir avec switch"
+          }
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "chapter": 3,
+      "title": "Texte, plus précisément",
+      "summary": "Transformer une chaîne et en extraire une information.",
+      "lessons": [
+        {
+          "id": "cpp-c3-text",
+          "title": "Longueur d'un texte",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Transformer un texte avec l'outil du langage, sans réécrire le résultat à la main."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Choisir avec switch ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "mot.size() renvoie le nombre de caractères. codeflow a 8 lettres. On affiche ce nombre, pas le mot lui-même.\n\nL'exemple suivant compte un autre mot."
+            },
+            {
+              "type": "code",
+              "code": "std::string mot = \"oui\";\nstd::cout << mot.size() << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "La variable garde codeflow. La méthode de mise en majuscules fabrique un nouveau texte pour l'affichage."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La Sortie est CODEFLOW."
+            },
+            {
+              "type": "prose",
+              "body": "Cet exemple affiche 3, la longueur de oui. codeflow fera 8."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Taper CODEFLOW entre guillemets ignore la variable. L'exercice le refuse."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c3-ex-text",
+            "prompt": "Objectif. Transformer un texte avec l'outil du langage, sans réécrire le résultat à la main.\n\nMarche à suivre. mot vaut codeflow et il est affiché tel quel, donc la sortie est le mot, pas un nombre. Remplacez std::cout << mot par std::cout << mot.size() << std::endl;. size() compte les caractères, ici 8. N'écrivez pas 8 directement.\n\nContraintes. La sortie comparée est exactement « 8 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 8.",
+            "hint": "mot.size()",
+            "starterCode": "#include <iostream>\n#include <string>\n\nint main() {\n    std::string mot = \"codeflow\";\n    std::cout << mot << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "8",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "\\.(size|length)\\s*\\(",
+                    "message": "Affichez la longueur de mot (size ou length), pas le nombre 8."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*8(?!\\d)",
+                    "message": "N'affichez pas 8 tout seul. Demandez la longueur de mot."
+                  }
+                ]
+              }
+            },
+            "objective": "Transformer un texte avec l'outil du langage, sans réécrire le résultat à la main.",
+            "concept": "Longueur d'un texte"
+          }
+        },
+        {
+          "id": "cpp-c3-words",
+          "title": "Compter les mots",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Compter les mots d'une phrase en la découpant sur les espaces."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Longueur d'un texte ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Sans split, on compte les espaces. Une phrase de trois mots contient deux espaces. On part de 1, et on ajoute 1 à chaque espace."
+            },
+            {
+              "type": "code",
+              "code": "int mots = 1;\nfor (char c : texte) {\n    if (c == ' ') mots = mots + 1;\n}\nstd::cout << mots << std::endl;"
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "Le découpage produit une liste de mots. La longueur de cette liste est le nombre de mots, pas le nombre de lettres."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "un deux trois fait 3."
+            },
+            {
+              "type": "prose",
+              "body": "« un deux » a un espace, donc 1 + 1 = 2. « un deux trois » a deux espaces."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "print(3) ne découpe rien. L'outil de découpage doit rester visible."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c3-ex-words",
+            "prompt": "Objectif. Compter les mots d'une phrase en la découpant sur les espaces.\n\nMarche à suivre. texte vaut « un deux trois ». Partez de int mots = 1; puis for (char c : texte) { if (c == ' ') mots = mots + 1; } et affichez mots. Deux espaces dans « un deux trois » donnent 3 mots. N'écrivez pas 3 directement.\n\nContraintes. La sortie comparée est exactement « 3 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 3.",
+            "hint": "Partez de int mots = 1; puis for (char c : texte) { if (c == ' ') mots = mots + 1; } et affichez mots. Deux espaces dans « un deux trois » donnent 3 mots.",
+            "starterCode": "#include <iostream>\n#include <string>\n\nint main() {\n    std::string texte = \"un deux trois\";\n    std::cout << texte << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "3",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "==\\s*' '",
+                    "message": "Parcourez le texte et comptez les espaces. N'affichez pas 3 directement."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*3(?!\\d)",
+                    "message": "N'affichez pas 3 tout seul. Calculez le nombre de mots."
+                  }
+                ]
+              }
+            },
+            "objective": "Compter les mots d'une phrase en la découpant sur les espaces.",
+            "concept": "Compter les mots"
+          }
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "chapter": 3,
+      "title": "Projet : ticket de caisse",
+      "summary": "Combiner fonction, tableau associatif et plusieurs calculs. Plus complet que le diagnostic du chapitre 2.",
+      "lessons": [
+        {
+          "id": "cpp-c3-ligne",
+          "title": "Préparer une ligne",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Changer les arguments d'un appel pour changer le résultat, sans toucher à la formule."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Compter les mots ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "produit(prix, quantite) renvoie déjà prix × quantite. Pour une ligne de ticket, vous changez seulement les nombres de l'appel.\n\nproduit(2, 2) affiche 4. produit(3, 3) affiche 9. Ce n'est pas le même appel."
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "La fonction est déjà correcte. 2 et 2 donnent 4. 3 et 3 donnent 9. Seuls les arguments de l'appel changent."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La Sortie devient 9."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "print(9) abandonne la fonction. L'appel doit rester."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c3-ex-ligne",
+            "prompt": "Objectif. Changer les arguments d'un appel pour changer le résultat, sans toucher à la formule.\n\nMarche à suivre. La fonction produit est correcte. L'affichage appelle encore produit(2, 2), donc la sortie est 4. Changez produit(2, 2) en produit(3, 3). N'affichez pas 9 directement.\n\nContraintes. La sortie comparée est exactement « 9 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 9.",
+            "hint": "Changez produit(2, 2) en produit(3, 3). N'affichez pas 9 directement.",
+            "starterCode": "#include <iostream>\n\nint produit(int prix, int quantite) {\n    return prix * quantite;\n}\n\nint main() {\n    std::cout << produit(2, 2) << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "9",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "produit\\s*\\(\\s*3\\s*,\\s*3\\s*\\)",
+                    "message": "Appelez la fonction avec 3 et 3. N'affichez pas 9 directement."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*9(?!\\d)",
+                    "message": "N'affichez pas 9 tout seul. Appelez la fonction."
+                  }
+                ]
+              }
+            },
+            "objective": "Changer les arguments d'un appel pour changer le résultat, sans toucher à la formule.",
+            "concept": "Préparer une ligne"
+          }
+        },
+        {
+          "id": "cpp-c3-project",
+          "title": "Projet : ticket de caisse",
+          "sections": [
+            {
+              "type": "prose",
+              "heading": "Objectif",
+              "body": "Calculer un total de ticket à partir d'une table de prix et de quantités."
+            },
+            {
+              "type": "prose",
+              "heading": "Prérequis",
+              "body": "Prérequis : la leçon « Préparer une ligne ». Aucune autre notion n'est utilisée."
+            },
+            {
+              "type": "prose",
+              "heading": "Explication",
+              "body": "Le ticket a trois lignes. Chaque ligne multiplie le prix trouvé par la clé (le nom de l'article) par la quantité.\n\npomme × 2 = 4, pain × 1 = 3, lait × 2 = 2. Le total est 4 + 3 + 2 = 9."
+            },
+            {
+              "type": "prose",
+              "body": "Le programme de départ additionne déjà les trois appels, mais ligne renvoie 0, et l'affichage imprime 0 au lieu de la variable total. Les deux endroits sont à corriger."
+            },
+            {
+              "type": "prose",
+              "heading": "Comment ça marche",
+              "body": "ligne reçoit la table, le nom et la quantité, puis renvoie prix fois quantité. Le total additionne trois appels. L'affichage montre le mot Total et la variable total."
+            },
+            {
+              "type": "prose",
+              "heading": "Résultat attendu",
+              "body": "La Sortie exacte est Total 9."
+            },
+            {
+              "type": "prose",
+              "heading": "À retenir",
+              "body": "Total 9 écrit en un seul texte ne calcule rien. Le return doit multiplier la case par la quantité."
+            }
+          ],
+          "exercise": {
+            "id": "cpp-c3-ex-project",
+            "prompt": "Objectif. Calculer un total de ticket à partir d'une table de prix et de quantités.\n\nMarche à suivre. Dans ligne, remplacez return 0; par return grille.at(nom) * quantite;. Affichez total, pas 0 : std::cout << \"Total \" << total << std::endl; Ne tapez pas Total 9 en un seul texte. Le contrôle vérifie le calcul dans ligne.\n\nContraintes. La sortie comparée est exactement « Total 9 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement Total 9.",
+            "hint": "Dans ligne, remplacez return 0; par return grille.at(nom) * quantite;. Affichez total, pas 0 : std::cout << \"Total \" << total << std::endl;",
+            "starterCode": "#include <iostream>\n#include <map>\n#include <string>\n\nint ligne(const std::map<std::string, int>& grille, const std::string& nom, int quantite) {\n    return 0;\n}\n\nint main() {\n    std::map<std::string, int> prix;\n    prix[\"pomme\"] = 2;\n    prix[\"pain\"] = 3;\n    prix[\"lait\"] = 1;\n    int total = ligne(prix, \"pomme\", 2) + ligne(prix, \"pain\", 1) + ligne(prix, \"lait\", 2);\n    std::cout << \"Total \" << 0 << std::endl;\n    return 0;\n}",
+            "validate": {
+              "type": "stdoutEquals",
+              "expected": "Total 9",
+              "checks": {
+                "mustMatch": [
+                  {
+                    "pattern": "return\\s+grille(?:\\.at\\s*\\(\\s*nom\\s*\\)|\\s*\\[\\s*nom\\s*\\])\\s*\\*\\s*quantite",
+                    "message": "ligne doit renvoyer le prix de l'article multiplié par la quantité."
+                  }
+                ],
+                "forbidCheats": [
+                  {
+                    "pattern": "(?:std::)?cout\\s*<<\\s*\"Total 9\"",
+                    "message": "N'affichez pas Total 9 à la main. Calculez le total avec ligne."
+                  }
+                ]
+              }
+            },
+            "objective": "Calculer un total de ticket à partir d'une table de prix et de quantités.",
+            "concept": "Projet : ticket de caisse"
+          }
+        }
+      ]
+    }
+  ]
+}

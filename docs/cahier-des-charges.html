@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cahier des charges — CodeFlow 1.2.0</title>
+  <style>
+    :root {
+      --ink: #1c1915;
+      --slate: #3c433f;
+      --muted: #5e675f;
+      --line: #e3ddd2;
+      --paper: #f6f3ec;
+      --card: #fffcf7;
+      --accent: #2c4638;
+      --mark: #efe6d6;
+      --code: #f3eee6;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Segoe UI", "Segoe UI Variable", Calibri, sans-serif;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 760px);
+      gap: 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 28px 80px;
+    }
+
+    nav {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      max-height: calc(100vh - 56px);
+      overflow: auto;
+      padding-right: 8px;
+    }
+
+    nav p {
+      margin: 0 0 10px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    nav ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      display: block;
+      padding: 5px 0;
+      color: var(--slate);
+      text-decoration: none;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    nav a:hover { color: var(--ink); }
+
+    header.doc {
+      margin-bottom: 36px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    header.doc .kicker {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-family: Palatino, "Palatino Linotype", "Iowan Old Style", Georgia, serif;
+      font-size: 40px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 4px 16px;
+      margin: 18px 0 0;
+      font-size: 14.5px;
+    }
+
+    .meta dt { color: var(--muted); }
+    .meta dd { margin: 0; }
+
+    h2 {
+      margin: 48px 0 12px;
+      padding-top: 8px;
+      font-family: Palatino, "Palatino Linotype", Georgia, serif;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    h3 {
+      margin: 28px 0 8px;
+      font-size: 18px;
+      font-weight: 650;
+    }
+
+    p { margin: 0 0 12px; }
+
+    ul, ol { margin: 0 0 14px; padding-left: 1.25rem; }
+    li { margin: 4px 0; }
+    li strong { font-weight: 650; }
+
+    .table-wrap { overflow-x: auto; margin: 8px 0 18px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+      font-size: 14.5px;
+      line-height: 1.4;
+      background: var(--card);
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      font-weight: 650;
+      color: var(--slate);
+      background: var(--mark);
+      border-bottom-color: #ddd4c4;
+    }
+
+    pre {
+      margin: 0 0 16px;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    code {
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-size: 0.92em;
+      background: var(--code);
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+
+    pre code { background: none; padding: 0; }
+
+    .note {
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      background: var(--card);
+      border-left: 3px solid var(--accent);
+      color: var(--slate);
+      font-size: 15.5px;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 24px 18px 64px;
+      }
+      nav {
+        position: static;
+        max-height: none;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--line);
+      }
+      h1 { font-size: 32px; }
+      .meta { grid-template-columns: 1fr; }
+      .meta dt { margin-top: 8px; }
+    }
+
+    @media print {
+      body { background: white; font-size: 11.5pt; }
+      .layout { display: block; max-width: none; padding: 0; }
+      nav { position: static; max-height: none; margin-bottom: 18pt; }
+      a { color: inherit; text-decoration: none; }
+      h2 { break-before: page; }
+      h2:first-of-type { break-before: auto; }
+      table, pre, .note { break-inside: avoid; }
+      header.doc { border-bottom-color: #ccc; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <nav aria-label="Sommaire">
+      <p>Sommaire</p>
+      <ol>
+        <li><a href="#presentation">1. Présentation</a></li>
+        <li><a href="#objectifs">2. Objectifs</a></li>
+        <li><a href="#perimetre">3. Périmètre</a></li>
+        <li><a href="#architecture">4. Architecture</a></li>
+        <li><a href="#fonctionnalites">5. Fonctionnalités</a></li>
+        <li><a href="#contenu">6. Contenu pédagogique</a></li>
+        <li><a href="#exigences">7. Exigences techniques</a></li>
+        <li><a href="#historique">8. Historique des versions</a></li>
+        <li><a href="#bugs">9. Bugs connus et corrigés</a></li>
+        <li><a href="#release">10. Contraintes et règles de release</a></li>
+        <li><a href="#glossaire">11. Glossaire</a></li>
+      </ol>
+    </nav>
+
+    <main>
+      <header class="doc">
+        <p class="kicker">Spécification du produit livré</p>
+        <h1>Cahier des charges — CodeFlow</h1>
+        <dl class="meta">
+          <dt>Produit</dt><dd>CodeFlow 1.2.0</dd>
+          <dt>Identifiant</dt><dd><code>com.codeflow.desktop</code></dd>
+          <dt>Date</dt><dd>25 novembre 2026</dd>
+          <dt>Nature</dt><dd>État livré de l’application, du contenu et de la distribution. Ce n’est pas une feuille de route.</dd>
+        </dl>
+      </header>
+
+      <p>Le texte décrit ce que le dépôt et les notes de version publiques mettent en œuvre. Lorsqu’un point n’est pas tranché par le code ou par une note GitHub, il est signalé comme tel.</p>
+      <p>Sources : application bureau (<code>apps/desktop</code>), contenu (<code>content/tracks</code>), serveur du dépôt (<code>apps/server</code>), dossier portable, guide <code>docs/INSTALL.md</code>, et notes des releases <a href="https://github.com/Lysacae/CodeFlow/releases">Lysacae/CodeFlow</a> de la v1.0.0 à la v1.2.0.</p>
+
+      <h2 id="presentation">1. Présentation</h2>
+      <p>CodeFlow est une application Windows de bureau pour apprendre à programmer en <strong>Python</strong>, <strong>C#</strong>, <strong>C++</strong> et <strong>Java</strong>. L’élève lit des leçons en français, écrit dans un éditeur, exécute le programme sur sa machine, et avance dans un parcours verrouillé leçon par leçon.</p>
+      <p>Le compte (pseudo, mot de passe, photo facultative), la progression, les projets, les amis et la messagerie sont synchronisés via Supabase. L’expérience, le rang et 71 succès suivent le compte. Au lancement, si une release GitHub plus récente existe, une fenêtre propose de l’installer. Tant que cette mise à jour n’est pas installée, une icône de téléchargement reste visible à côté des paramètres.</p>
+      <p>Deux distributions existent :</p>
+      <ul>
+        <li>l’installateur NSIS <code>CodeFlow_*_x64-setup.exe</code> ;</li>
+        <li>la version portable, lancée par <code>portable/Lancer-CodeFlow.bat</code>, qui place devant le <code>PATH</code> les runtimes livrés dans <code>portable/runtimes</code>.</li>
+      </ul>
+      <p>L’interface de l’application est en français. L’éditeur Windows peut signaler un éditeur non vérifié : le README oriente alors vers la version portable, ou vers une autorisation manuelle de l’application.</p>
+
+      <h2 id="objectifs">2. Objectifs</h2>
+      <h3>Pédagogiques</h3>
+      <ul>
+        <li>Faire écrire et exécuter du vrai code, avec la sortie réelle de l’interpréteur ou du compilateur. L’exécution n’est pas simulée.</li>
+        <li>Couvrir, pour chaque langage, trois chapitres : bases, structures utiles, puis un projet de ticket de caisse. Les chapitres 2 et 3, ainsi que les exercices tardifs du chapitre 1, expliquent la notion avant de demander le geste.</li>
+        <li>Vérifier les exercices par comparaison exacte de la sortie, et, quand la leçon l’exige, par la structure du programme. Afficher le texte attendu sans la notion enseignée ne suffit pas.</li>
+        <li>Proposer une série de questions à choix multiples, chronométrée, à part des leçons. La première maîtrise rapporte de l’expérience ; les répétitions en rapportent beaucoup moins.</li>
+        <li>Expliquer une erreur par un assistant local, en trois paliers, en bas de la leçon, sans service d’intelligence artificielle distant.</li>
+      </ul>
+      <h3>Produit</h3>
+      <ul>
+        <li>Un compte par personne, réutilisable après réinstallation : progression, projets, amis et messages reviennent avec le pseudo.</li>
+        <li>Une installation des langages depuis l’application (winget), un par un ou tous ensemble, et une édition portable qui embarque déjà les runtimes.</li>
+        <li>Un classement entre comptes : progression, réussite des questions, temps pour finir les quatre séries. Chaque ligne ouvre le profil public, avec le bouclier de rang.</li>
+        <li>Des mises à jour depuis GitHub Releases, installées par l’application, avec un récapitulatif des versions sautées et un rappel visuel tant que l’installation n’est pas faite.</li>
+        <li>Une interface sobre, quatre thèmes, un mode Focus pendant les exercices, des amis, une messagerie, et une progression par rangs.</li>
+      </ul>
+
+      <h2 id="perimetre">3. Périmètre</h2>
+      <h3>Dans le périmètre livré</h3>
+      <ul>
+        <li>Windows 10 et 11, processeur x64.</li>
+        <li>Quatre langages, leçons, exercices, création d’un premier fichier, questions/réponses.</li>
+        <li>Compte cloud, photo, changement de mot de passe, suppression de compte, récupération locale.</li>
+        <li>Carnet de programmes, synchronisation cloud, réinstallation d’un projet sur un autre PC.</li>
+        <li>Détection, installation et désinstallation des runtimes, y compris en lot.</li>
+        <li>Classement, thèmes, mode Focus, mises à jour automatiques, icône de mise à jour disponible.</li>
+        <li>Amis, demandes, blocage, messagerie (lecture, réactions, émojis, saisie en cours).</li>
+        <li>Profil public, expérience, douze rangs, 71 succès.</li>
+        <li>Tutoriel obligatoire une fois par compte, rouvert depuis la page du langage.</li>
+        <li>Compte technique interne <code>DevTesting</code> (onglet Admin, journaux, leçons déverrouillées).</li>
+      </ul>
+      <h3>Hors périmètre</h3>
+      <ul>
+        <li>macOS, Linux, téléphone, tablette.</li>
+        <li>Exécution du code sur un serveur. Le bac à sable est local.</li>
+        <li>Cours dans une autre langue que le français.</li>
+        <li>Tuteur conversationnel branché sur un modèle distant. L’assistant lit la sortie du compilateur et des règles locales.</li>
+        <li>Espace public d’administration. L’onglet Admin n’apparaît que pour le pseudo <code>DevTesting</code>.</li>
+        <li>Signature de code de l’éditeur. L’avertissement Windows « éditeur non vérifié » reste un cas prévu.</li>
+        <li>Réglage de l’objectif quotidien dans l’interface. Le champ <code>dailyGoal</code> existe dans la progression (valeur par défaut 3) et se synchronise, sans écran pour le modifier. Le succès « Ambitieux » exige pourtant une valeur d’au moins 5 : il n’est pas atteignable depuis l’écran actuel.</li>
+        <li>Signalement transmis à une modération. Le bouton affiche une confirmation locale et n’appelle aucun service. Voir la section 5.10.</li>
+      </ul>
+      <p>Le serveur Express <code>apps/server</code> est dans le dépôt (pont documenté, script de publication de release). Le client livré ne l’appelle pas : il parle à Supabase et à l’API GitHub depuis le processus Rust.</p>
+
+      <h2 id="architecture">4. Architecture</h2>
+      <pre><code>CodeFlow.exe (Tauri 2)
+  interface React 19 + Vite + Tailwind
+  commandes Rust
+        |                         |
+        v                         v
+  SQLite locale              Supabase Auth
+  %LOCALAPPDATA%\CodeFlow    comptes, progression, projets,
+        |                    amis, messages (app_metadata)
+        +-- exécution locale (python, dotnet, g++, javac/java)
+        +-- winget (installation des runtimes)
+        +-- GitHub Releases Lysacae/CodeFlow (mises à jour)</code></pre>
+
+      <h3>Poste de travail</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Élément</th><th>Rôle</th></tr></thead>
+          <tbody>
+            <tr><td>Tauri 2</td><td>Fenêtre native, commandes, installeur NSIS</td></tr>
+            <tr><td>React 19, React Router 7, Zustand</td><td>Écrans et état</td></tr>
+            <tr><td>Monaco</td><td>Éditeur de code</td></tr>
+            <tr><td>Tailwind 4</td><td>Styles et thèmes</td></tr>
+            <tr><td>SQLite (<code>rusqlite</code>, bibliothèque embarquée)</td><td>Session locale, progression, programmes</td></tr>
+            <tr><td><code>ureq</code></td><td>Appels HTTPS vers Supabase et GitHub</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>La fenêtre s’ouvre en 1280 × 840, minimum 960 × 640. Le maximum déclaré dans la configuration est 3840 × 2160 ; à l’exécution il est ramené à la zone de travail du moniteur, et recalculé quand la fenêtre se déplace ou quand l’échelle d’affichage change. Le document web est calé sur la taille intérieure de la fenêtre, pour éviter qu’elle s’étire hors de l’écran.</p>
+      <p>Après un Alt+Tab, ou quand une fenêtre élevée (droits administrateur) ne reçoit pas le rappel du shell, le processus force lui-même la restauration : <code>ShowWindow</code> en mode restauration, puis premier plan. Si Windows a laissé la fenêtre hors écran ou minuscule, elle est ramenée à 1280 × 840 et recentrée. Perdre le focus ne masque pas la fenêtre. Une taille 0 × 0, qui correspond à la réduction, n’est pas envoyée à la webview.</p>
+      <p>Le menu contextuel du navigateur intégré (WebView2), celui de Monaco, et le clic droit sur la page sont désactivés.</p>
+
+      <h3>Données locales</h3>
+      <p>Tout est sous <code>%LOCALAPPDATA%\CodeFlow\</code> :</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Fichier ou dossier</th><th>Contenu</th></tr></thead>
+          <tbody>
+            <tr><td><code>codeflow.db</code></td><td>Utilisateur actif, jetons, leçons, exercices, historique, programmes, thème, drapeau d’onboarding</td></tr>
+            <tr><td><code>projects\</code></td><td>Fichiers de projets</td></tr>
+            <tr><td><code>sandbox\</code></td><td>Dossier temporaire d’une exécution</td></tr>
+            <tr><td><code>.codeflow-recovery.json</code></td><td>Pseudo et mot de passe du dernier compte utilisé sur ce PC, fichier masqué</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Le navigateur intégré garde aussi, par compte, un cache de progression (<code>cf-prog-…</code>) et la liste locale des identifiants bloqués (<code>cf-blocked-…</code>).</p>
+      <p>Une base déjà utilisée (comptes présents, mise à jour) est marquée comme ayant déjà vu l’écran des environnements. Cet écran ne se rouvre donc pas à chaque connexion.</p>
+
+      <h3>Cloud</h3>
+      <p>Le client crée un utilisateur Supabase Auth. L’adresse est fabriquée : le pseudo, réduit aux lettres, chiffres, <code>_</code> et <code>-</code>, suivi de <code>@accounts.codeflow.app</code>. Le pseudo affiché et la photo sont dans les métadonnées utilisateur. La progression est dans <code>app_metadata.progress</code>. Les projets sont dans <code>app_metadata.projects</code>. Les amis, les demandes, les fils de discussion et la liste des bloqués sont dans le même <code>app_metadata</code>, à côté de la progression.</p>
+      <p>Le client embarque l’adresse du projet Supabase et une clé de service, et appelle l’API d’administration Auth (création, lecture des profils, mise à jour, suppression définitive). Cette clé ne figure pas dans ce document. Conséquence assumée par l’implémentation actuelle : le binaire peut lister les comptes pour le classement, les profils publics, les taux de succès et l’onglet Admin.</p>
+      <p>Les jetons d’accès et de rafraîchissement sont gardés dans SQLite et dans le <code>localStorage</code> de la webview. Si le jeton d’accès expire dans moins de 30 secondes, le client demande un nouveau couple de jetons avant l’appel. Un message explicite demande de se reconnecter quand la session n’est plus récupérable.</p>
+      <p>La fusion de progression est « la plus récente gagne » (<code>updatedAt</code>). Si le cloud est plus récent, il remplace le local. Si le local est plus récent, il est poussé. Un envoi plus ancien que la copie cloud est refusé par le client Rust. Tant que la signature de la progression n’a pas changé, le client ne réécrit pas.</p>
+      <p>Limites de la messagerie, le blob étant partagé avec la progression et les projets :</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Limite</th><th>Valeur</th></tr></thead>
+          <tbody>
+            <tr><td>Messages gardés par conversation</td><td>30, les plus récents</td></tr>
+            <tr><td>Longueur d’un message</td><td>280 caractères</td></tr>
+            <tr><td>Conversations par compte</td><td>40</td></tr>
+            <tr><td>Réaction</td><td>une par utilisateur et par message ; la même réaction la retire</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Chaque fil est recopié sur les deux comptes. Au-delà, les plus anciens sont tronqués.</p>
+
+      <h3>Mises à jour</h3>
+      <p><code>cloud_latest_update</code> lit les releases GitHub du dépôt <code>Lysacae/CodeFlow</code> (brouillons et préversions ignorés). Il retient la plus récente qui a un fichier, et concatène les notes de toutes les versions strictement plus neuves que la version installée, de la plus ancienne à la plus récente.</p>
+      <p>L’installateur choisi est l’asset dont le nom contient <code>setup</code> et se termine par <code>.exe</code>. À défaut, le premier <code>.exe</code>, puis le premier fichier.</p>
+      <ul>
+        <li>Copie installée : téléchargement du setup, fermeture de CodeFlow, lancement NSIS silencieux (<code>/S /UPDATE /R</code>).</li>
+        <li>Copie portable : tentative de télécharger <code>CodeFlow.exe</code> à côté du setup, remplacement de l’exécutable en cours, relance. Si cet asset manque, repli sur le setup.</li>
+      </ul>
+      <p>Le hook NSIS tue <code>CodeFlow.exe</code> avant une installation ou une mise à jour, pour pouvoir remplacer les fichiers.</p>
+
+      <h3>Serveur du dépôt</h3>
+      <p><code>apps/server</code> (Express, port 8787 par défaut) expose santé, inscription, connexion, profil, progression et dernière release. Il sert aussi au script <code>publish-release</code>. Ce n’est pas le chemin du client 1.2.0. La variable <code>VITE_CODEFLOW_API_URL</code> est déclarée dans les types Vite et n’est pas lue par les écrans.</p>
+
+      <h3>Distributions</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>Installateur</th><th>Portable</th></tr></thead>
+          <tbody>
+            <tr><td>Fichier</td><td><code>CodeFlow_*_x64-setup.exe</code></td><td><code>portable/CodeFlow/CodeFlow.exe</code></td></tr>
+            <tr><td>Lancement</td><td>Installation NSIS, mode utilisateur courant</td><td><code>Lancer-CodeFlow.bat</code></td></tr>
+            <tr><td>Runtimes</td><td>Proposés par winget dans l’application</td><td>Préfixés sur le <code>PATH</code> de la session s’ils sont dans <code>portable/runtimes</code></td></tr>
+            <tr><td>Mise à jour</td><td>Setup silencieux</td><td>Remplacement de l’exe, ou setup en secours</td></tr>
+            <tr><td>Langues NSIS</td><td>Français et anglais déclarés, sélecteur masqué</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Les releases 1.0.0 à 1.0.4 ne publient que le setup. À partir de la 1.0.5, les deux fichiers sont attachés : <code>CodeFlow.exe</code> et le setup.</p>
+
+      <h2 id="fonctionnalites">5. Fonctionnalités</h2>
+
+      <h3>5.1 Compte, profil, session</h3>
+      <p>Inscription et connexion demandent un pseudo et un mot de passe. La photo est facultative.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Règle</th><th>Valeur</th></tr></thead>
+          <tbody>
+            <tr><td>Pseudo</td><td>3 à 24 caractères, lettres ASCII, chiffres, <code>_</code>, <code>-</code></td></tr>
+            <tr><td>Mot de passe</td><td>au moins 4 caractères</td></tr>
+            <tr><td>Photo</td><td>fichier image, 2 Mo maximum à la sélection ; recadrage carré ; JPEG 128 × 128, qualité 0,85</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Le profil éditable s’ouvre depuis l’avatar dans l’en-tête. On peut changer le pseudo et la photo. Un nouveau mot de passe n’est accepté que si le mot de passe actuel est fourni et reconnu (nouvelle connexion de contrôle). L’ancien et le nouveau doivent différer. Le fichier de récupération local est mis à jour quand le pseudo change et qu’il correspond au compte mémorisé.</p>
+      <p>La suppression de compte demande le mot de passe, contrôle la connexion, puis efface l’utilisateur Supabase sans mise en corbeille (<code>should_soft_delete=false</code>). La récupération locale est retirée si le pseudo correspond.</p>
+      <p>La récupération locale ne couvre que le dernier compte utilisé sur cet ordinateur. Le fichier JSON contient le pseudo et le mot de passe encodés en Base64, puis le fichier est masqué. Ce n’est pas un chiffrement. Depuis l’écran de connexion, on peut retrouver le mot de passe à partir du pseudo, ou le pseudo seul.</p>
+      <p>La déconnexion efface la session active et les jetons. Le sondage social s’arrête avec la session.</p>
+
+      <h3>5.2 Thèmes</h3>
+      <p>Quatre thèmes, libellés d’interface : <strong>Night</strong> (défaut, identifiant <code>dark</code>), <strong>Clair</strong> (<code>light</code>), <strong>Prune</strong> (<code>prune</code>), <strong>Salade</strong> (<code>salad</code>). Le choix est dans Paramètres, stocké dans la progression, et suit le compte. Une valeur inconnue retombe sur Night. Essayer un thème, puis les quatre, alimente des succès.</p>
+
+      <h3>5.3 Parcours, leçons, exercices</h3>
+      <p>Le tableau de bord affiche la progression globale (leçons terminées sur le total, exercices réussis), le dernier cours, et les quatre langages. Le bouton « Reprendre » reste inactif tant qu’aucune leçon n’a été ouverte. Il n’y a plus, depuis la 1.1.1, de bouton « Vérifier les environnements » sur cet écran. Les environnements restent dans Paramètres.</p>
+      <p>Chaque langage a une page de parcours. Les chapitres se replient. Le chapitre en cours (ou le premier) est ouvert au départ. Un bouton <strong>Tutoriel</strong> rouvre le tutoriel pour ce langage.</p>
+      <p>Déverrouillage :</p>
+      <ul>
+        <li>les leçons d’un niveau se suivent dans l’ordre ;</li>
+        <li>un niveau s’ouvre quand toutes les leçons du niveau précédent sont terminées ;</li>
+        <li>les chapitres 2 et 3 restent fermés tant que le chapitre 1 n’est pas terminé ;</li>
+        <li>finir le chapitre 1 ouvre le chapitre 2 et le chapitre 3. Le chapitre 2 n’est pas un prérequis du chapitre 3 ;</li>
+        <li>le compte <code>DevTesting</code> ignore ces verrous.</li>
+      </ul>
+      <p>Types de leçon :</p>
+      <ul>
+        <li>cours (texte et extraits de code) ;</li>
+        <li>cours plus exercice, avec éditeur, exécution, et sortie à comparer ;</li>
+        <li>assistant de création de fichier (<code>file-wizard</code>), une fois par langage, au chapitre 1.</li>
+      </ul>
+      <p>À partir du niveau 2, un rappel court du langage est ajouté en tête de leçon (affichage, syntaxe, lecture d’erreur). Le niveau 1, qui enseigne déjà ces points, ne reçoit pas ce rappel. Ce rappel est aussi repris dans le tutoriel quand on l’ouvre depuis un langage.</p>
+      <p>L’écran d’exercice sépare le texte de consigne. Les paragraphes qui précèdent le dernier forment le bloc <strong>Explication</strong>. Le dernier paragraphe est le bloc <strong>Exercice</strong>, souligné. La sortie attendue est affichée ; un saut de ligne y est montré par le signe ↵.</p>
+      <p>L’exercice est réussi si les trois conditions tiennent :</p>
+      <ol>
+        <li>le programme se termine bien ;</li>
+        <li>la sortie standard est identique au texte attendu, y compris majuscules, espaces, accents et ponctuation ;</li>
+        <li>les contrôles de structure, s’il y en a, passent.</li>
+      </ol>
+      <p>Ces contrôles sont de trois sortes : texte obligatoire (<code>mustInclude</code>), motif obligatoire (<code>mustMatch</code>), motif interdit (<code>forbidCheats</code>). Les commentaires sont retirés avant le contrôle, pour qu’un mot-clé mis en commentaire ne fasse pas passer l’exercice. Un <code>print</code> du seul résultat attendu est refusé quand la leçon demande une variable, un test, une boucle ou une lecture de case. Le message le dit en français.</p>
+      <p>Le délai d’exécution est de 10 secondes. Au-delà, l’exécution est coupée. Chaque lancement écrit dans le bac à sable local. Rien n’est envoyé à un serveur pour être compilé.</p>
+      <p>L’assistant pédagogique est local. Il est placé sous l’éditeur, en bas de la leçon. Le bouton « Pourquoi mon programme ne fonctionne pas ? » n’est actif qu’après une exécution, et se désactive une fois l’exercice réussi. Chaque demande monte d’un palier, jusqu’à 3. Le palier 1 explique, le palier 2 reprend l’indice, le palier 3 explique la correction. Si l’exercice n’a pas de contrôle de structure, le palier 3 peut proposer l’instruction d’affichage du texte attendu. S’il en a un, cette instruction n’est pas proposée : le texte rappelle que la structure compte autant que la sortie. Une ampoule montre l’indice, seulement au chapitre 1 et seulement pour les niveaux 1 à 3.</p>
+      <p>Le mode Focus s’active à l’ouverture d’une leçon qui contient un exercice, et se quitte en sortant de la leçon ou avec le bouton dédié. Il masque l’en-tête (navigation, profil, déconnexion) pour laisser le cours et l’éditeur. L’icône de mise à jour, si une version est proposée, reste en haut à droite.</p>
+
+      <h3>5.4 Questions / Réponses</h3>
+      <p>Chaque langage a un questionnaire de 22 questions, 4 choix, 25 secondes par question. Il est accessible depuis la page du langage, sans condition de chapitre.</p>
+      <p>Règles :</p>
+      <ul>
+        <li>une bonne réponse est maîtrisée et ne revient pas ;</li>
+        <li>une mauvaise réponse est écartée tout de suite, et ne revient que lorsqu’elle est la dernière encore non maîtrisée ; si c’est déjà le cas, un écran de pause s’intercale avant de la reposer ;</li>
+        <li>le temps écoulé (zéro seconde) compte comme une mauvaise réponse ;</li>
+        <li>le pourcentage affiché est le nombre de bonnes réponses sur le nombre de tentatives ;</li>
+        <li>le temps de complétion est figé au moment où toutes les questions du langage sont maîtrisées.</li>
+      </ul>
+      <p>La première maîtrise d’une question rapporte 24 XP. Chaque réussite supplémentaire de la même question ajoute au plus quelques points (<code>max(1, arrondi de 8 / n^1,25)</code>). Finir une série en moins de 12 secondes par question, en moins de 8, ou sans erreur, ouvre des succès distincts.</p>
+
+      <h3>5.5 Carnet et projets</h3>
+      <p>Le carnet liste les programmes enregistrés sur le PC et les projets du compte cloud. À l’ouverture, les projets locaux sont fusionnés avec le cloud : pour un même identifiant, la copie dont la date est la plus récente l’emporte.</p>
+      <p>Limites de synchronisation : 40 projets, 80 000 caractères par projet, 500 000 caractères au total. Au-delà du nombre, les plus anciens sont écartés après tri. Un projet trop gros est refusé avec un message qui cite le fichier.</p>
+      <p>« Réinstaller » recopie le projet cloud dans la base et le dossier locaux, puis relance une fusion. C’est le geste prévu après une réinstallation ou sur un autre ordinateur, une fois connecté au même compte.</p>
+      <p>On peut rouvrir un programme local, le modifier, l’exécuter et l’enregistrer. Le nombre de programmes et le nombre de langages concernés alimentent des succès.</p>
+
+      <h3>5.6 Environnements</h3>
+      <p>L’écran n’est imposé qu’au premier passage, quand la base ne contient encore aucun compte. Dès que la page s’affiche, le drapeau « onboarding fait » est posé. Une base qui a déjà des utilisateurs est marquée faite au démarrage, pour qu’une mise à jour ou une reconnexion ne renvoie pas sur cet écran. On y revient ensuite par Paramètres.</p>
+      <p>Détection après relecture du <code>PATH</code> machine et du <code>PATH</code> utilisateur. Les raccourcis factices de <code>WindowsApps</code> sont ignorés.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Runtime</th><th>Outil reconnu</th><th>Paquet winget demandé par l’application</th></tr></thead>
+          <tbody>
+            <tr><td>Python</td><td><code>py -3</code>, sinon <code>python</code> / <code>python3</code></td><td><code>Python.Python.3.12</code></td></tr>
+            <tr><td>C#</td><td><code>dotnet</code></td><td><code>Microsoft.DotNet.SDK.8</code></td></tr>
+            <tr><td>C++</td><td><code>g++</code> ou <code>clang++</code></td><td><code>MartinStorsjo.LLVM-MinGW.UCRT</code></td></tr>
+            <tr><td>Java</td><td><code>javac</code> et <code>java</code> tous les deux</td><td><code>EclipseAdoptium.Temurin.17.JDK</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><code>docs/INSTALL.md</code> cite encore Temurin 21 pour Java. Le comportement installé est Temurin 17. Le guide d’installation n’a pas été aligné.</p>
+      <p>Installation : <code>winget install</code> avec identifiant exact, source <code>winget</code>, accords acceptés, <code>--silent</code> et <code>--disable-interactivity</code>. Les fenêtres de winget ne sont pas affichées (<code>CREATE_NO_WINDOW</code>). Une barre de progression est alimentée par la sortie de winget. Après coup, le <code>PATH</code> du processus est recalculé.</p>
+      <p><strong>Installer tout</strong> enchaîne les runtimes encore absents, un par un, avec le libellé « Installation de {nom} ({n}/{total}) ». <strong>Désinstaller tout</strong> demande une confirmation, puis enchaîne les runtimes présents. Si une étape échoue après des réussites, le message indique combien ont été traités avant l’erreur. Un second lot ne démarre pas tant que le premier n’est pas fini.</p>
+      <p>Désinstallation unitaire : même silence. Plusieurs portées sont essayées. Si le processus n’est pas élevé, l’ordre est : commande sans portée, puis utilisateur, puis machine. S’il est élevé : machine, puis utilisateur, puis sans portée. Une nouvelle tentative n’a lieu que si le message indique un paquet introuvable dans cette portée, ou un refus lié aux droits d’administrateur. Ainsi une désinstallation d’un paquet installé pour l’utilisateur n’exige pas de relancer l’application en administrateur.</p>
+      <p>Si winget manque, l’écran le dit et le guide d’installation décrit l’installation manuelle. La version portable peut aussi préparer les runtimes avec <code>setup-runtimes.ps1</code>.</p>
+
+      <h3>5.7 Classement</h3>
+      <p>Trois onglets, photos de profil et bouclier de rang compris. Une ligne ouvre le profil public du compte.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Onglet</th><th>Ordre</th></tr></thead>
+          <tbody>
+            <tr><td>Progression</td><td>Somme leçons + exercices, puis nombre de leçons, puis pseudo</td></tr>
+            <tr><td>Réussite Q/R</td><td>Part des questions maîtrisées sur l’ensemble des questions des quatre langages (88), puis nombre maîtrisé, puis pseudo</td></tr>
+            <tr><td>Temps Q/R</td><td>D’abord les comptes qui ont terminé les quatre séries, du plus rapide au plus lent (somme des temps de complétion). Les autres sont derrière, triés par nombre de questions maîtrisées</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Le chargement initial a lieu à l’ouverture. Le bouton de rechargement est manuel. Un nouveau chargement avant 30 secondes est refusé, avec le texte « Patientez N s ». Il n’y a pas de rafraîchissement automatique toutes les 30 secondes.</p>
+      <p>La liste des comptes est lue avec la clé d’administration. Le jeton de l’utilisateur doit être présent et non vide. Un jeton d’accès expiré ne bloque pas cet écran : le commentaire du code indique que l’expiration ne doit pas masquer le classement. Les autres opérations cloud (profil, projets, progression) exigent, elles, un jeton encore valable ou rafraîchi.</p>
+
+      <h3>5.8 Mises à jour</h3>
+      <p>Au lancement, si une version plus récente a un fichier à télécharger, une fenêtre indique la version actuelle, la version distante, et les notes. L’utilisateur peut installer ou reporter. Reporter ne retire pas la mise à jour : une icône de téléchargement, avec un point, apparaît à gauche de l’engrenage des paramètres. Elle rouvre la même fenêtre. En mode Focus, cette icône reste fixée en haut à droite. Paramètres permet la même vérification, et l’installation si une version est proposée.</p>
+      <p>Les notes affichées passent par un filtre :</p>
+      <ul>
+        <li>les titres de section (ligne courte, sans ponctuation forte, au plus six mots ou 48 caractères, ou titre markdown) restent des titres, sans puce, avec une ligne vide avant les puces ;</li>
+        <li>les lignes « Version x.y.z » ou « CodeFlow x.y.z » deviennent « Version x.y.z » ;</li>
+        <li>une section intitulée « Distributions » est omise ;</li>
+        <li>le reste est une puce ;</li>
+        <li>les lignes vides en trop du texte source sont ignorées. Une seule ligne vide sépare les blocs.</li>
+      </ul>
+      <p>Les notes de release 1.1.x et 1.2.0 utilisent les titres <strong>Correction</strong> et <strong>Ajout</strong> (et <strong>Suppression</strong> lorsqu’il y a lieu). Ces titres restent des titres dans la fenêtre. Les versions sautées sont toutes reprises, de la plus ancienne à la plus récente, chacune précédée de son numéro.</p>
+      <p>Si l’installation automatique échoue, l’application tente d’ouvrir l’URL de téléchargement.</p>
+
+      <h3>5.9 En-tête et indicateurs</h3>
+      <p>Hors mode Focus, l’en-tête tient sur une barre pleine largeur, qui ne s’étire pas avec le contenu.</p>
+      <p>À gauche : avatar et pseudo (ouvrent l’édition du profil), bouclier du rang (ouvre le profil public), icône Amis, icône Messagerie. Le badge de la messagerie compte les demandes d’ami reçues, pas les messages non lus. Ceux-ci sont indiqués dans la liste des discussions.</p>
+      <p>Au centre : Tableau de bord, Classement, Carnet. Le pseudo <code>DevTesting</code> voit en plus l’entrée Admin.</p>
+      <p>À droite : icône de téléchargement si une mise à jour est proposée, engrenage des paramètres, bouton Déconnexion.</p>
+      <p>Les attentes (chargement, déconnexion, installation, vérification de mise à jour, listes) affichent un indicateur circulaire. L’animation est une rotation CSS de 0,8 s, linéaire, infinie, portée par la classe du conteneur (<code>.cf-spin</code>), y compris quand l’utilisateur demande moins d’animations au système (la durée est alors ramenée à presque rien).</p>
+
+      <h3>5.10 Amis et messagerie</h3>
+      <p>Le panneau Amis s’ouvre depuis l’icône. On envoie une demande avec le pseudo exact (au moins 3 caractères). La liste montre les amis, avec Écrire, Bloquer et Signaler. Un ami ouvre son profil public. Les comptes bloqués sont listés en dessous, avec Débloquer.</p>
+      <p>Les demandes reçues et envoyées se traitent dans la messagerie : Accepter ou Refuser. On n’écrit qu’à un ami. Ouvrir une discussion marque les messages reçus comme lus.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Geste</th><th>Comportement</th></tr></thead>
+          <tbody>
+            <tr><td>Lecture</td><td>L’auteur voit « vu » une fois <code>readAt</code> posé</td></tr>
+            <tr><td>Réaction</td><td>Dix émojis (😀 😂 ❤️ 👍 🎉 🔥 ✨ 👏 😮 🙏). Une réaction par personne ; recliquer la retire. Le même choix est proposé sous le champ de saisie</td></tr>
+            <tr><td>Suppression d’un message</td><td>Seulement l’auteur, et seulement tant que le message n’est pas lu. Le serveur refuse ensuite</td></tr>
+            <tr><td>Suppression de la discussion</td><td>Confirmation, puis effacement du fil</td></tr>
+            <tr><td>Blocage</td><td>Retire l’ami, les demandes et le fil, des deux côtés si l’autre a aussi bloqué. La liste cloud fait foi ; les identifiants encore présents en local restent masqués</td></tr>
+            <tr><td>Signalement</td><td>Confirmation locale. Le texte affiché est « Signalement envoyé. Merci. » Aucun appel n’est envoyé</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Les actions d’un message (émoji, corbeille) apparaissent au survol, à côté de la bulle : à gauche pour un message envoyé, à droite pour un message reçu. Elles ne recouvrent pas le texte. La corbeille n’est là que si le message est encore supprimable.</p>
+      <p>Pendant la saisie, le client signale « en train d’écrire » (déclenchement vers 350 ms, puis toutes les 2,5 s tant que le champ n’est pas vide). L’autre voit trois points si ce signal a moins de 8 secondes. Le panneau est borné (<code>min(640 px, 86 % de la hauteur)</code>), et seule la liste des messages défile. Le défilement reste collé en bas si l’on est à moins de 48 px du bas ; sinon il ne saute pas.</p>
+      <p>Un sondage lit l’état social toutes les 4 secondes, seulement si l’onglet est visible, et aussi quand la fenêtre reprend le focus. Si rien n’a changé, l’état n’est pas réécrit. Une nouvelle demande ou un nouveau message joue un son, fait clignoter la barre des tâches, et pose un toast en bas à gauche (au plus 4, 6,5 s, clic pour fermer). Une erreur de sondage après le premier chargement réussi ne remplace pas l’écran.</p>
+
+      <h3>5.11 Profil public, expérience, succès</h3>
+      <p>Le bouclier de l’en-tête ouvre le profil du compte connecté. Le classement, la liste d’amis et l’adresse <code>/profil/{id}</code> ouvrent celui d’un autre compte. On y voit la photo, le niveau, l’XP, la barre vers le rang suivant, le bouclier, le nombre de leçons, d’exercices et de questions maîtrisées. Sur le profil d’un autre, Bloquer (ou Débloquer) et Signaler sont proposés. Signaler a le même comportement local que dans la messagerie.</p>
+      <p>L’XP se calcule ainsi :</p>
+      <ul>
+        <li>48 XP par leçon déjà comptée ;</li>
+        <li>l’XP des questions, avec la décroissance décrite en 5.4 ;</li>
+        <li>l’XP des succès : 35 (commun), 100 (rare), 280 (ardu).</li>
+      </ul>
+      <p>La courbe de niveau est exponentielle (raison 1,045, coût de base 48 XP). Le niveau est plafonné à 200 dans le calcul. Un parcours complet (leçons, premières maîtrises des Q/R, succès) atterrit dans le Titane. Le Tungstène, au niveau 100, demande de l’ordre de 82 000 XP et reste hors d’une pratique normale.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Rang</th><th>Niveau minimum</th></tr></thead>
+          <tbody>
+            <tr><td>Bronze</td><td>1</td></tr>
+            <tr><td>Fer</td><td>8</td></tr>
+            <tr><td>Argent</td><td>14</td></tr>
+            <tr><td>Or</td><td>20</td></tr>
+            <tr><td>Platine</td><td>27</td></tr>
+            <tr><td>Diamant</td><td>34</td></tr>
+            <tr><td>Émeraude</td><td>41</td></tr>
+            <tr><td>Jade</td><td>48</td></tr>
+            <tr><td>Perle</td><td>54</td></tr>
+            <tr><td>Améthyste</td><td>58</td></tr>
+            <tr><td>Titane</td><td>62</td></tr>
+            <tr><td>Tungstène</td><td>100</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Les boucliers sont des images (<code>/ranks/{id}.png</code>) affichées sans fond, sans bordure et sans ombre (classe <code>cf-plain-icon</code>). Ils apparaissent dans l’en-tête, sur le profil et dans le classement.</p>
+      <p>Les 71 succès sont définis dans le client. Le module refuse de démarrer si le nombre ou un indice de déblocage manque. Le profil les affiche tous : bordure bleue (commun, <code>#4f8cff</code>), rouge (rare, <code>#e85d6a</code>) ou violette (ardu, <code>#a78bfa</code>). Un succès obtenu montre sa description. Un succès fermé montre un indice court, et le pourcentage de comptes qui l’ont obtenu. Ce pourcentage vient d’une lecture de tous les profils.</p>
+      <p>Familles couvertes : ouverture du compte, photo, quatre thèmes, mode Focus, tutoriel, volumes de leçons et d’exercices, démarrage et fin de chaque langage, chapitres 1 et 3, questions (volume, vitesse, sans-faute, répétition), amis et messages (demande, acceptation, refus, lecture, émoji, réaction, message non lu supprimé), carnet, exécutions, aide demandée, objectif du jour, jours d’activité, classement, visite d’un profil, rangs Fer, Or, Diamant et Titane.</p>
+      <p>Un succès nouveau, après le premier chargement du compte, affiche un toast en bas à droite (au plus 3, environ 4,2 s). Le chargement initial ne rejoue pas les succès déjà obtenus.</p>
+
+      <h3>5.12 Tutoriel</h3>
+      <p>Le tutoriel est obligatoire une fois par compte. Il n’est plus inséré dans les leçons. Quatre étapes rappellent le parcours, l’exécution exacte, les questions et l’expérience, puis l’en-tête (classement, amis, messagerie). Ouvert depuis un langage, il ajoute le rappel de syntaxe de ce langage. Une fois terminé, il ne revient pas seul. Le bouton Tutoriel de la page du langage permet de le revoir, et on peut alors le passer.</p>
+
+      <h3>5.13 Compte technique DevTesting</h3>
+      <p>Ce n’est pas une fonction présentée aux élèves. Le pseudo, comparé sans tenir compte de la casse, doit être exactement <code>devtesting</code>.</p>
+      <p>Réservé à ce compte :</p>
+      <ul>
+        <li>onglet <strong>Admin</strong> : liste des comptes cloud, suppression d’un autre compte (confirmation, suppression définitive, progression et projets compris ; le compte connecté ne se supprime pas depuis cette liste), réinitialisation de sa propre progression locale puis tentative de synchronisation ;</li>
+        <li>bouton <strong>Logs</strong> dans Paramètres : version, processus élevé ou non, chemin de winget, chemins de la base, des données, des projets et du bac à sable, état des runtimes, erreurs récentes ;</li>
+        <li>ouverture de n’importe quelle leçon, même verrouillée.</li>
+      </ul>
+      <p>Les commandes Rust correspondantes refusent tout autre compte.</p>
+
+      <h2 id="contenu">6. Contenu pédagogique</h2>
+      <p>Quatre parcours parallèles, 15 niveaux, 3 chapitres. Le chapitre 1 regroupe les niveaux 1 à 5, le chapitre 2 les niveaux 6 à 10, le chapitre 3 les niveaux 11 à 15.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Chapitre</th><th>Niveaux</th><th>Sujets</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Découverte, Premier programme, Variables, Logique, Premiers exercices</td><td>Rôle du langage, exécution, code source, éditeur, erreurs, affichage, commentaires, fichier, variables, conditions, boucles, premiers exercices</td></tr>
+            <tr><td>2</td><td>Texte et formatage, Décisions avancées, Boucles utiles, collections, Fonctions</td><td>Chaînes, <code>else if</code>, combinaisons de tests, boucles, tableaux ou listes, fonctions, mini-projet « diagnostic »</td></tr>
+            <tr><td>3</td><td>Fonctions qui renvoient, Tableaux associatifs, Répéter et choisir, Texte, Projet : ticket de caisse</td><td>Valeurs de retour, dictionnaire / map, <code>while</code> et <code>switch</code>, traitement de texte, projet final</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Le niveau 9 s’intitule « Listes » en Python, « Tableaux et listes » en C#, « Tableaux » en C++ et en Java. Le projet final demande de préparer une ligne de ticket, puis d’assembler un ticket de caisse.</p>
+      <p>Les cours des chapitres 2 et 3, et les exercices devenus trop elliptiques en fin de chapitre 1, disent la notion avant la tâche. Un exemple chiffré n’est pas celui de l’exercice. Le dernier paragraphe est la tâche. Les contrôles de structure refusent le raccourci qui affiche le résultat. Exemple, en Python, sur les listes : le cours distingue l’index 0 de la valeur rangée dans la case, puis l’exercice demande <code>print(valeurs[0])</code> et refuse <code>print(10)</code>. Le même soin est porté aux quatre fichiers de parcours.</p>
+      <p>Volumes comptés dans les fichiers de contenu :</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Langage</th><th>Leçons</th><th>Exercices</th><th>Assistant de fichier</th><th>Questions</th></tr></thead>
+          <tbody>
+            <tr><td>Python</td><td>49</td><td>30</td><td>1</td><td>22</td></tr>
+            <tr><td>C#</td><td>45</td><td>27</td><td>1</td><td>22</td></tr>
+            <tr><td>C++</td><td>45</td><td>27</td><td>1</td><td>22</td></tr>
+            <tr><td>Java</td><td>45</td><td>27</td><td>1</td><td>22</td></tr>
+            <tr><td><strong>Total</strong></td><td><strong>184</strong></td><td><strong>111</strong></td><td><strong>4</strong></td><td><strong>88</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Python a quatre leçons et trois exercices de plus au chapitre 1 (28 leçons et 14 exercices, contre 24 et 11). Les chapitres 2 et 3 ont la même taille partout : 10 leçons et 6 exercices, puis 11 leçons et 10 exercices. Par rapport au décompte de la 1.1.3, C#, C++ et Java ont chacun un exercice de plus au chapitre 1. Les leçons, elles, n’ont pas changé de nombre.</p>
+      <p>Chaque question a un énoncé, quatre réponses, l’index de la bonne réponse, et une explication affichée après la tentative. Le délai est de 25 secondes dans les quatre fichiers.</p>
+      <p>Extensions et couleurs de parcours : <code>.py</code>, <code>.cs</code>, <code>.cpp</code>, <code>.java</code>. L’éditeur Monaco utilise le mode du langage correspondant.</p>
+
+      <h2 id="exigences">7. Exigences techniques</h2>
+      <h3>Plateforme</h3>
+      <ul>
+        <li>Windows 10 ou 11, x64.</li>
+        <li>WebView2 : présent sur Windows 11, installé si besoin sur Windows 10 (prérequis Tauri).</li>
+        <li>Pour développer : Node.js 20+, Rust (édition 2021), puis <code>npm run tauri:dev</code> ou <code>npm run tauri:build</code> dans <code>apps/desktop</code>.</li>
+      </ul>
+      <h3>Build livré</h3>
+      <p>Versions alignées sur <strong>1.2.0</strong> dans <code>package.json</code>, <code>Cargo.toml</code>, <code>tauri.conf.json</code> et <code>src/shared/lib/version.ts</code>.</p>
+      <p>Profil Rust de release : une seule unité de génération, LTO, optimisation 3, <code>panic = abort</code>, symboles retirés. Cible du bundle : NSIS uniquement. Mode d’installation : utilisateur courant. Rétrogradation interdite (<code>allowDowngrades: false</code>).</p>
+      <h3>Exécution du code élève</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Langage</th><th>Chaîne</th></tr></thead>
+          <tbody>
+            <tr><td>Python</td><td>interpréteur détecté, script dans le bac à sable</td></tr>
+            <tr><td>C#</td><td><code>dotnet</code>, compilation puis exécution</td></tr>
+            <tr><td>C++</td><td><code>g++</code> ou <code>clang++</code>, puis exécutable</td></tr>
+            <tr><td>Java</td><td><code>javac</code> puis <code>java</code> ; le nom de la classe publique est lu dans le source, sinon le fichier reste cohérent avec <code>Main</code> tel que les leçons le présentent</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Délai : 10 secondes. Sortie standard, erreur standard et sortie de compilation sont renvoyées à l’interface. Les processus enfants sont lancés sans fenêtre console. La comparaison de sortie est suivie, côté interface, des contrôles de structure décrits en 5.3.</p>
+      <h3>Réseau et session</h3>
+      <ul>
+        <li>Inscription, connexion, profil, mot de passe, progression, projets, classement, amis, messages, profils publics, taux de succès : Supabase Auth.</li>
+        <li>Mises à jour : API GitHub Releases, sans jeton.</li>
+        <li>Pas d’exécution distante du code élève.</li>
+        <li>Rafraîchissement du JWT avant expiration (marge de 30 secondes), puis nouvel essai de l’appel.</li>
+        <li>Sondage social toutes les 4 secondes pendant que l’onglet est visible. Pas de réécriture si l’instantané est identique.</li>
+        <li>Corps JSON côté serveur du dépôt limité à 2 Mo, ce qui couvre une photo. Le client, lui, refuse déjà une image source au-delà de 2 Mo avant envoi.</li>
+      </ul>
+      <h3>Sécurité, état actuel</h3>
+      <ul>
+        <li>Mot de passe de changement et de suppression revérifié par une connexion.</li>
+        <li>Suppression cloud définitive, pas une désactivation.</li>
+        <li>Récupération locale : Base64 et attribut « caché », sur un seul compte, sur la machine. Toute personne qui lit le fichier peut retrouver le mot de passe.</li>
+        <li>Clé de service Supabase compilée dans le client. Elle ne doit pas être recopiée dans un document, un ticket ou un dépôt public. Le classement, les profils publics, les taux de succès et l’admin s’appuient sur elle.</li>
+        <li>Jeton d’accès expiré : bloquant pour la synchro de progression et de projets (message de reconnexion), non bloquant pour l’affichage du classement tant qu’une chaîne de jeton non vide est présente.</li>
+        <li>Blocage effectif, stocké dans le compte et rappelé en local. Signalement sans envoi : confirmation d’interface seulement.</li>
+        <li>Menu contextuel retiré, ce qui limite le copier-coller par le menu du navigateur intégré. Ce n’est pas un contrôle d’accès. Le texte des messages reste sélectionnable.</li>
+      </ul>
+      <h3>Interface</h3>
+      <ul>
+        <li>Textes élèves en français.</li>
+        <li>Quatre thèmes nommés ci-dessus.</li>
+        <li>Fenêtre centrée, redimensionnable, maximisable, bornée par la zone de travail, restaurée après Alt+Tab y compris si le processus est élevé.</li>
+        <li>Indicateurs de chargement animés sur les actions qui attendent.</li>
+        <li>Toasts de succès en bas à droite, toasts sociaux en bas à gauche.</li>
+      </ul>
+
+      <h2 id="historique">8. Historique des versions</h2>
+      <p>Toutes les releases publiques listées ci-dessous ont été publiées le 24 novembre 2026. Les libellés reprennent les notes GitHub. « Correction », « Ajout » et « Suppression » sont les titres utilisés à partir de la 1.1.1. Avant cela, les notes sont une simple liste de puces. Les notes 1.1.5, 1.1.6, 1.1.7 et 1.2.0 disent « Correction de bug » sans nommer le défaut : le détail est en section 9, à partir du code 1.2.0.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Version</th><th>Heure (UTC)</th><th>Correction</th><th>Ajout</th><th>Suppression</th></tr></thead>
+          <tbody>
+            <tr><td>1.0.0</td><td>11:49</td><td>—</td><td>Comptes et synchronisation de la progression</td><td>—</td></tr>
+            <tr><td>1.0.1</td><td>12:28</td><td>—</td><td>Connexion au compte sans installer de serveur</td><td>—</td></tr>
+            <tr><td>1.0.2</td><td>12:42</td><td>Correctif de connexion au compte</td><td>—</td><td>—</td></tr>
+            <tr><td>1.0.3</td><td>13:04</td><td>—</td><td>Leçons plus lisibles ; vérification des mises à jour dans Paramètres</td><td>—</td></tr>
+            <tr><td>1.0.4</td><td>13:14</td><td>—</td><td>Installation silencieuse des langages ; édition du profil</td><td>—</td></tr>
+            <tr><td>1.0.5</td><td>13:38</td><td>—</td><td>Désinstallation et détection des environnements ; thèmes Prune et Salade ; classement. Premier asset <code>CodeFlow.exe</code></td><td>—</td></tr>
+            <tr><td>1.0.6</td><td>14:09</td><td>—</td><td>Installation automatique des mises à jour ; classement avec photos et progression ; thème Night ; synchronisation des projets entre PC</td><td>—</td></tr>
+            <tr><td>1.0.7</td><td>14:24</td><td>—</td><td>Notes de mise à jour plus courtes ; récapitulatif des versions manquées</td><td>—</td></tr>
+            <tr><td>1.1.0</td><td>15:01</td><td>—</td><td>Chapitre 3 et projets avancés ; questions/réponses chronométrées ; classements réussite et temps ; synchronisation des projets plus fiable. La note parle d’une refonte</td><td>—</td></tr>
+            <tr><td>1.1.1</td><td>15:44</td><td>« Correction de bug », sans préciser lequel</td><td>Recharge du classement ; sécurité du profil et du mot de passe ; indicateurs de chargement</td><td>Bouton « Vérifier les environnements » du tableau de bord</td></tr>
+            <tr><td>1.1.2</td><td>16:11</td><td>—</td><td>Suppression de compte</td><td>—</td></tr>
+            <tr><td>1.1.3</td><td>16:42</td><td>« Correction de bug », sans préciser lequel</td><td>—</td><td>—</td></tr>
+            <tr><td>1.1.4</td><td>17:39</td><td>Étirement de l’en-tête avec la fenêtre ; tutoriel retiré des leçons, obligatoire une fois par compte</td><td>Amis, demandes et messagerie ; succès, expérience et rangs</td><td>—</td></tr>
+            <tr><td>1.1.5</td><td>18:23</td><td>« Correction de bug », sans préciser lequel</td><td>Améliorations messagerie et succès</td><td>—</td></tr>
+            <tr><td>1.1.6</td><td>18:51</td><td>« Correction de bug », sans préciser lequel</td><td>Notifications sociales ; installation et désinstallation groupées des environnements</td><td>—</td></tr>
+            <tr><td>1.1.7</td><td>19:25</td><td>« Correction de bug », sans préciser lequel</td><td>—</td><td>—</td></tr>
+            <tr><td>1.2.0</td><td>20:25</td><td>« Correction de bug », sans préciser lequel</td><td>Notification de mise à jour ; leçons plus explicites</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>La 1.2.0 est la version embarquée dans le dépôt au moment de ce document. Les tags GitHub 1.0.x et 1.1.x pointaient, lors du document 1.1.3, vers un même commit affiché. Le détail fichier par fichier de chaque palier n’est donc pas reconstructible depuis l’historique git local lorsque le clone n’a pas ces commits. Les notes restent le journal public ; le comportement décrit aux sections 5 et 9 est celui du code 1.2.0.</p>
+
+      <h2 id="bugs">9. Bugs connus et corrigés</h2>
+      <h3>Correctifs rattachés à une note</h3>
+      <p>Ordre chronologique. Le symptôme est formulé à partir de la note et du comportement présent dans le code. Quand la note ne nomme pas le défaut, la ligne le dit.</p>
+      <ol>
+        <li><strong>1.0.1 — Connexion dépendante d’un serveur.</strong> La note ajoute la connexion sans installer de serveur. Le client 1.2.0 parle à Supabase depuis Rust, sans Express.</li>
+        <li><strong>1.0.2 — Connexion au compte.</strong> La note dit seulement « Correctif de connexion au compte ». Le défaut précis n’est pas décrit.</li>
+        <li><strong>1.0.3 — Leçons difficiles à lire.</strong> La note dit « Leçons plus lisibles ». Dans le code actuel, le rappel générique de syntaxe n’est injecté qu’après le niveau 1, pour ne pas répéter le chapitre de découverte. Le lien exact entre cette note et ce choix n’est pas écrit dans la release.</li>
+        <li><strong>1.0.4 — Installations bavardes, profil figé.</strong> Installation winget silencieuse, et édition du profil (pseudo, photo).</li>
+        <li><strong>1.0.5 — Environnements et classement.</strong> Désinstallation et détection reprises ; classement des utilisateurs ; thèmes Prune et Salade.</li>
+        <li><strong>1.0.6 — Mise à jour manuelle, projets isolés sur un PC.</strong> Installation lancée par l’application ; classement avec photo et volumes de progression ; thème Night ; projets synchronisés entre machines.</li>
+        <li><strong>1.0.7 — Notes trop longues, versions sautées absentes.</strong> Le filtre d’affichage raccourcit la présentation (titres sans puce, section Distributions omise). Le récapitulatif agrège chaque version strictement plus récente, de la plus ancienne à la plus récente.</li>
+        <li><strong>1.1.1 — Note « Correction de bug ».</strong> Le défaut n’est pas nommé. Les ajouts nommés, eux, correspondent au code : bouton de rechargement du classement avec attente de 30 secondes ; changement de mot de passe seulement avec l’ancien mot de passe ; indicateurs de chargement animés ; retrait du bouton de vérification des environnements sur le tableau de bord.</li>
+        <li><strong>1.1.2 — Pas de suppression de compte.</strong> Ajout de la suppression, avec mot de passe et effacement définitif.</li>
+        <li><strong>1.1.3 — Note « Correction de bug ».</strong> Le défaut corrigé n’est pas nommé dans la release. On ne peut pas l’attribuer à un symptôme précis sans inventer.</li>
+        <li><strong>1.1.4 — En-tête et tutoriel.</strong> La note corrige l’étirement de l’en-tête avec la fenêtre, et retire le tutoriel des leçons : il est obligatoire une fois par compte. Les ajouts nommés sont les amis, les demandes, la messagerie, les succès, l’expérience et les rangs. Dans le code 1.2.0, cela comprend la lecture (« vu »), les réactions, la suppression d’un message non lu, la barre d’émojis, le profil public et les douze rangs, du Bronze au Tungstène.</li>
+        <li><strong>1.1.5 — Note « Correction de bug », ajout « Améliorations messagerie et succès ».</strong> Le défaut n’est pas nommé. Le code livré, pour ces deux zones, fait ceci : boucliers sans cadre blanc ; au survol, émoji et corbeille ; points de saisie ; liste de messages qui défile dans un panneau fixe ; suppression de discussion ; blocage ; signalement local seulement ; toast de succès ; bordure selon la rareté ; indice tant que le succès est fermé ; sondage qui ne réécrit rien si l’instantané est identique.</li>
+        <li><strong>1.1.6 — Note « Correction de bug ».</strong> Le défaut n’est pas nommé. L’ajout nommé couvre les notifications sociales et l’installation ou la désinstallation groupée des environnements. Les actions de message sont placées à côté de la bulle, pas par-dessus. Les toasts sociaux sont en bas à gauche.</li>
+        <li><strong>1.1.7 — Note « Correction de bug ».</strong> Le défaut n’est pas nommé. Le code de la leçon, lui, sépare explication et exercice, refuse une sortie juste si la structure ne correspond pas, et place l’assistant sous l’éditeur. Le palier 3 ne propose plus l’affichage littéral du texte attendu quand un contrôle de structure existe.</li>
+        <li><strong>1.2.0 — Note « Correction de bug », ajouts nommés.</strong> La note ajoute la notification de mise à jour et des leçons plus explicites. L’icône de téléchargement à côté des paramètres correspond au premier ajout. Les cours des chapitres 2 et 3, et les consignes devenues trop courtes en fin de chapitre 1, correspondent au second, dans les quatre langages. Le défaut non nommé du côté fenêtre est, dans le code, la restauration après Alt+Tab : un processus élevé ou une fenêtre réduite ne restait pas toujours au premier plan ; la restauration est forcée, et une fenêtre laissée hors écran est recentrée.</li>
+      </ol>
+
+      <h3>Défauts dont le correctif est dans le code 1.2.0</h3>
+      <p>Ces points sont visibles dans l’implémentation. La release qui les a introduits n’est pas toujours nommée. Ils sont livrés, pas ouverts.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Symptôme traité</th><th>Comportement livré</th></tr></thead>
+          <tbody>
+            <tr><td>Session JWT expirée pendant la synchro</td><td>Marge de 30 secondes, rafraîchissement, nouvel essai, message demandant de se reconnecter pour les projets. Le jeton peut aussi être relu depuis SQLite si la webview l’a perdu</td></tr>
+            <tr><td>Classement inaccessible parce que le jeton d’accès a expiré</td><td>La liste est lue avec la clé d’administration. Un jeton non vide suffit. Le code commente explicitement ce choix</td></tr>
+            <tr><td>Fenêtre plus grande que l’écran, contenu étiré</td><td>Maximum égal à la zone de travail ; recalcul au déplacement et au changement d’échelle ; largeur et hauteur CSS calées sur la fenêtre</td></tr>
+            <tr><td>Fenêtre élevée ou réduite qui ne revient pas après Alt+Tab</td><td>Filtres de messages du shell autorisés ; <code>ShowWindow</code> restauration ; recentrage si la position est hors écran ou la taille minuscule. Perdre le focus ne cache pas la fenêtre</td></tr>
+            <tr><td>Indicateur de chargement immobile</td><td>Rotation CSS sur le conteneur <code>.cf-spin</code> (0,8 s). Cohérent avec l’ajout « Indicateurs de chargement » de la 1.1.1</td></tr>
+            <tr><td>Bouton « Voir » en plus de l’icône œil</td><td>Un seul contrôle : icône œil, libellé accessible « Afficher le mot de passe » ou « Masquer le mot de passe »</td></tr>
+            <tr><td>Menu du clic droit</td><td>Désactivé dans WebView2, dans Monaco (<code>contextmenu: false</code>), et par un écouteur sur le document</td></tr>
+            <tr><td>Texte du niveau 1 répété en tête de leçon</td><td><code>lessonIntro</code> n’est affiché que lorsque le niveau n’est pas le niveau 1</td></tr>
+            <tr><td>Écran Environnements à chaque reconnexion</td><td>Drapeau <code>environments_onboarding_done</code>. Une base qui a déjà des utilisateurs est marquée faite. La page, une fois ouverte, pose le drapeau immédiatement</td></tr>
+            <tr><td>Désinstallation winget refusée sans droits administrateur</td><td>Plusieurs portées sont essayées. L’ordre dépend du fait que le processus est élevé ou non. On ne redemande une tentative que si le message parle de portée ou de droits</td></tr>
+            <tr><td>Exercice validé par un simple affichage du texte attendu</td><td>Contrôles <code>mustInclude</code>, <code>mustMatch</code> et <code>forbidCheats</code>, commentaires ignorés. L’assistant ne donne pas la ligne d’affichage quand ces contrôles existent</td></tr>
+            <tr><td>Sondage social qui fait clignoter l’interface sans nouveauté</td><td>Retour immédiat si l’instantané JSON est identique et qu’il n’y a pas d’avis nouveau</td></tr>
+            <tr><td>Bouclier de rang entouré d’un cadre blanc</td><td>Classe <code>cf-plain-icon</code> : fond transparent, bordure nulle, ombre nulle</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Limites encore présentes</h3>
+      <p>Ce ne sont pas des régressions datées. Ce sont des propriétés du produit 1.2.0 à connaître.</p>
+      <ul>
+        <li>Les notes 1.1.1, 1.1.3, 1.1.5, 1.1.6, 1.1.7 et 1.2.0 disent « Correction de bug » sans dire lequel. Le journal public est incomplet sur ces paliers. La section ci-dessus ne comble le trou que là où le code 1.2.0 montre un comportement nommé.</li>
+        <li><code>docs/INSTALL.md</code> indique Temurin 21. L’application installe <code>EclipseAdoptium.Temurin.17.JDK</code>.</li>
+        <li>La récupération de mot de passe est un encodage Base64 dans un fichier local masqué, pas un coffre.</li>
+        <li>La clé d’administration Supabase est dans le client. Le classement, les profils publics et les taux de succès ne reposent pas sur un droit limité au seul utilisateur connecté.</li>
+        <li>L’objectif quotidien est une donnée de progression, sans réglage à l’écran. Le succès « Ambitieux » (objectif à 5 ou plus) n’a donc pas de geste dans l’interface.</li>
+        <li>Le chapitre 3 s’ouvre avec le chapitre 2 dès la fin du chapitre 1.</li>
+        <li>Le bouton Signaler, dans les amis, la messagerie et le profil public, n’envoie rien. Il affiche seulement « Signalement envoyé. Merci. »</li>
+        <li>L’application n’est pas présentée comme signée. L’avertissement SmartScreen reste un cas d’usage de la version portable.</li>
+      </ul>
+      <p>Aucun défaut ouvert, reproduit et non traité n’a été trouvé dans les notes de la 1.2.0 au-delà de ces limites.</p>
+
+      <h2 id="release">10. Contraintes et règles de release</h2>
+      <ul>
+        <li><strong>Deux artefacts, en même temps.</strong> Après une correction ou une évolution qui change l’exécutable : <code>npm run tauri build</code> dans <code>apps/desktop</code>, puis l’installateur NSIS (<code>apps/desktop/src-tauri/target/release/bundle/nsis/CodeFlow_*_x64-setup.exe</code>) et la copie portable (<code>apps/desktop/src-tauri/target/release/codeflow.exe</code> vers <code>portable/CodeFlow/CodeFlow.exe</code>). La tâche n’est pas finie tant que les deux ne sont pas à jour. Depuis la 1.0.5, la release GitHub publie aussi les deux.</li>
+        <li><strong>Numérotation.</strong> Ligne 1.0 publiée de 1.0.0 à 1.0.7, puis passage en 1.1.0. Sur une ligne mineure, le correctif s’arrête à <strong>.7</strong>. La ligne 1.1 s’est arrêtée à 1.1.7. La suivante, <strong>1.2.0</strong>, est la version actuelle. Le prochain correctif de cette ligne est 1.2.1, jusqu’à 1.2.7, puis 1.3.0. Les quatre fichiers de version cités plus haut restent alignés.</li>
+        <li><strong>Notes de mise à jour.</strong> Courtes. Titres Correction, Ajout, Suppression quand il y a lieu. Pas de chapitre « Distributions » dans le texte montré à l’élève : le filtre le retire. Si l’élève a sauté des versions, chaque note intermédiaire est incluse, dans l’ordre chronologique des numéros.</li>
+        <li><strong>Langue.</strong> Interface élève en français. L’installeur déclare le français et l’anglais, sans afficher de sélecteur.</li>
+        <li><strong>Fenêtre d’installation.</strong> NSIS en mode utilisateur courant, sans rétrogradation. Le hook ferme CodeFlow avant de copier les fichiers.</li>
+        <li><strong>Contenu.</strong> Les leçons et les questions vivent dans <code>content/tracks/&lt;langage&gt;/</code>. Une leçon nouvelle suit le verrouillage existant : ordre dans le niveau, chapitre 1 obligatoire avant les chapitres 2 et 3. Un exercice qui enseigne une structure emporte des contrôles, pas seulement une sortie attendue.</li>
+        <li><strong>Compte DevTesting.</strong> Réservé à l’usage interne. Il ne fait pas partie du parcours présenté sur la page d’accueil du dépôt.</li>
+      </ul>
+
+      <h2 id="glossaire">11. Glossaire</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Terme</th><th>Sens dans CodeFlow</th></tr></thead>
+          <tbody>
+            <tr><td>Parcours</td><td>Ensemble des niveaux d’un langage</td></tr>
+            <tr><td>Chapitre</td><td>Groupe de niveaux. 1 = bases, 2 = approfondissement, 3 = projet</td></tr>
+            <tr><td>Niveau</td><td>Bloc titré (Découverte, Variables, etc.) contenant plusieurs leçons</td></tr>
+            <tr><td>Leçon</td><td>Écran de cours, parfois avec un exercice ou un assistant de fichier</td></tr>
+            <tr><td>Exercice</td><td>Code à exécuter ; réussi si la sortie égale le texte attendu et si la structure demandée est présente</td></tr>
+            <tr><td>Q/R</td><td>Questionnaire chronométré de 22 questions par langage</td></tr>
+            <tr><td>Carnet</td><td>Programmes enregistrés, en local et sur le compte</td></tr>
+            <tr><td>Runtime</td><td>Outil qui exécute ou compile : Python, .NET SDK, g++/clang++, JDK</td></tr>
+            <tr><td>winget</td><td>Gestionnaire de paquets Windows utilisé pour installer ou retirer ces outils</td></tr>
+            <tr><td>NSIS</td><td>Installeur Windows produit par Tauri</td></tr>
+            <tr><td>Portable</td><td>Dossier avec <code>CodeFlow.exe</code>, un script de lancement, et des runtimes optionnels</td></tr>
+            <tr><td>Mode Focus</td><td>Leçon sans en-tête de navigation</td></tr>
+            <tr><td>Night, Clair, Prune, Salade</td><td>Les quatre thèmes</td></tr>
+            <tr><td>Rang</td><td>Bronze, Fer, Argent, Or, Platine, Diamant, Émeraude, Jade, Perle, Améthyste, Titane, Tungstène</td></tr>
+            <tr><td>XP</td><td>Points d’expérience : leçons, questions, succès</td></tr>
+            <tr><td>Succès</td><td>Un des 71 objectifs du compte, de rareté commun, rare ou ardu</td></tr>
+            <tr><td>DevTesting</td><td>Pseudo du compte technique interne</td></tr>
+            <tr><td>Jeton / JWT</td><td>Preuve de session Supabase. Le jeton d’accès est courte durée ; le jeton de rafraîchissement le renouvelle</td></tr>
+            <tr><td>Bac à sable</td><td>Dossier local où le code de l’élève est écrit le temps d’une exécution</td></tr>
+            <tr><td>Setup</td><td>Fichier <code>CodeFlow_*_x64-setup.exe</code></td></tr>
+            <tr><td>Vu</td><td>Mention affichée à l’auteur quand le destinataire a ouvert la discussion</td></tr>
+            <tr><td>Signalement</td><td>Confirmation locale, sans envoi</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

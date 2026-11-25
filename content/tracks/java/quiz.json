@@ -1,0 +1,270 @@
+{
+  "language": "java",
+  "secondsPerQuestion": 25,
+  "questions": [
+    {
+      "id": "java-q01",
+      "prompt": "Que fait System.out.println ?",
+      "choices": [
+        "Il affiche une valeur puis passe à la ligne.",
+        "Il compile la classe.",
+        "Il crée un fichier .class à la main.",
+        "Il supprime la méthode main."
+      ],
+      "answer": 0,
+      "explanation": "println écrit dans la sortie standard. La réponse juste est : Il affiche une valeur puis passe à la ligne. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q02",
+      "prompt": "Pourquoi le fichier s'appelle-t-il souvent Main.java ?",
+      "choices": [
+        "Java interdit le nom Main.",
+        "Le nom du fichier doit correspondre à la classe publique Main.",
+        "L'extension doit être .py.",
+        "Le fichier ne contient pas de classe."
+      ],
+      "answer": 1,
+      "explanation": "Une classe publique doit être dans un fichier du même nom. La réponse juste est : Le nom du fichier doit correspondre à la classe publique Main. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q03",
+      "prompt": "À quoi sert le point-virgule ?",
+      "choices": [
+        "À ouvrir un bloc.",
+        "À écrire un commentaire.",
+        "À terminer une instruction.",
+        "À importer HashMap."
+      ],
+      "answer": 2,
+      "explanation": "Sans « ; », le compilateur ne reconnaît pas la fin de l'instruction. La réponse juste est : À terminer une instruction. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q04",
+      "prompt": "Où démarre un programme Java classique ?",
+      "choices": [
+        "Dans la première ligne du fichier, même hors classe.",
+        "Dans import.",
+        "Dans default.",
+        "Dans la méthode main."
+      ],
+      "answer": 3,
+      "explanation": "main est le point d'entrée. La réponse juste est : Dans la méthode main. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q05",
+      "prompt": "Quand else s'exécute-t-il ?",
+      "choices": [
+        "Quand la condition du if est fausse.",
+        "Quand elle est vraie.",
+        "Avant le if.",
+        "Seulement dans un switch."
+      ],
+      "answer": 0,
+      "explanation": "else est le chemin alternatif. La réponse juste est : Quand la condition du if est fausse. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q06",
+      "prompt": "Que signifie && ?",
+      "choices": [
+        "Une seule suffit.",
+        "Les deux conditions doivent être vraies.",
+        "On concatène deux textes.",
+        "On importe une classe."
+      ],
+      "answer": 1,
+      "explanation": "&& exige que chaque côté soit vrai. La réponse juste est : Les deux conditions doivent être vraies. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q07",
+      "prompt": "Quel est l'index du premier élément d'un tableau ?",
+      "choices": [
+        "1",
+        "2",
+        "0",
+        "La longueur du tableau"
+      ],
+      "answer": 2,
+      "explanation": "valeurs[0] est le premier élément. La réponse juste est : 0 Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q08",
+      "prompt": "Que fait return dans une méthode ?",
+      "choices": [
+        "Il affiche la valeur.",
+        "Il ferme la classe.",
+        "Il remplace main.",
+        "Il renvoie une valeur à l'appelant."
+      ],
+      "answer": 3,
+      "explanation": "L'appel peut ensuite utiliser cette valeur. La réponse juste est : Il renvoie une valeur à l'appelant. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q09",
+      "prompt": "À quoi sert un HashMap<String, Integer> ?",
+      "choices": [
+        "À associer une clé texte à un entier.",
+        "À remplacer System.out.",
+        "À écrire un commentaire.",
+        "À compter les lignes du fichier."
+      ],
+      "answer": 0,
+      "explanation": "put enregistre, get retrouve. La réponse juste est : À associer une clé texte à un entier. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q10",
+      "prompt": "Que renvoie notes.get(\"Lea\") si Lea vaut 18 ?",
+      "choices": [
+        "Lea",
+        "18",
+        "null dans cet exemple",
+        "La taille de la map"
+      ],
+      "answer": 1,
+      "explanation": "get renvoie la valeur associée à la clé. La réponse juste est : 18 Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q11",
+      "prompt": "Comment visiter toutes les valeurs d'un HashMap ?",
+      "choices": [
+        "Avec un seul get sans clé.",
+        "Avec import seulement.",
+        "Avec une boucle for sur values().",
+        "Ce n'est pas possible."
+      ],
+      "answer": 2,
+      "explanation": "Chaque valeur peut être ajoutée à un total. La réponse juste est : Avec une boucle for sur values(). Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q12",
+      "prompt": "Quand while (n > 0) s'arrête-t-il ?",
+      "choices": [
+        "Après un tour, même si n reste positif.",
+        "Quand main se termine avant la boucle.",
+        "Seulement si n vaut null.",
+        "Quand n n'est plus supérieur à 0."
+      ],
+      "answer": 3,
+      "explanation": "Il faut diminuer n pour que le test finisse par échouer. La réponse juste est : Quand n n'est plus supérieur à 0. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q13",
+      "prompt": "À quoi sert break dans un switch ?",
+      "choices": [
+        "À terminer le cas en cours.",
+        "À importer HashMap.",
+        "À créer la classe Main.",
+        "À passer au case précédent."
+      ],
+      "answer": 0,
+      "explanation": "Sans break, l'exécution continue dans le cas suivant. La réponse juste est : À terminer le cas en cours. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q14",
+      "prompt": "Quel cas gère une valeur imprévue ?",
+      "choices": [
+        "case 0 obligatoirement.",
+        "default",
+        "Le premier case.",
+        "main"
+      ],
+      "answer": 1,
+      "explanation": "default est le cas de repli. La réponse juste est : default Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q15",
+      "prompt": "Que renvoie \"codeflow\".toUpperCase() ?",
+      "choices": [
+        "codeflow",
+        "8",
+        "CODEFLOW",
+        "Codeflow"
+      ],
+      "answer": 2,
+      "explanation": "toUpperCase renvoie une nouvelle chaîne en majuscules. La réponse juste est : CODEFLOW Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q16",
+      "prompt": "Que vaut \"un deux trois\".split(\" \").length ?",
+      "choices": [
+        "2",
+        "14",
+        "0",
+        "3"
+      ],
+      "answer": 3,
+      "explanation": "split découpe la phrase en trois mots. La réponse juste est : 3 Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q17",
+      "prompt": "Pourquoi une méthode static ligne reçoit-elle le HashMap en paramètre ?",
+      "choices": [
+        "Pour utiliser la map remplie dans main.",
+        "Parce que Java interdit les paramètres.",
+        "Pour supprimer println.",
+        "Pour changer le nom du fichier."
+      ],
+      "answer": 0,
+      "explanation": "Une méthode static ne voit pas les variables locales de main : on les lui passe. La réponse juste est : Pour utiliser la map remplie dans main. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q18",
+      "prompt": "Que fait l'addition de trois appels à ligne ?",
+      "choices": [
+        "Elle affiche le code source.",
+        "Elle totalise le montant de trois articles.",
+        "Elle crée trois classes.",
+        "Elle vide le HashMap."
+      ],
+      "answer": 1,
+      "explanation": "Chaque appel renvoie un sous-total. La réponse juste est : Elle totalise le montant de trois articles. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q19",
+      "prompt": "Comment écrit-on un commentaire sur une ligne ?",
+      "choices": [
+        "Avec # seulement, comme en Python.",
+        "Avec print.",
+        "Avec //",
+        "Avec import."
+      ],
+      "answer": 2,
+      "explanation": "Java ignore le reste de la ligne après //. La réponse juste est : Avec // Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q20",
+      "prompt": "Que se passe-t-il si une clé demandée avec get n'existe pas ?",
+      "choices": [
+        "Java invente la valeur 0 sans le signaler, toujours.",
+        "Le fichier est renommé.",
+        "La classe Main disparaît.",
+        "get renvoie null."
+      ],
+      "answer": 3,
+      "explanation": "Il faut vérifier la clé avant de l'utiliser comme un entier. La réponse juste est : get renvoie null. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q21",
+      "prompt": "À quoi servent les accolades ?",
+      "choices": [
+        "À délimiter un bloc : classe, méthode, if ou boucle.",
+        "À afficher un texte.",
+        "À terminer une instruction à la place du point-virgule.",
+        "À importer java.util."
+      ],
+      "answer": 0,
+      "explanation": "Chaque accolade ouvrante a une fermante. La réponse juste est : À délimiter un bloc : classe, méthode, if ou boucle. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "java-q22",
+      "prompt": "Pourquoi un projet ticket utilise-t-il une fonction plutôt qu'un seul if ?",
+      "choices": [
+        "Parce que Java ne sait pas faire if.",
+        "Le calcul de chaque ligne est nommé, réutilisé, puis additionné.",
+        "Parce qu'un HashMap ne peut contenir qu'une clé.",
+        "Parce que println ne peut être appelé qu'une fois."
+      ],
+      "answer": 1,
+      "explanation": "Le chapitre 3 assemble fonction, map et total. La réponse juste est : Le calcul de chaque ligne est nommé, réutilisé, puis additionné. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    }
+  ]
+}

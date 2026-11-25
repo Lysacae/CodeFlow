@@ -1,0 +1,270 @@
+{
+  "language": "csharp",
+  "secondsPerQuestion": 25,
+  "questions": [
+    {
+      "id": "csharp-q01",
+      "prompt": "Que fait Console.WriteLine ?",
+      "choices": [
+        "Il affiche une valeur puis passe à la ligne.",
+        "Il compile le projet.",
+        "Il crée une classe.",
+        "Il efface toutes les variables."
+      ],
+      "answer": 0,
+      "explanation": "WriteLine écrit dans la sortie, avec un retour à la ligne. La réponse juste est : Il affiche une valeur puis passe à la ligne. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q02",
+      "prompt": "Pourquoi presque chaque instruction se termine-t-elle par un point-virgule ?",
+      "choices": [
+        "Pour créer une variable.",
+        "Pour marquer la fin de l'instruction.",
+        "Pour ouvrir un bloc.",
+        "Pour écrire un commentaire."
+      ],
+      "answer": 1,
+      "explanation": "Sans « ; », le compilateur ne sait pas où l'instruction s'arrête. La réponse juste est : Pour marquer la fin de l'instruction. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q03",
+      "prompt": "Que fait // en début de ligne ?",
+      "choices": [
+        "La ligne est exécutée deux fois.",
+        "La ligne devient une chaîne.",
+        "Le reste de la ligne est un commentaire.",
+        "Le programme s'arrête."
+      ],
+      "answer": 2,
+      "explanation": "Le compilateur ignore un commentaire. La réponse juste est : Le reste de la ligne est un commentaire. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q04",
+      "prompt": "Quand le bloc else s'exécute-t-il ?",
+      "choices": [
+        "Quand la condition du if est vraie.",
+        "Avant le test.",
+        "Seulement dans une boucle.",
+        "Quand la condition du if est fausse."
+      ],
+      "answer": 3,
+      "explanation": "else est le chemin alternatif. La réponse juste est : Quand la condition du if est fausse. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q05",
+      "prompt": "Que signifie && entre deux tests ?",
+      "choices": [
+        "Les deux tests doivent être vrais.",
+        "Un seul suffit.",
+        "Les deux doivent être faux.",
+        "&& additionne les tests."
+      ],
+      "answer": 0,
+      "explanation": "&& n'est vrai que si les deux côtés le sont. La réponse juste est : Les deux tests doivent être vrais. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q06",
+      "prompt": "Que signifie || entre deux tests ?",
+      "choices": [
+        "Les deux doivent être vrais.",
+        "Au moins un test doit être vrai.",
+        "Aucun ne doit être vrai.",
+        "|| compare des textes."
+      ],
+      "answer": 1,
+      "explanation": "|| réussit dès qu'un côté est vrai. La réponse juste est : Au moins un test doit être vrai. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q07",
+      "prompt": "Quelle boucle affiche 1, 2 puis 3 sans recopier trois affichages ?",
+      "choices": [
+        "Un seul if.",
+        "Un commentaire.",
+        "Une boucle for ou while.",
+        "Une chaîne vide."
+      ],
+      "answer": 2,
+      "explanation": "La boucle répète l'affichage en faisant varier un compteur. La réponse juste est : Une boucle for ou while. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q08",
+      "prompt": "Quel est l'index du premier élément d'un tableau ?",
+      "choices": [
+        "1",
+        "2",
+        "Le nom du tableau",
+        "0"
+      ],
+      "answer": 3,
+      "explanation": "values[0] est le premier élément. La réponse juste est : 0 Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q09",
+      "prompt": "Que fait return dans une méthode ?",
+      "choices": [
+        "Il renvoie une valeur et quitte la méthode.",
+        "Il affiche la valeur.",
+        "Il ouvre une accolade.",
+        "Il importe un espace de noms."
+      ],
+      "answer": 0,
+      "explanation": "L'appel peut utiliser le résultat retourné. La réponse juste est : Il renvoie une valeur et quitte la méthode. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q10",
+      "prompt": "À quoi sert un Dictionary<string, int> ?",
+      "choices": [
+        "À répéter un bloc trois fois.",
+        "À associer une clé texte à un entier.",
+        "À remplacer le point-virgule.",
+        "À compiler plus vite."
+      ],
+      "answer": 1,
+      "explanation": "La clé permet de retrouver la valeur. La réponse juste est : À associer une clé texte à un entier. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q11",
+      "prompt": "Que vaut notes[\"Lea\"] si Lea a été associée à 18 ?",
+      "choices": [
+        "Lea",
+        "0",
+        "18",
+        "null dans tous les cas"
+      ],
+      "answer": 2,
+      "explanation": "L'indexeur demande la valeur de cette clé. La réponse juste est : 18 Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q12",
+      "prompt": "Que fait foreach sur un dictionnaire ?",
+      "choices": [
+        "Il trie toujours les nombres à l'envers.",
+        "Il supprime le dictionnaire.",
+        "Il n'entre jamais dans le bloc.",
+        "Il visite chaque paire clé / valeur."
+      ],
+      "answer": 3,
+      "explanation": "On peut additionner paire.Value à chaque tour. La réponse juste est : Il visite chaque paire clé / valeur. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q13",
+      "prompt": "Quand une boucle while (n > 0) s'arrête-t-elle ?",
+      "choices": [
+        "Quand n n'est plus supérieur à 0.",
+        "Après un seul tour, quoi qu'il arrive.",
+        "Quand elle voit un switch.",
+        "Seulement si n vaut 100."
+      ],
+      "answer": 0,
+      "explanation": "Il faut diminuer n dans le bloc, sinon la condition reste vraie. La réponse juste est : Quand n n'est plus supérieur à 0. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q14",
+      "prompt": "À quoi sert break dans un switch ?",
+      "choices": [
+        "À revenir au premier cas.",
+        "À terminer le cas en cours.",
+        "À créer une variable.",
+        "À ignorer le point-virgule."
+      ],
+      "answer": 1,
+      "explanation": "Sans break, l'exécution peut continuer dans le cas suivant. La réponse juste est : À terminer le cas en cours. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q15",
+      "prompt": "Quel cas s'exécute si aucun case ne correspond ?",
+      "choices": [
+        "case 0, toujours.",
+        "Le premier case.",
+        "default",
+        "Aucun default n'existe en C#."
+      ],
+      "answer": 2,
+      "explanation": "default est le cas de repli. La réponse juste est : default Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q16",
+      "prompt": "Que renvoie \"codeflow\".ToUpper() ?",
+      "choices": [
+        "codeflow",
+        "8",
+        "Code",
+        "CODEFLOW"
+      ],
+      "answer": 3,
+      "explanation": "ToUpper renvoie une nouvelle chaîne en majuscules. La réponse juste est : CODEFLOW Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q17",
+      "prompt": "Que vaut \"un deux trois\".Split(' ').Length ?",
+      "choices": [
+        "3",
+        "2",
+        "14",
+        "0"
+      ],
+      "answer": 0,
+      "explanation": "Split découpe la phrase en trois morceaux. La réponse juste est : 3 Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q18",
+      "prompt": "Que permet une chaîne interpolée $\"...{total}\" ?",
+      "choices": [
+        "De supprimer total.",
+        "D'insérer la valeur de total dans le texte.",
+        "De créer un dictionnaire.",
+        "D'arrêter la méthode."
+      ],
+      "answer": 1,
+      "explanation": "Les accolades marquent l'emplacement de la valeur. La réponse juste est : D'insérer la valeur de total dans le texte. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q19",
+      "prompt": "Où écrit-on le corps d'un if ?",
+      "choices": [
+        "Avant le mot if.",
+        "Dans un commentaire.",
+        "Entre accolades, juste après la condition.",
+        "Uniquement après else."
+      ],
+      "answer": 2,
+      "explanation": "Les accolades délimitent le bloc. La réponse juste est : Entre accolades, juste après la condition. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q20",
+      "prompt": "Qu'est-ce qu'un paramètre de méthode ?",
+      "choices": [
+        "La sortie obligatoire à l'écran.",
+        "Un fichier du projet.",
+        "Un commentaire.",
+        "Une valeur d'entrée nommée, fournie lors de l'appel."
+      ],
+      "answer": 3,
+      "explanation": "Produit(2, 2) passe deux entiers à la méthode. La réponse juste est : Une valeur d'entrée nommée, fournie lors de l'appel. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q21",
+      "prompt": "Pourquoi découper un ticket en fonction Ligne ?",
+      "choices": [
+        "Pour réutiliser le calcul prix × quantité sans le recopier.",
+        "Parce qu'un programme C# ne peut pas additionner.",
+        "Pour interdire return.",
+        "Pour éviter les variables."
+      ],
+      "answer": 0,
+      "explanation": "Chaque appel calcule une ligne, puis on additionne les résultats. La réponse juste est : Pour réutiliser le calcul prix × quantité sans le recopier. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    },
+    {
+      "id": "csharp-q22",
+      "prompt": "Que se passe-t-il si on utilise une variable jamais déclarée ?",
+      "choices": [
+        "Le programme invente la valeur 0 sans rien dire.",
+        "Le compilateur signale un nom introuvable.",
+        "La variable devient une chaîne vide automatiquement.",
+        "C# ignore la ligne."
+      ],
+      "answer": 1,
+      "explanation": "Il faut déclarer le nom avant de l'utiliser. La réponse juste est : Le compilateur signale un nom introuvable. Les autres propositions décrivent un autre mécanisme, déjà écarté par la leçon correspondante."
+    }
+  ]
+}
