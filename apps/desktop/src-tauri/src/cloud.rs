@@ -2,11 +2,16 @@ use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 
 const SUPABASE_URL: &str = "https://xzxvuwvjaxrlgxywogiu.supabase.co";
-/// Clé Supabase injectée à la compilation via `CODEFLOW_SUPABASE_SECRET`.
-/// Elle ne figure pas dans le dépôt.
-const SUPABASE_SECRET: &str = match option_env!("CODEFLOW_SUPABASE_SECRET") {
-    Some(value) => value,
-    None => "",
+/// Clé Supabase injectée à la compilation via `CODEFLOW_SUPABASE_SECRET`
+/// (environnement de build, ou `SUPABASE_SECRET_KEY` dans `apps/server/.env`).
+/// Elle ne figure pas dans le dépôt. Un build release sans clé ne compile pas.
+const SUPABASE_SECRET: &str = env!("CODEFLOW_SUPABASE_SECRET");
+
+#[cfg(not(debug_assertions))]
+const _: () = {
+    if SUPABASE_SECRET.is_empty() {
+        panic!("CODEFLOW_SUPABASE_SECRET must be set for release builds");
+    }
 };
 const GITHUB_REPO: &str = "Lysacae/CodeFlow";
 
@@ -94,6 +99,12 @@ pub(crate) fn supabase_request(
     body: Option<Value>,
     token: Option<&str>,
 ) -> Result<(u16, Value), String> {
+    if SUPABASE_SECRET.is_empty() {
+        return Err(
+            "Clé API absente de cette version. Recompilez avec CODEFLOW_SUPABASE_SECRET.".into(),
+        );
+    }
+
     let url = format!("{SUPABASE_URL}{path}");
     let auth = token.unwrap_or(SUPABASE_SECRET);
 

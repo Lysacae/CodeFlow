@@ -85,6 +85,8 @@ Les langages manquants peuvent être installés depuis l’application.
 
 L'application est open source (licence MIT) : leçons, interface et bureau Tauri sont dans ce dépôt.
 
+La connexion cloud est compilée avec `CODEFLOW_SUPABASE_SECRET`. Sans cette variable, le build desktop reprend `SUPABASE_SECRET_KEY` depuis `apps/server/.env` (fichier ignoré par git). Un build release sans clé échoue. Ne pas committer la clé.
+
 ## Présence Discord
 
 CodeFlow peut s'afficher sur Discord tant que la fenêtre est ouverte (« Apprend à coder », ou le langage en cours). Il faut une application Discord nommée CodeFlow, son Application ID dans `apps/desktop/src-tauri/src/discord_presence.rs` (ou la variable `CODEFLOW_DISCORD_APP_ID` au moment du build), l'icône de l'application, et un art asset Rich Presence dont la clé est `codeflow`.

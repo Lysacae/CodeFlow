@@ -15,6 +15,8 @@ GITHUB_RELEASES_REPO=Lysacae/CodeFlow
 
 Ne jamais committer `.env` / la clé secrète.
 
+Le client desktop (`apps/desktop`) embarque la même clé à la compilation sous le nom `CODEFLOW_SUPABASE_SECRET`. Si la variable n'est pas définie, `build.rs` lit `SUPABASE_SECRET_KEY` dans ce `.env`. Un binaire release ne se compile pas sans clé.
+
 ## Lancer
 
 ```bash
