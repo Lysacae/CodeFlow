@@ -165,8 +165,8 @@ export function FileWizard({
   };
 
   return (
-    <div className="mx-auto grid w-full max-w-6xl gap-4 lg:grid-cols-[0.9fr_1.3fr]">
-      <div className="glass space-y-4 p-6 text-left">
+    <div className="grid w-full min-w-0 gap-4 lg:grid-cols-[0.9fr_1.3fr]">
+      <div className="space-y-4 rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-5 text-center lg:text-left">
         <div>
           <label className="text-sm text-[var(--text-secondary)]" htmlFor="filename">
             Nom du fichier

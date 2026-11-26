@@ -463,9 +463,23 @@ export async function devDeleteAccount(userId: string): Promise<void> {
   await invoke("dev_delete_account", { userId });
 }
 
-export async function devResetRank(userId: string): Promise<void> {
-  if (!isTauri()) return;
-  await invoke("dev_reset_rank", { userId });
+export async function devResetRank(userId: string, achievementIds: string[]): Promise<unknown> {
+  if (!isTauri()) return {};
+  return invoke("dev_reset_rank", { userId, achievementIds });
+}
+
+export async function devGetProgression(userId: string): Promise<unknown> {
+  if (!isTauri()) return {};
+  return invoke("dev_get_progression", { userId });
+}
+
+export async function devUnlockAchievements(
+  userId: string,
+  ids: string[],
+  xpById: Record<string, number>,
+): Promise<unknown> {
+  if (!isTauri()) return {};
+  return invoke("dev_unlock_achievements", { userId, ids, xpById });
 }
 
 export async function devResetSession(): Promise<ProgressSnapshot> {

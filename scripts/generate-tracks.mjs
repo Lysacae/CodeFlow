@@ -161,7 +161,7 @@ writeTrack("python", [
         fileWizard: {
           defaultName: "bonjour",
           extension: ".py",
-          starterCode: 'print("Bienvenue dans la programmation !")',
+          starterCode: 'print("Bonjour")',
           notes: [
             "Choisissez le dossier via la fenêtre d'enregistrement.",
             "L'extension .py identifie un fichier Python.",
@@ -544,7 +544,7 @@ function langTrack(lang, name, ext, printExpr, hello, welcome, wrap = (c) => c, 
           fileWizard: {
             defaultName: lang === "java" ? "Main" : lang === "csharp" ? "Bonjour" : "bonjour",
             extension: ext,
-            starterCode: show(welcome),
+            starterCode: show(hello),
             requireClassNameMatch: lang === "java",
             notes: fileNotes,
           },

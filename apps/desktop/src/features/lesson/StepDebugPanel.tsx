@@ -88,30 +88,11 @@ export function StepDebugPanel({ language, code, onHighlight }: Props) {
           {tracing ? <Spinner size="sm" /> : null}
           {trace ? "Relancer" : "Démarrer"}
         </Button>
-        <Button variant="secondary" disabled={!current || index >= events.length - 1} onClick={() => { setPlaying(false); setIndex((value) => value + 1); }}>
-          Pas
-        </Button>
-        <Button variant="secondary" disabled={!trace || events.length === 0 || playing} onClick={() => setPlaying(true)}>
-          {index > 0 && index < events.length - 1 ? "Reprendre" : "Lecture"}
-        </Button>
         <Button variant="ghost" disabled={!playing} onClick={() => setPlaying(false)}>
           Pause
         </Button>
         <Button variant="ghost" disabled={!trace} onClick={() => { setPlaying(false); setIndex(0); }}>
           Recommencer
-        </Button>
-        <Button
-          variant="ghost"
-          disabled={!trace}
-          onClick={() => {
-            setPlaying(false);
-            setTrace(null);
-            setIndex(0);
-            setError(null);
-            onHighlight(null);
-          }}
-        >
-          Stop
         </Button>
       </div>
       {error ? <p className="text-sm text-[var(--error)]">{error}</p> : null}

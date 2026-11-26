@@ -42,6 +42,17 @@ export function levelForXp(xp: number): number {
   return level;
 }
 
+/** Progression à l'intérieur du niveau courant : XP déjà gagnés / XP pour passer au suivant. */
+export function levelProgress(xp: number): { level: number; into: number; need: number; ratio: number } {
+  const safe = Math.max(0, Math.floor(xp));
+  const level = levelForXp(safe);
+  const start = xpToReachLevel(level);
+  const end = xpToReachLevel(level + 1);
+  const need = Math.max(1, end - start);
+  const into = Math.max(0, Math.min(need, safe - start));
+  return { level, into, need, ratio: into / need };
+}
+
 export function rankForLevel(level: number) {
   let current: (typeof RANKS)[number] = RANKS[0];
   for (const rank of RANKS) {

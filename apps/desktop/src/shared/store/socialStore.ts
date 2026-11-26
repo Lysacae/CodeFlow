@@ -9,6 +9,7 @@ import {
   apiSocialRespond,
   apiSocialSend,
   apiSocialSnapshot,
+  apiSocialRemoveFriend,
   apiSocialTyping,
   apiSocialUnblock,
   flashTaskbar,
@@ -50,6 +51,7 @@ type SocialState = {
   removeMessage: (peerId: string, messageId: string) => Promise<void>;
   react: (peerId: string, messageId: string, emoji: string) => Promise<void>;
   deleteThread: (peerId: string) => Promise<void>;
+  removeFriend: (userId: string) => Promise<void>;
   blockUser: (userId: string) => Promise<void>;
   unblockUser: (userId: string) => Promise<void>;
   signalTyping: (peerId: string, active: boolean) => Promise<void>;
@@ -264,6 +266,10 @@ export const useSocialStore = create<SocialState>((set, get) => ({
     const snapshot = adopt(await apiSocialDeleteThread(peerId));
     const nextPeer = snapshot.threads[0]?.peerId ?? null;
     set({ snapshot, error: null, activePeer: get().activePeer === peerId ? nextPeer : get().activePeer });
+  },
+  removeFriend: async (userId) => {
+    const snapshot = adopt(await apiSocialRemoveFriend(userId));
+    set({ snapshot, error: null, incomingBaseline: snapshot.incoming.length });
   },
   blockUser: async (userId) => {
     const me = useAuthStore.getState().user?.id;

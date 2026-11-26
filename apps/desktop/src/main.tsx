@@ -33,6 +33,16 @@ document.addEventListener(
   },
   true,
 );
+document.addEventListener(
+  "dragstart",
+  (event) => {
+    const target = event.target;
+    if (target instanceof Element && target.closest("img")) {
+      event.preventDefault();
+    }
+  },
+  true,
+);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

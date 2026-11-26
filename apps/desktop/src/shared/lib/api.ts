@@ -400,6 +400,12 @@ export async function apiSocialUnblock(userId: string) {
   );
 }
 
+export async function apiSocialRemoveFriend(userId: string) {
+  return withAuthRetry((token) =>
+    invoke<import("@/shared/lib/social").SocialSnapshot>("cloud_social_remove_friend", { token, userId }),
+  );
+}
+
 export async function apiGetProgression(): Promise<unknown> {
   return withAuthRetry((token) => invoke("cloud_get_progression", { token }));
 }

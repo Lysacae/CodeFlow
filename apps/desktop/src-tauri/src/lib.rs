@@ -40,6 +40,49 @@ fn window_is_iconic(window: &tauri::WebviewWindow) -> bool {
     false
 }
 
+/// WebView2 pose `WS_EX_NOREDIRECTIONBITMAP` : la capture d'écran Windows
+/// (Impr. écran, Outil Capture) ne voit alors qu'une fenêtre noire.
+#[cfg(windows)]
+fn clear_capture_block(hwnd: windows::Win32::Foundation::HWND) {
+    use windows::Win32::UI::WindowsAndMessaging::{
+        GetWindowLongPtrW, SetWindowDisplayAffinity, SetWindowLongPtrW, GWL_EXSTYLE, WDA_NONE,
+        WS_EX_NOREDIRECTIONBITMAP,
+    };
+    unsafe {
+        let ex = GetWindowLongPtrW(hwnd, GWL_EXSTYLE);
+        let blocked = WS_EX_NOREDIRECTIONBITMAP.0 as isize;
+        if ex & blocked != 0 {
+            SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex & !blocked);
+        }
+        let _ = SetWindowDisplayAffinity(hwnd, WDA_NONE);
+    }
+}
+
+#[cfg(windows)]
+unsafe extern "system" fn clear_capture_child(
+    hwnd: windows::Win32::Foundation::HWND,
+    _: windows::Win32::Foundation::LPARAM,
+) -> windows::core::BOOL {
+    clear_capture_block(hwnd);
+    windows::core::BOOL(1)
+}
+
+#[cfg(windows)]
+fn allow_screen_capture(window: &tauri::WebviewWindow) {
+    use windows::Win32::UI::WindowsAndMessaging::EnumChildWindows;
+    let Ok(hwnd) = window.hwnd() else {
+        return;
+    };
+    clear_capture_block(hwnd);
+    unsafe {
+        let _ = EnumChildWindows(
+            Some(hwnd),
+            Some(clear_capture_child),
+            windows::Win32::Foundation::LPARAM(0),
+        );
+    }
+}
+
 fn disable_webview_context_menu(window: &tauri::WebviewWindow) {
     #[cfg(windows)]
     {
@@ -201,6 +244,8 @@ pub fn run() {
             discord_presence::start();
             for (_, window) in app.webview_windows() {
                 clamp_window_to_work_area(&window);
+                #[cfg(windows)]
+                allow_screen_capture(&window);
                 disable_webview_context_menu(&window);
                 #[cfg(windows)]
                 allow_shell_activation(&window);
@@ -209,7 +254,11 @@ pub fn run() {
                     match event {
                         // Perdre le focus ne doit jamais masquer la fenêtre.
                         tauri::WindowEvent::Focused(false) => {}
-                        tauri::WindowEvent::Focused(true) => schedule_restore(&watch),
+                        tauri::WindowEvent::Focused(true) => {
+                            #[cfg(windows)]
+                            allow_screen_capture(&watch);
+                            schedule_restore(&watch);
+                        }
                         tauri::WindowEvent::Moved(_)
                         | tauri::WindowEvent::ScaleFactorChanged { .. } => {
                             clamp_window_to_work_area(&watch);
@@ -233,6 +282,16 @@ pub fn run() {
                             );
                         }
                         _ => {}
+                    }
+                });
+            }
+            #[cfg(windows)]
+            {
+                let handle = app.handle().clone();
+                std::thread::spawn(move || {
+                    std::thread::sleep(std::time::Duration::from_millis(600));
+                    if let Some(window) = handle.get_webview_window("main") {
+                        allow_screen_capture(&window);
                     }
                 });
             }
@@ -275,6 +334,7 @@ pub fn run() {
             social::cloud_social_typing,
             social::cloud_social_block,
             social::cloud_social_unblock,
+            social::cloud_social_remove_friend,
             social::cloud_get_progression,
             social::cloud_put_progression,
             social::cloud_public_profile,
@@ -305,6 +365,8 @@ pub fn run() {
             dev::dev_list_accounts,
             dev::dev_delete_account,
             dev::dev_reset_rank,
+            dev::dev_get_progression,
+            dev::dev_unlock_achievements,
             dev::dev_reset_session,
             dev::dev_diagnostics,
             dev::maintenance_bypass,

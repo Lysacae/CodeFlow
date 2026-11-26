@@ -3,7 +3,7 @@
  * `true` : l'application livrée affiche l'écran de maintenance et bloque les parcours.
  * Remettre `false` pour rouvrir CodeFlow, puis recompiler.
  */
-export const MAINTENANCE_MODE = true;
+export const MAINTENANCE_MODE = false;
 
 const BYPASS_KEY = "CODEFLOW_BYPASS_MAINTENANCE";
 

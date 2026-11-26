@@ -9,7 +9,6 @@ import { UpdateDialog } from "@/features/update/UpdateDialog";
 import { apiLatestUpdate } from "@/shared/lib/api";
 import { MAINTENANCE_MODE, maintenanceBypassSync } from "@/shared/lib/maintenance";
 import { APP_VERSION, isNewerVersion } from "@/shared/lib/version";
-import { OrbitBackdrop } from "@/shared/ui/OrbitBackdrop";
 import { useUpdateStore } from "@/shared/store/updateStore";
 import { useAuthStore } from "@/shared/store/authStore";
 import { useOnboardingStore } from "@/shared/store/onboardingStore";
@@ -108,8 +107,7 @@ export default function App() {
 
   if (!authReady || onboardingDone === null || (MAINTENANCE_MODE && bypass === null)) {
     return (
-      <div className="relative flex h-full items-center justify-center">
-        <OrbitBackdrop />
+      <div className="flex h-full items-center justify-center">
         <Spinner label="Chargement…" />
       </div>
     );
@@ -117,25 +115,21 @@ export default function App() {
 
   if (MAINTENANCE_MODE && bypass !== true) {
     return (
-      <div className="relative flex h-full w-full min-h-0 flex-col overflow-hidden">
-        <OrbitBackdrop />
+      <div className="flex h-full w-full min-h-0 flex-col overflow-hidden">
         <MaintenanceScreen />
       </div>
     );
   }
 
   return (
-    <div className="relative flex h-full w-full min-h-0 flex-col overflow-hidden">
-      <OrbitBackdrop />
+    <div className="flex h-full w-full min-h-0 flex-col overflow-hidden">
       <BrowserRouter>
-        <div className="relative z-[1] flex h-full min-h-0 w-full flex-1 flex-col">
-          <DiscordPresence />
-          {update && dialogOpen ? (
-            <UpdateDialog update={update} onLater={closeDialog} />
-          ) : null}
-          <AppRouter />
-          <SocialToasts />
-        </div>
+        <DiscordPresence />
+        {update && dialogOpen ? (
+          <UpdateDialog update={update} onLater={closeDialog} />
+        ) : null}
+        <AppRouter />
+        <SocialToasts />
       </BrowserRouter>
     </div>
   );

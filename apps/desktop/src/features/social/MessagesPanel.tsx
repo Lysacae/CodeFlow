@@ -3,6 +3,7 @@ import { MESSAGE_EMOJIS } from "@/shared/lib/social";
 import { useAuthStore } from "@/shared/store/authStore";
 import { useSocialStore } from "@/shared/store/socialStore";
 import { Button } from "@/shared/ui/Button";
+import { GlassCard } from "@/shared/ui/GlassCard";
 
 function formatTime(iso: string) {
   const date = new Date(iso);
@@ -51,6 +52,7 @@ export function MessagesPanel({ onClose }: { onClose: () => void }) {
   const [busy, setBusy] = useState(false);
   const [pickerId, setPickerId] = useState<string | null>(null);
   const [confirm, setConfirm] = useState<null | "delete" | "block" | "report">(null);
+  const [dropId, setDropId] = useState<string | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const stickRef = useRef(true);
   const textRef = useRef(text);
@@ -135,9 +137,9 @@ export function MessagesPanel({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="modal-layer" onClick={onClose}>
-      <div className="modal msg-modal" onClick={(event) => event.stopPropagation()}>
-        <div className="flex h-[min(640px,86vh)] flex-col overflow-hidden">
+    <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/45 px-4 py-8" onClick={onClose}>
+      <div className="w-full max-w-4xl" onClick={(event) => event.stopPropagation()}>
+        <GlassCard className="flex h-[min(640px,86vh)] flex-col overflow-hidden !p-0">
           <div className="flex shrink-0 items-center justify-between border-b border-[var(--border)] px-4 py-3">
             <h2 className="text-lg font-semibold">Messagerie</h2>
             <Button variant="ghost" onClick={onClose}>Fermer</Button>
@@ -169,24 +171,40 @@ export function MessagesPanel({ onClose }: { onClose: () => void }) {
                 <p className="px-1 py-2 text-sm text-[var(--text-secondary)]">Ajoutez un ami pour écrire.</p>
               ) : (
                 snapshot.threads.map((item) => (
-                  <button
+                  <div
                     key={item.peerId}
-                    type="button"
-                    onClick={() => {
-                      setConfirm(null);
-                      setActivePeer(item.peerId);
-                    }}
                     className={
                       thread?.peerId === item.peerId
-                        ? "mt-1 flex w-full items-center justify-between rounded-[12px] bg-[var(--surface-strong)] px-2 py-2 text-left"
-                        : "mt-1 flex w-full items-center justify-between rounded-[12px] px-2 py-2 text-left hover:bg-[var(--surface)]"
+                        ? "mt-1 flex items-center gap-1 rounded-[12px] bg-[var(--surface-strong)] px-2 py-2"
+                        : "mt-1 flex items-center gap-1 rounded-[12px] px-2 py-2 hover:bg-[var(--surface)]"
                     }
                   >
-                    <span className="truncate text-sm">{item.username}</span>
-                    {item.unread > 0 ? (
-                      <span className="ml-2 rounded-full bg-[var(--accent)] px-1.5 text-[10px] text-white">{item.unread}</span>
-                    ) : null}
-                  </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setConfirm(null);
+                        setDropId(null);
+                        setActivePeer(item.peerId);
+                      }}
+                      className="flex min-w-0 flex-1 items-center justify-between text-left"
+                    >
+                      <span className="truncate text-sm">{item.username}</span>
+                      {item.unread > 0 ? (
+                        <span className="ml-2 rounded-full bg-[var(--accent)] px-1.5 text-[10px] text-white">{item.unread}</span>
+                      ) : null}
+                    </button>
+                    <button
+                      type="button"
+                      className="shrink-0 text-xs text-[var(--error)]"
+                      onClick={() => {
+                        setActivePeer(item.peerId);
+                        setDropId(null);
+                        setConfirm("delete");
+                      }}
+                    >
+                      Supprimer
+                    </button>
+                  </div>
                 ))
               )}
             </aside>
@@ -197,7 +215,7 @@ export function MessagesPanel({ onClose }: { onClose: () => void }) {
                     <div className="flex items-center justify-between gap-2">
                       <p className="truncate font-medium">{thread.username}</p>
                       <div className="flex shrink-0 gap-1">
-                        <Button variant="ghost" className="!px-2 !py-1" onClick={() => setConfirm("delete")}>Supprimer</Button>
+                        <Button variant="ghost" className="!px-2 !py-1" onClick={() => setConfirm("delete")}>Supprimer la discussion</Button>
                         <Button variant="ghost" className="!px-2 !py-1" onClick={() => setConfirm("block")}>Bloquer</Button>
                         <Button variant="ghost" className="!px-2 !py-1" onClick={() => setConfirm("report")}>Signaler</Button>
                       </div>
@@ -234,8 +252,6 @@ export function MessagesPanel({ onClose }: { onClose: () => void }) {
                         for (const emoji of Object.values(message.reactions || {})) {
                           grouped.set(emoji, (grouped.get(emoji) ?? 0) + 1);
                         }
-                        const deletable = mine && !message.readAt;
-                        const actionsOpen = pickerId === message.id;
                         return (
                           <div key={message.id} className={mine ? "group flex w-full flex-col items-end" : "group flex w-full flex-col items-start"}>
                             <div className={mine ? "relative w-fit min-w-0 max-w-[calc(100%-4.75rem)]" : "relative w-fit min-w-0 max-w-[calc(100%-2.75rem)]"}>
@@ -254,13 +270,9 @@ export function MessagesPanel({ onClose }: { onClose: () => void }) {
                               </div>
                               <div
                                 className={
-                                  actionsOpen
-                                    ? mine
-                                      ? "absolute right-full top-1 z-10 mr-1 flex gap-0.5"
-                                      : "absolute left-full top-1 z-10 ml-1 flex gap-0.5"
-                                    : mine
-                                      ? "pointer-events-none absolute right-full top-1 z-10 mr-1 flex gap-0.5 opacity-0 transition group-hover:pointer-events-auto group-hover:opacity-100"
-                                      : "pointer-events-none absolute left-full top-1 z-10 ml-1 flex gap-0.5 opacity-0 transition group-hover:pointer-events-auto group-hover:opacity-100"
+                                  mine
+                                    ? "absolute right-full top-1 z-10 mr-1 flex gap-0.5"
+                                    : "absolute left-full top-1 z-10 ml-1 flex gap-0.5"
                                 }
                               >
                                 <button
@@ -271,22 +283,35 @@ export function MessagesPanel({ onClose }: { onClose: () => void }) {
                                 >
                                   😊
                                 </button>
-                                {deletable ? (
-                                  <button
-                                    type="button"
-                                    className="flex h-7 w-7 items-center justify-center rounded-full bg-transparent text-[var(--error)] hover:bg-[var(--surface)]"
-                                    aria-label="Supprimer le message"
-                                    onClick={() =>
-                                      void removeMessage(thread.peerId, message.id).catch((e) =>
-                                        setError(e instanceof Error ? e.message : String(e)),
-                                      )
-                                    }
-                                  >
-                                    <TrashIcon />
-                                  </button>
-                                ) : null}
+                                <button
+                                  type="button"
+                                  className="flex h-7 w-7 items-center justify-center rounded-full bg-transparent text-[var(--error)] hover:bg-[var(--surface)]"
+                                  aria-label="Supprimer le message"
+                                  onClick={() => setDropId((current) => (current === message.id ? null : message.id))}
+                                >
+                                  <TrashIcon />
+                                </button>
                               </div>
                             </div>
+                            {dropId === message.id ? (
+                              <div className={mine ? "mt-1 flex flex-wrap items-center justify-end gap-2 text-xs" : "mt-1 flex flex-wrap items-center gap-2 text-xs"}>
+                                <span className="text-[var(--text-secondary)]">Supprimer ce message ?</span>
+                                <Button
+                                  variant="danger"
+                                  className="!px-2 !py-1"
+                                  onClick={() =>
+                                    void removeMessage(thread.peerId, message.id)
+                                      .then(() => setDropId(null))
+                                      .catch((e) => setError(e instanceof Error ? e.message : String(e)))
+                                  }
+                                >
+                                  Supprimer
+                                </Button>
+                                <Button variant="ghost" className="!px-2 !py-1" onClick={() => setDropId(null)}>
+                                  Annuler
+                                </Button>
+                              </div>
+                            ) : null}
                             {pickerId === message.id ? (
                               <div className={mine ? "mt-1 flex flex-wrap justify-end gap-1" : "mt-1 flex flex-wrap gap-1"}>
                                 {MESSAGE_EMOJIS.map((emoji) => (
@@ -360,7 +385,7 @@ export function MessagesPanel({ onClose }: { onClose: () => void }) {
               )}
             </section>
           </div>
-        </div>
+        </GlassCard>
       </div>
     </div>
   );

@@ -18,7 +18,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : aucun. C'est le point de départ du parcours."
+              "body": "Aucun. C'est le début du parcours."
             },
             {
               "type": "prose",
@@ -40,17 +40,17 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "System.out.println(\"Bonjour\"); est un ordre d'affichage. Le texte entre guillemets est la donnée. Le nom de l'instruction est le verbe."
+              "body": "System.out.println(\"Bonjour\"); affiche le mot. Les guillemets délimitent le texte, le point-virgule termine l'instruction."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "La sortie ne contient que Bonjour, sans les guillemets et sans le nom de l'instruction."
+              "body": "La Sortie ne contient que Bonjour, sans les guillemets."
             },
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Un programme ne fait que ce qui est écrit, dans l'ordre. Chaque instruction se termine par un point-virgule. Le code d'un exercice tient dans la classe déjà ouverte."
+              "body": "Un programme ne fait que ce qui est écrit, dans l'ordre. Chaque instruction se termine par un point-virgule."
             }
           ]
         },
@@ -66,7 +66,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Qu'est-ce que programmer en Java ? ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Qu'est-ce que programmer en Java ? »."
             },
             {
               "type": "prose",
@@ -82,23 +82,19 @@
               "body": "Dans CodeFlow, le fichier s'appelle Main.java : le nom de la classe publique Main doit correspondre à ce fichier."
             },
             {
-              "type": "code",
-              "code": "System.out.println(\"Bonjour\");"
-            },
-            {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "L'exemple affiche un mot. Vous n'avez pas encore de variable : le message est écrit en toutes lettres."
+              "body": "Java impose une classe et une méthode main. Cette structure se retrouve dans presque tous les programmes du parcours."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "Une seule ligne apparaît dans la Sortie."
+              "body": "Rien à exécuter dans cette leçon : le geste d'affichage arrive juste après."
             },
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Java reste lisible parce que l'affichage ressemble à une phrase. La rigueur (guillemets, point-virgule) vient juste après."
+              "body": "Java se lit clairement. Chaque instruction se termine par un point-virgule."
             }
           ]
         },
@@ -114,7 +110,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « À quoi sert Java ? ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « À quoi sert Java ? »."
             },
             {
               "type": "prose",
@@ -130,23 +126,19 @@
               "body": "La zone Sortie affiche ce que System.out.println a écrit, ou le message du compilateur."
             },
             {
-              "type": "code",
-              "code": "System.out.println(\"Bonjour\");"
-            },
-            {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "javac compile la classe, puis java exécute main. Une ligne fausse arrête le processus et la Sortie montre l'erreur réelle, pas une simulation."
+              "body": "javac compile la classe, puis la JVM exécute main. Une erreur de compilation empêche le démarrage."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "Un exemple correct affiche son message. Un exemple incorrect n'affiche pas un résultat inventé : il montre l'erreur."
+              "body": "Un programme correct affiche son message. Un programme incorrect montre l'erreur, pas un résultat inventé."
             },
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Lisez toujours la Sortie après un essai. C'est le seul juge du programme."
+              "body": "Lisez toujours la Sortie après un essai."
             }
           ]
         },
@@ -162,7 +154,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Comment un programme Java s'exécute ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Comment un programme Java s'exécute »."
             },
             {
               "type": "prose",
@@ -206,7 +198,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Lire du code source Java ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Lire du code source Java »."
             },
             {
               "type": "prose",
@@ -246,7 +238,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « L'éditeur, javac et la JVM ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « L'éditeur, javac et la JVM »."
             },
             {
               "type": "prose",
@@ -290,7 +282,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Blocs et accolades en Java ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Blocs et accolades en Java »."
             },
             {
               "type": "prose",
@@ -304,7 +296,7 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "Le message cite souvent un nom (SyntaxError, point-virgule, symbole introuvable) et une ligne. Corrigez cette ligne, puis relancez."
+              "body": "javac indique le fichier, la ligne et le symbole inattendu. Corrigez cette ligne, puis relancez."
             },
             {
               "type": "prose",
@@ -338,7 +330,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Comprendre une erreur de javac ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Comprendre une erreur de javac »."
             },
             {
               "type": "prose",
@@ -356,22 +348,22 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "System.out.println(\"Bienvenue dans la programmation !\"); envoie cette phrase. Les guillemets ne sortent pas."
+              "body": "System.out.println(\"Bonjour !\"); envoie Bonjour ! Les guillemets ne sortent pas."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "La Sortie doit être exactement : Bienvenue dans la programmation !"
+              "body": "La Sortie de l'exemple est : Bonjour !"
             },
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Changer le texte entre guillemets change la sortie. Le reste de l'instruction reste."
+              "body": "Changer le texte entre guillemets change la sortie. L'exercice demande une autre phrase, avec l'accent et le point d'exclamation."
             }
           ],
           "exercise": {
             "id": "java-l2-ex1",
-            "prompt": "Objectif. Afficher un texte exact, accents et ponctuation compris.\n\nMarche à suivre. Vous allez utiliser la commande d'affichage de Java. Elle envoie du texte dans la zone Sortie. Le texte à afficher doit être entre guillemets. Modifiez le programme de départ : remplacez le texte actuel par exactement Bienvenue dans la programmation ! (accents et ponctuation inclus).\n\nContraintes. La sortie comparée est exactement « Bienvenue dans la programmation ! ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nFaites afficher : Bienvenue dans la programmation !",
+            "prompt": "Vous allez utiliser la commande d'affichage de Java. Elle envoie du texte dans la zone Sortie. Le texte à afficher doit être entre guillemets. Modifiez le programme de départ : remplacez le texte actuel par exactement Bienvenue dans la programmation ! (accents et ponctuation inclus).\n\nLa Sortie doit être exactement : Bienvenue dans la programmation !\n\nFaites afficher : Bienvenue dans la programmation !",
             "hint": "Remplace uniquement le texte entre guillemets.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Bonjour !\");\n    }\n}",
             "validate": {
@@ -408,7 +400,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Afficher du texte ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Afficher du texte »."
             },
             {
               "type": "prose",
@@ -437,7 +429,7 @@
           ],
           "exercise": {
             "id": "java-l2-ex2",
-            "prompt": "Objectif. Produire deux lignes distinctes, dans l'ordre demandé.\n\nMarche à suivre. Deux affichages vides sont déjà écrits. Premier println : \"CodeFlow\". Second println : \"Java\". Gardez les deux lignes.\n\nContraintes. La sortie comparée est exactement « CodeFlow↵Java ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez CodeFlow puis Java, chacun sur sa propre ligne.",
+            "prompt": "Deux affichages vides sont déjà écrits. Premier println : \"CodeFlow\". Second println : \"Java\". Gardez les deux lignes.\n\nLa Sortie doit être exactement : CodeFlow puis Java.\n\nAffichez CodeFlow puis Java, chacun sur sa propre ligne.",
             "hint": "Premier println : \"CodeFlow\". Second println : \"Java\". Gardez les deux lignes.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"\");\n        System.out.println(\"\");\n    }\n}",
             "validate": {
@@ -468,7 +460,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Plusieurs messages ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Plusieurs messages »."
             },
             {
               "type": "prose",
@@ -508,7 +500,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Les commentaires ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Les commentaires »."
             },
             {
               "type": "prose",
@@ -517,22 +509,22 @@
             },
             {
               "type": "code",
-              "code": "System.out.println(\"Bonjour\");"
+              "code": "System.out.println(\"Texte\");\nSystem.out.println(\"Autre texte\");"
             },
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "Chaque instruction se termine par un point-virgule. Le code d'un exercice tient dans la classe déjà ouverte. Les guillemets entourent le texte. Les parenthèses, quand il y en a, entourent l'argument."
+              "body": "Les guillemets délimitent le texte. Chaque instruction se termine par un point-virgule."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "Une forme correcte s'exécute. Une forme cassée s'arrête sur une erreur de syntaxe."
+              "body": "Deux lignes : Texte, puis Autre texte."
             },
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Ne fermez pas un guillemet trop tôt : le reste de la phrase serait lu comme du code."
+              "body": "Un guillemet fermé trop tôt fait lire la suite comme du code, et l'exécution s'arrête."
             }
           ]
         },
@@ -549,7 +541,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Les règles d'écriture essentielles ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Les règles d'écriture essentielles »."
             },
             {
               "type": "prose",
@@ -579,7 +571,7 @@
           "fileWizard": {
             "defaultName": "Main",
             "extension": ".java",
-            "starterCode": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Bienvenue dans la programmation !\");\n    }\n}",
+            "starterCode": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Bonjour\");\n    }\n}",
             "requireClassNameMatch": true,
             "notes": [
               "Pour une classe publique Main, le fichier doit être Main.java.",
@@ -607,7 +599,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Créer ton premier fichier ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Créer ton premier fichier »."
             },
             {
               "type": "prose",
@@ -625,22 +617,22 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "Le nom est à gauche du signe =. La valeur est à droite. L'affichage reçoit le nom, sans guillemets, pour lire la boîte."
+              "body": "La variable ville contient Lyon. L'affichage reçoit le nom, sans guillemets, pour lire la boîte."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "La Sortie montre la valeur, ici Paris, pas le mot ville."
+              "body": "La Sortie de l'exemple est Lyon. L'exercice demande Paris."
             },
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "print du nom et print du texte entre guillemets ne sont pas le même geste."
+              "body": "Afficher le nom de la variable et afficher un texte entre guillemets ne sont pas le même geste."
             }
           ],
           "exercise": {
             "id": "java-l3-ex1",
-            "prompt": "Objectif. Créer une variable et afficher son contenu, pas son nom.\n\nMarche à suivre. Une variable est une boîte nommée qui stocke une valeur. Ici, créez une variable ville qui contient le texte Paris (entre guillemets). Ensuite, affichez le contenu de ville — pas le mot « ville » entre guillemets, mais la variable elle-même.\n\nContraintes. La sortie comparée est exactement « Paris ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nCréez ville = \"Paris\", puis affichez cette variable.",
+            "prompt": "Une variable est une boîte nommée qui stocke une valeur. Ici, créez une variable ville qui contient le texte Paris (entre guillemets). Ensuite, affichez le contenu de ville — pas le mot « ville » entre guillemets, mais la variable elle-même.\n\nLa Sortie doit être exactement : Paris.\n\nCréez ville = \"Paris\", puis affichez cette variable.",
             "hint": "ville = \"Paris\", puis affichez ville.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        String ville = \"\";\n        System.out.println(ville);\n    }\n}",
             "validate": {
@@ -681,7 +673,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Déclarer une variable ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Déclarer une variable »."
             },
             {
               "type": "prose",
@@ -721,7 +713,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Types de données ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Types de données »."
             },
             {
               "type": "prose",
@@ -735,22 +727,22 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "La deuxième affectation écrase la première. L'ancienne valeur n'est plus là. L'affichage placé après les deux lignes voit la dernière."
+              "body": "La deuxième affectation remplace la première. L'affichage est placé après, donc il voit la dernière valeur."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "La Sortie montre 10, pas 0, parce que l'affichage est après le remplacement."
+              "body": "La Sortie de l'exemple est 2. L'exercice part de 0, passe à 10, et doit afficher 10."
             },
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "L'ordre des lignes compte. Afficher entre les deux affectations montrerait encore 0."
+              "body": "L'ordre des lignes compte. Un affichage entre les deux affectations montrerait encore l'ancienne valeur."
             }
           ],
           "exercise": {
             "id": "java-l3-ex-score",
-            "prompt": "Objectif. Remplacer la valeur d'une variable, puis afficher la valeur actuelle.\n\nMarche à suivre. On peut changer la valeur d'une variable : on réécrit son nom, puis =, puis la nouvelle valeur. L'ancienne est remplacée. Étape 1 : score vaut 0. Étape 2 : une deuxième ligne score = 10 remplace 0 par 10. Étape 3 : affichez la variable score, pas le nombre 10 tout seul. La Sortie montre seulement la dernière valeur : 10.\n\nContraintes. La sortie comparée est exactement « 10 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nscore = 0, puis score = 10, puis affichez score.",
+            "prompt": "On peut changer la valeur d'une variable : on réécrit son nom, puis =, puis la nouvelle valeur. L'ancienne est remplacée. Étape 1 : score vaut 0. Étape 2 : une deuxième ligne score = 10 remplace 0 par 10. Étape 3 : affichez la variable score, pas le nombre 10 tout seul. La Sortie montre seulement la dernière valeur : 10.\n\nLa Sortie doit être exactement : 10.\n\nscore = 0, puis score = 10, puis affichez score.",
             "hint": "Deux affectations (0 puis 10), puis affichez la variable score.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int score = 0;\n        score = 0; // remplacez ce 0 par 10\n        System.out.println(score);\n    }\n}",
             "validate": {
@@ -799,7 +791,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Modifier une variable ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Modifier une variable »."
             },
             {
               "type": "prose",
@@ -817,22 +809,22 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "+ additionne, - soustrait, * multiplie, / divise. Les noms a et b portent les nombres. L'affichage reçoit a + b."
+              "body": "a vaut 4 et b vaut 2. a + b calcule 6. Des guillemets autour de ces nombres en feraient du texte."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "7 et 3 donnent 10. La Sortie montre 10 parce que le calcul a été fait, pas parce que 10 était écrit en dur."
+              "body": "La Sortie de l'exemple est 6. L'exercice demande 7 + 3, donc 10."
             },
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Des guillemets autour de 7 en feraient un texte. Le calcul n'aurait plus le même sens."
+              "body": "Affichez le calcul, pas le nombre déjà écrit. Le résultat figé est refusé."
             }
           ],
           "exercise": {
             "id": "java-l3-ex2",
-            "prompt": "Objectif. Calculer avec des variables numériques et afficher le calcul, pas le résultat figé.\n\nMarche à suivre. Les nombres se calculent avec + - * /. Placez 7 dans a et 3 dans b. Affichez le résultat de a + b (pas le texte \"a + b\", le calcul).\n\nContraintes. La sortie comparée est exactement « 10 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\na = 7, b = 3, affichez leur somme (10).",
+            "prompt": "Les nombres se calculent avec + - * /. Placez 7 dans a et 3 dans b. Affichez le résultat de a + b (pas le texte \"a + b\", le calcul).\n\nLa Sortie doit être exactement : 10.\n\na = 7, b = 3, affichez leur somme (10).",
             "hint": "Affichez a + b, avec a = 7 et b = 3.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int a = 0;\n        int b = 0;\n        System.out.println(a + b);\n    }\n}",
             "validate": {
@@ -885,7 +877,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Nombres et calculs ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Nombres et calculs »."
             },
             {
               "type": "prose",
@@ -899,12 +891,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "La comparaison se lit : score est-il supérieur ou égal à 10 ? Si oui, le bloc s'exécute. Sinon, il est sauté."
+              "body": "score vaut 15. 15 >= 10 est vrai, donc le bloc affiche OK. Avec 9, ce bloc serait sauté."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "Avec 12, le message Réussi apparaît. Avec 9, il n'apparaîtrait pas."
+              "body": "La Sortie de l'exemple est OK. L'exercice affiche Réussi, toujours avec un test."
             },
             {
               "type": "prose",
@@ -913,12 +905,12 @@
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Afficher Réussi sans le test réussit la sortie de cet exemple et rate l'objectif."
+              "body": "Afficher le message sans le test réussit parfois la Sortie et rate la notion."
             }
           ],
           "exercise": {
             "id": "java-l4-ex1",
-            "prompt": "Objectif. N'afficher un message que si une comparaison est vraie.\n\nMarche à suivre. score vaut 12. Le if score >= 10 est déjà écrit, avec un affichage vide. Entre les guillemets du println, écrivez Réussi. Laissez if (score >= 10) tel quel. 12 est supérieur ou égal à 10, donc le message doit apparaître.\n\nContraintes. La sortie comparée est exactement « Réussi ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nSi score >= 10, affichez Réussi.",
+            "prompt": "score vaut 12. Le if score >= 10 est déjà écrit, avec un affichage vide. Entre les guillemets du println, écrivez Réussi. Laissez if (score >= 10) tel quel. 12 est supérieur ou égal à 10, donc le message doit apparaître.\n\nLa Sortie doit être exactement : Réussi.\n\nSi score >= 10, affichez Réussi.",
             "hint": "Entre les guillemets du println, écrivez Réussi. Laissez if (score >= 10) tel quel.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int score = 12;\n        if (score >= 10) {\n            System.out.println(\"\");\n        }\n    }\n}",
             "validate": {
@@ -955,7 +947,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Conditions ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Conditions »."
             },
             {
               "type": "prose",
@@ -973,22 +965,22 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "if prend le cas vrai. else prend le cas faux. Les deux blocs ne s'exécutent pas ensemble."
+              "body": "20 n'est pas supérieur à 25, donc else s'exécute et affiche Frais."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "La valeur de départ rend un seul des deux messages vrai. L'autre doit quand même être écrit : il sert pour une autre valeur."
+              "body": "La Sortie de l'exemple est Frais. L'exercice utilise 5 et le seuil 10 : la Sortie doit être Froid."
             },
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Sans else, un test faux n'affiche rien. Ce n'est pas ce que demande l'exercice."
+              "body": "if et else ne s'exécutent pas ensemble. Sans else, un test faux n'affiche rien."
             }
           ],
           "exercise": {
             "id": "java-l4-ex2",
-            "prompt": "Objectif. Prévoir le cas où le test est faux, avec else.\n\nMarche à suivre. else signifie « sinon » : le cas où le if est faux. Sans else, si le test échoue, rien ne s'affiche. Avec else, vous choisissez toujours un message. temperature vaut déjà 5. Si temperature est inférieure à 10, affichez Froid. Sinon, affichez Doux. Comme 5 < 10, la Sortie doit être Froid. Le else doit quand même être écrit : il sert pour les autres températures.\n\nContraintes. La sortie comparée est exactement « Froid ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nComplétez le if et le else : Froid si temperature < 10, sinon Doux.",
+            "prompt": "else signifie « sinon » : le cas où le if est faux. Sans else, si le test échoue, rien ne s'affiche. Avec else, vous choisissez toujours un message. temperature vaut déjà 5. Si temperature est inférieure à 10, affichez Froid. Sinon, affichez Doux. Comme 5 < 10, la Sortie doit être Froid. Le else doit quand même être écrit : il sert pour les autres températures.\n\nLa Sortie doit être exactement : Froid.\n\nComplétez le if et le else : Froid si temperature < 10, sinon Doux.",
             "hint": "if temperature < 10 : Froid, sinon Doux.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int temperature = 5;\n        if (temperature < 10) {\n            System.out.println(\"\");\n        } else {\n            System.out.println(\"\");\n        }\n    }\n}",
             "validate": {
@@ -1025,7 +1017,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « À quoi sert else ? ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « À quoi sert else ? »."
             },
             {
               "type": "prose",
@@ -1069,7 +1061,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Comparer des valeurs ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Comparer des valeurs »."
             },
             {
               "type": "prose",
@@ -1078,17 +1070,17 @@
             },
             {
               "type": "code",
-              "code": "for (int i = 0; i < 2; i++) {\n    System.out.println(i);\n}"
+              "code": "for (int i = 0; i < 3; i++) {\n    System.out.println(i);\n}"
             },
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "La boucle donne à i les valeurs prévues, une par tour. L'affichage de i est dans le corps, donc il se répète."
+              "body": "i part de 0 et s'arrête avant 3. L'affichage de i est dans la boucle, donc il se répète."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "Vous voyez 0, puis 1, puis 2, chacun sur sa ligne."
+              "body": "Trois lignes : 0, puis 1, puis 2."
             },
             {
               "type": "prose",
@@ -1121,7 +1113,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Introduction aux boucles ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Introduction aux boucles »."
             },
             {
               "type": "prose",
@@ -1146,7 +1138,7 @@
           ],
           "exercise": {
             "id": "java-l5-ex1",
-            "prompt": "Objectif. Reprendre un calcul déjà vu avec de nouveaux nombres, sans guide ligne à ligne.\n\nMarche à suivre. Reprenez les variables et le calcul, avec des nombres différents. Stockez 4 dans x et 6 dans y. Affichez le produit x * y.\n\nContraintes. La sortie comparée est exactement « 24 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nx = 4, y = 6, affichez le produit (24).",
+            "prompt": "Reprenez les variables et le calcul, avec des nombres différents. Stockez 4 dans x et 6 dans y. Affichez le produit x * y.\n\nLa Sortie doit être exactement : 24.\n\nx = 4, y = 6, affichez le produit (24).",
             "hint": "System.out.println(x * y);",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int x = 0;\n        int y = 0;\n        System.out.println(x * y);\n    }\n}",
             "validate": {
@@ -1191,7 +1183,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Multiplier deux nombres ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Multiplier deux nombres »."
             },
             {
               "type": "prose",
@@ -1205,7 +1197,7 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "Le mot CodeFlow est un texte. Il lui manque le guillemet ouvrant. Une fois les deux guillemets en place, l'instruction redevient un affichage."
+              "body": "Le mot CodeFlow est un texte. Il lui faut un guillemet ouvrant et un guillemet fermant."
             },
             {
               "type": "prose",
@@ -1215,12 +1207,12 @@
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Ajouter un commentaire ne répare pas la syntaxe. Il faut corriger la ligne elle-même."
+              "body": "Un commentaire ne répare pas la syntaxe. Il faut corriger la ligne."
             }
           ],
           "exercise": {
             "id": "java-l5-ex2",
-            "prompt": "Objectif. Réparer une ligne qui ne peut pas être lue, puis vérifier la Sortie.\n\nMarche à suivre. Il manque le guillemet ouvrant. La ligne doit devenir System.out.println(\"CodeFlow\");. Exécutez après la correction.\n\nContraintes. La sortie comparée est exactement « CodeFlow ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nCorrigez le programme pour afficher CodeFlow.",
+            "prompt": "Il manque le guillemet ouvrant. La ligne doit devenir System.out.println(\"CodeFlow\");. Exécutez après la correction.\n\nLa Sortie doit être exactement : CodeFlow.\n\nCorrigez le programme pour afficher CodeFlow.",
             "hint": "Il manque le guillemet ouvrant. La ligne doit devenir System.out.println(\"CodeFlow\");.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(CodeFlow\");\n    }\n}",
             "validate": {
@@ -1251,7 +1243,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Corriger une erreur ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Corriger une erreur »."
             },
             {
               "type": "prose",
@@ -1265,22 +1257,22 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "if prend le cas vrai. else prend le cas faux. Les deux blocs ne s'exécutent pas ensemble."
+              "body": "age vaut 20. 20 >= 18 est vrai, donc if affiche Majeur. else servirait pour un âge plus petit."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "La valeur de départ rend un seul des deux messages vrai. L'autre doit quand même être écrit : il sert pour une autre valeur."
+              "body": "L'exemple affiche Majeur. L'exercice part de 15 et doit afficher Mineur."
             },
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Sans else, un test faux n'affiche rien. Ce n'est pas ce que demande l'exercice."
+              "body": "Gardez les deux branches. L'exercice note la branche else."
             }
           ],
           "exercise": {
             "id": "java-l5-ex-else",
-            "prompt": "Objectif. Prévoir le cas où le test est faux, avec else.\n\nMarche à suivre. else sert quand le if est faux. age vaut 15. Si age >= 18, affichez Majeur. Sinon (else), affichez Mineur. Comme 15 < 18, la Sortie doit être Mineur — c'est le rôle de else.\n\nContraintes. La sortie comparée est exactement « Mineur ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nage = 15 : Majeur si >= 18, sinon Mineur.",
+            "prompt": "else sert quand le if est faux. age vaut 15. Si age >= 18, affichez Majeur. Sinon (else), affichez Mineur. Comme 15 < 18, la Sortie doit être Mineur — c'est le rôle de else.\n\nLa Sortie doit être exactement : Mineur.\n\nage = 15 : Majeur si >= 18, sinon Mineur.",
             "hint": "Écrivez if … else … avec les deux messages.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int age = 15;\n        if (age >= 18) {\n            System.out.println(\"\");\n        } else {\n            System.out.println(\"\");\n        }\n    }\n}",
             "validate": {
@@ -1317,7 +1309,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Comprendre else ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Comprendre else »."
             },
             {
               "type": "prose",
@@ -1326,12 +1318,12 @@
             },
             {
               "type": "code",
-              "code": "int points = 4;\nif (points >= 10) {\n    System.out.println(\"Validé\");\n}"
+              "code": "int points = 15;\nif (points >= 10) {\n    System.out.println(\"Validé\");\n}"
             },
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "points vaut 15, le seuil est 10. Le bloc indenté affiche Validé seulement parce que le test est vrai."
+              "body": "points vaut 15. 15 >= 10 est vrai, donc le bloc affiche Validé."
             },
             {
               "type": "prose",
@@ -1350,7 +1342,7 @@
           ],
           "exercise": {
             "id": "java-l5-ex3",
-            "prompt": "Objectif. Compléter un test déjà commencé, sans l'effacer.\n\nMarche à suivre. points vaut 15. Entre les guillemets, écrivez Validé : System.out.println(\"Validé\");. N'effacez pas le if : un affichage seul de Validé n'explique pas la condition.\n\nContraintes. La sortie comparée est exactement « Validé ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAvec points = 15, affichez Validé si points >= 10.",
+            "prompt": "points vaut 15. Entre les guillemets, écrivez Validé : System.out.println(\"Validé\");. N'effacez pas le if : un affichage seul de Validé n'explique pas la condition.\n\nLa Sortie doit être exactement : Validé.\n\nAvec points = 15, affichez Validé si points >= 10.",
             "hint": "Entre les guillemets, écrivez Validé : System.out.println(\"Validé\");.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int points = 15;\n        if (points >= 10) {\n            System.out.println(\"\");\n        }\n    }\n}",
             "validate": {
@@ -1396,7 +1388,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Petite décision ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Petite décision »."
             },
             {
               "type": "prose",
@@ -1414,12 +1406,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "La variable contient le texte. L'affichage de la variable montre son contenu. L'affichage d'un autre texte entre guillemets ignore la variable."
+              "body": "prenom contient Lea. Afficher la variable montre Lea. Afficher un autre texte entre guillemets ignore la variable."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "Vous voyez la valeur stockée, pas le nom de la variable."
+              "body": "La Sortie de l'exemple est Bonjour Lea."
             },
             {
               "type": "prose",
@@ -1440,7 +1432,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Revoir les chaînes de caractères ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Revoir les chaînes de caractères »."
             },
             {
               "type": "prose",
@@ -1454,12 +1446,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "L'espace est dans le texte fixe. La variable apporte le nom. L'affichage reçoit l'assemblage."
+              "body": "L'espace est dans \"Bonjour \". prenom vaut Alex, donc l'assemblage est Bonjour Alex."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "La Sortie est Bonjour CodeFlow."
+              "body": "La Sortie de l'exemple est Bonjour Alex. L'exercice assemble Bonjour et CodeFlow."
             },
             {
               "type": "prose",
@@ -1469,7 +1461,7 @@
           ],
           "exercise": {
             "id": "java-c2-ex1",
-            "prompt": "Objectif. Assembler un salut et une variable déjà remplie.\n\nMarche à suivre. La variable nom contient déjà CodeFlow. Ne la renommez pas. Ajoutez une ligne d'affichage qui colle le texte \"Bonjour \" (avec l'espace avant la fin des guillemets) et la variable nom. Écrivez exactement : System.out.println(\"Bonjour \" + nom);\n\nContraintes. La sortie comparée est exactement « Bonjour CodeFlow ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez Bonjour CodeFlow en utilisant la variable nom.",
+            "prompt": "La variable nom contient déjà CodeFlow. Ne la renommez pas. Ajoutez une ligne d'affichage qui colle le texte \"Bonjour \" (avec l'espace avant la fin des guillemets) et la variable nom. Écrivez exactement : System.out.println(\"Bonjour \" + nom);\n\nLa Sortie doit être exactement : Bonjour CodeFlow.\n\nAffichez Bonjour CodeFlow en utilisant la variable nom.",
             "hint": "System.out.println(\"Bonjour \" + nom);",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        String nom = \"CodeFlow\";\n        \n    }\n}",
             "validate": {
@@ -1506,7 +1498,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Composer un message ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Composer un message »."
             },
             {
               "type": "prose",
@@ -1558,7 +1550,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Caractères spéciaux ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Caractères spéciaux »."
             },
             {
               "type": "prose",
@@ -1572,12 +1564,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "Le premier test vrai gagne. Les suivants ne sont pas lus. else n'est pris que si tous les tests ont échoué."
+              "body": "note vaut 7. Le premier test, 7 < 10, est vrai, donc Faible. Les tests suivants ne sont pas lus."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "note vaut 14. 14 < 10 est faux, 14 < 14 est faux, donc else affiche Bien."
+              "body": "La Sortie de l'exemple est Faible. L'exercice part de 14 et doit afficher Bien."
             },
             {
               "type": "prose",
@@ -1591,7 +1583,7 @@
           ],
           "exercise": {
             "id": "java-c2-ex2",
-            "prompt": "Objectif. Enchaîner plusieurs cas exclusifs : un seul message doit sortir.\n\nMarche à suivre. Le squelette if / else if / else est déjà dans l'éditeur. note vaut 14. Remplissez les trois textes vides, dans cet ordre : Faible, puis Moyen, puis Bien. 14 n'est pas inférieur à 10, et 14 n'est pas inférieur à 14. Aucun des deux tests n'est vrai, donc c'est le else qui s'exécute.\n\nContraintes. La sortie comparée est exactement « Bien ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAvec note = 14, affichez Bien.",
+            "prompt": "Le squelette if / else if / else est déjà dans l'éditeur. note vaut 14. Remplissez les trois textes vides, dans cet ordre : Faible, puis Moyen, puis Bien. 14 n'est pas inférieur à 10, et 14 n'est pas inférieur à 14. Aucun des deux tests n'est vrai, donc c'est le else qui s'exécute.\n\nLa Sortie doit être exactement : Bien.\n\nAvec note = 14, affichez Bien.",
             "hint": "Le else affiche Bien. Les deux tests au-dessus affichent Faible puis Moyen.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int note = 14;\n        if (note < 10) {\n            System.out.println(\"\");\n        } else if (note < 14) {\n            System.out.println(\"\");\n        } else {\n            System.out.println(\"\");\n        }\n    }\n}",
             "validate": {
@@ -1628,7 +1620,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Plusieurs cas possibles ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Plusieurs cas possibles »."
             },
             {
               "type": "prose",
@@ -1642,12 +1634,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "et (and, &&) exige que les deux côtés soient vrais. ou (or, ||) suffit qu'un côté soit vrai."
+              "body": "&& exige que les deux côtés soient vrais. || suffit qu'un côté soit vrai. Ici 20 est entre 18 et 26."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "Le bloc ne s'exécute que si la combinaison entière est vraie."
+              "body": "La Sortie est Jeune adulte."
             },
             {
               "type": "prose",
@@ -1680,7 +1672,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Combiner des tests ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Combiner des tests »."
             },
             {
               "type": "prose",
@@ -1689,17 +1681,17 @@
             },
             {
               "type": "code",
-              "code": "for (int i = 1; i <= 2; i++) {\n    System.out.println(i);\n}"
+              "code": "for (int i = 1; i <= 3; i++) {\n    System.out.println(i);\n}"
             },
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "Le compteur part de 1 et continue tant qu'il n'a pas dépassé 3."
+              "body": "i part de 1 et continue tant qu'il n'a pas dépassé 3. L'affichage de i est dans la boucle."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "Trois lignes : 1, 2, 3. Pas de 0, pas de 4."
+              "body": "Trois lignes : 1, puis 2, puis 3."
             },
             {
               "type": "prose",
@@ -1713,7 +1705,7 @@
           ],
           "exercise": {
             "id": "java-c2-ex3",
-            "prompt": "Objectif. Choisir les bornes d'une boucle pour obtenir 1, 2 et 3.\n\nMarche à suivre. Le départ de la boucle est déjà écrit. Dans la boucle, écrivez System.out.println(i);. i va de 1 à 3 inclus. N'écrivez pas trois affichages séparés de 1, puis 2, puis 3 : le contrôle exige une boucle.\n\nContraintes. La sortie comparée est exactement « 1↵2↵3 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez 1, puis 2, puis 3, chacun sur sa ligne.",
+            "prompt": "Le départ de la boucle est déjà écrit. Dans la boucle, écrivez System.out.println(i);. i va de 1 à 3 inclus. N'écrivez pas trois affichages séparés de 1, puis 2, puis 3 : le contrôle exige une boucle.\n\nLa Sortie doit être exactement : 1 puis 2 puis 3.\n\nAffichez 1, puis 2, puis 3, chacun sur sa ligne.",
             "hint": "Dans la boucle, écrivez System.out.println(i);. i va de 1 à 3 inclus.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 3; i++) {\n            \n        }\n    }\n}",
             "validate": {
@@ -1748,7 +1740,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Parcourir une plage ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Parcourir une plage »."
             },
             {
               "type": "prose",
@@ -1762,12 +1754,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "total commence à 0, avant la boucle. Dans la boucle, total devient total plus la valeur du tour. L'affichage est après la boucle, une seule fois."
+              "body": "total commence à 0. Chaque tour lui ajoute 1. L'affichage est après la boucle, une seule fois."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "Le total final apparaît une fois, pas une ligne par tour."
+              "body": "La Sortie de l'exemple est 2."
             },
             {
               "type": "prose",
@@ -1776,7 +1768,7 @@
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Afficher le total dans la boucle montrerait les totaux intermédiaires. Ce n'est pas la même consigne."
+              "body": "Afficher le total dans la boucle montrerait les totaux intermédiaires."
             }
           ]
         }
@@ -1800,7 +1792,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Accumuler une valeur ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Accumuler une valeur »."
             },
             {
               "type": "prose",
@@ -1818,12 +1810,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "La première case est l'index 0, la deuxième l'index 1. Le nom de la collection suivi de l'index lit la case. Ce n'est pas un texte."
+              "body": "L'index 0 est la première case. Dans l'exemple, elle vaut 2."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "valeurs[0] vaut 10. L'affichage montre 10."
+              "body": "La Sortie de l'exemple est 2. L'exercice lit la première case d'une autre collection : 10."
             },
             {
               "type": "prose",
@@ -1832,12 +1824,12 @@
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Écrire 10 directement ne lit pas la collection. L'index 1 lirait 20, pas la première case."
+              "body": "Écrire 10 directement ne lit pas la collection. L'index 1 n'est pas la première case."
             }
           ],
           "exercise": {
             "id": "java-c2-ex4",
-            "prompt": "Objectif. Lire une case précise d'une collection, en commençant à l'index 0.\n\nMarche à suivre. La liste valeurs contient déjà 10, puis 20. La première case est l'index 0, donc la valeur 10. La deuxième case est l'index 1, donc 20. Ajoutez exactement cette ligne, sans guillemets autour de valeurs[0] : System.out.println(valeurs[0]); N'écrivez pas 10 tout seul, ni \"10\". Le contrôle vérifie que vous lisez la case 0.\n\nContraintes. La sortie comparée est exactement « 10 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez 10 en lisant la première case.",
+            "prompt": "La liste valeurs contient déjà 10, puis 20. La première case est l'index 0, donc la valeur 10. La deuxième case est l'index 1, donc 20. Ajoutez exactement cette ligne, sans guillemets autour de valeurs[0] : System.out.println(valeurs[0]); N'écrivez pas 10 tout seul, ni \"10\". Le contrôle vérifie que vous lisez la case 0.\n\nLa Sortie doit être exactement : 10.\n\nAffichez 10 en lisant la première case.",
             "hint": "System.out.println(valeurs[0]);",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int[] valeurs = {10, 20};\n        \n    }\n}",
             "validate": {
@@ -1882,7 +1874,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Stocker plusieurs valeurs ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Stocker plusieurs valeurs »."
             },
             {
               "type": "prose",
@@ -1896,12 +1888,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "Le corps de la fonction est le bloc indenté ou entre accolades. L'appel, plus bas, exécute ce corps."
+              "body": "La fonction est définie, puis appelée. Sans l'appel, la Sortie reste vide."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "L'appel affiche Pret. Sans appel, la Sortie reste vide même si la fonction est correcte."
+              "body": "La Sortie de l'exemple est Ok. L'exercice demande Pret."
             },
             {
               "type": "prose",
@@ -1910,12 +1902,12 @@
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Remplacer l'appel par un affichage direct saute la notion d'appel."
+              "body": "Remplacer l'appel par un affichage direct saute la notion."
             }
           ],
           "exercise": {
             "id": "java-c2-ex5",
-            "prompt": "Objectif. Définir une fonction, puis l'appeler. La définition seule n'affiche rien.\n\nMarche à suivre. Le squelette de la fonction dire est déjà là, ainsi que l'appel dire(). Dans dire(), écrivez System.out.println(\"Pret\");. main appelle déjà dire().\n\nContraintes. La sortie comparée est exactement « Pret ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement Pret.",
+            "prompt": "Le squelette de la fonction dire est déjà là, ainsi que l'appel dire(). Dans dire(), écrivez System.out.println(\"Pret\");. main appelle déjà dire().\n\nLa Sortie doit être exactement : Pret.\n\nAffichez exactement Pret.",
             "hint": "Dans dire(), écrivez System.out.println(\"Pret\");. main appelle déjà dire().",
             "starterCode": "public class Main {\n    static void dire() {\n        \n    }\n\n    public static void main(String[] args) {\n        dire();\n    }\n}",
             "validate": {
@@ -1952,7 +1944,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Créer une action nommée ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Créer une action nommée »."
             },
             {
               "type": "prose",
@@ -1961,17 +1953,17 @@
             },
             {
               "type": "code",
-              "code": "int niveau = 3;\nif (niveau >= 5) {\n    System.out.println(\"Haut\");\n} else {\n    System.out.println(\"Bas\");\n}"
+              "code": "int charge = 85;\nif (charge >= 80) {\n    System.out.println(\"Niveau eleve\");\n} else {\n    System.out.println(\"Niveau normal\");\n}"
             },
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "Le seuil est 80. Au-dessus ou égal, un message. En dessous, l'autre. Les deux textes doivent être présents."
+              "body": "charge vaut 85. 85 >= 80 est vrai, donc le premier message s'affiche. else couvre une charge plus basse."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "Avec 85, la Sortie est Niveau eleve, sans accent : c'est le texte exact demandé."
+              "body": "La Sortie est Niveau eleve, sans accent : c'est le texte exact demandé."
             },
             {
               "type": "prose",
@@ -1980,12 +1972,12 @@
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Le else reste écrit même s'il ne s'exécute pas pour 85. Il documente l'autre cas."
+              "body": "Les deux messages restent écrits. Un seul s'exécute."
             }
           ],
           "exercise": {
             "id": "java-c2-ex6",
-            "prompt": "Objectif. Assembler un test et deux messages pour décrire un niveau.\n\nMarche à suivre. charge vaut déjà 85. Le if et le else sont préparés, avec des textes vides. Dans le if : System.out.println(\"Niveau eleve\");. Dans le else : System.out.println(\"Niveau normal\");. 85 est bien supérieur ou égal à 80, donc le if s'exécute. Le else doit quand même contenir Niveau normal.\n\nContraintes. La sortie comparée est exactement « Niveau eleve ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAvec charge = 85, affichez Niveau eleve.",
+            "prompt": "charge vaut déjà 85. Le if et le else sont préparés, avec des textes vides. Dans le if : System.out.println(\"Niveau eleve\");. Dans le else : System.out.println(\"Niveau normal\");. 85 est bien supérieur ou égal à 80, donc le if s'exécute. Le else doit quand même contenir Niveau normal.\n\nLa Sortie doit être exactement : Niveau eleve.\n\nAvec charge = 85, affichez Niveau eleve.",
             "hint": "Dans le if : System.out.println(\"Niveau eleve\");. Dans le else : System.out.println(\"Niveau normal\");.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int charge = 85;\n        if (charge >= 80) {\n            System.out.println(\"\");\n        } else {\n            System.out.println(\"\");\n        }\n    }\n}",
             "validate": {
@@ -2030,7 +2022,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Mini-projet : diagnostic ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Mini-projet : diagnostic »."
             },
             {
               "type": "prose",
@@ -2044,12 +2036,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "return quitte la fonction et donne le résultat à l'endroit de l'appel. Un affichage dans la fonction ne remplace pas ce retour."
+              "body": "return quitte la fonction et donne le résultat à l'appel. double(3) calcule 6, puis l'appelant l'affiche."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "L'appelant affiche ce qui a été renvoyé. Sans return utile, l'appelant n'a pas le calcul."
+              "body": "La Sortie de l'exemple est 6."
             },
             {
               "type": "prose",
@@ -2058,7 +2050,7 @@
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "return 0 est un résultat figé. Le return du calcul sert pour toutes les valeurs."
+              "body": "Un return figé ne sert que pour une valeur. Le return du calcul sert pour toutes."
             }
           ]
         },
@@ -2074,7 +2066,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Renvoyer un résultat ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Renvoyer un résultat »."
             },
             {
               "type": "prose",
@@ -2099,7 +2091,7 @@
           ],
           "exercise": {
             "id": "java-c3-ex-produit",
-            "prompt": "Objectif. Faire renvoyer le produit de deux paramètres, pas un nombre écrit en dur.\n\nMarche à suivre. La fonction produit existe, mais elle renvoie 0. L'appel produit(2, 2) est déjà affiché. Remplacez return 0; par return prix * quantite; 2 fois 2 font 4. N'écrivez pas return 4 : le contrôle veut le calcul, pas le résultat figé.\n\nContraintes. La sortie comparée est exactement « 4 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 4.",
+            "prompt": "La fonction produit existe, mais elle renvoie 0. L'appel produit(2, 2) est déjà affiché. Remplacez return 0; par return prix * quantite; 2 fois 2 font 4. N'écrivez pas return 4 : le contrôle veut le calcul, pas le résultat figé.\n\nLa Sortie doit être exactement : 4.\n\nAffichez exactement 4.",
             "hint": "return prix * quantite",
             "starterCode": "public class Main {\n    static int produit(int prix, int quantite) {\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(produit(2, 2));\n    }\n}",
             "validate": {
@@ -2136,7 +2128,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Écrire une fonction produit ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Écrire une fonction produit »."
             },
             {
               "type": "prose",
@@ -2161,7 +2153,7 @@
           ],
           "exercise": {
             "id": "java-c3-ex-somme",
-            "prompt": "Objectif. Réutiliser la même fonction deux fois et additionner les retours.\n\nMarche à suivre. Deux appels sont déjà additionnés dans l'affichage : produit(8, 1) + produit(3, 2). Le return doit être prix * quantite. Ne remplacez pas l'affichage par System.out.println(14);. 8 × 1 = 8 et 3 × 2 = 6, donc 8 + 6 = 14.\n\nContraintes. La sortie comparée est exactement « 14 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 14.",
+            "prompt": "Deux appels sont déjà additionnés dans l'affichage : produit(8, 1) + produit(3, 2). Le return doit être prix * quantite. Ne remplacez pas l'affichage par System.out.println(14);. 8 × 1 = 8 et 3 × 2 = 6, donc 8 + 6 = 14.\n\nLa Sortie doit être exactement : 14.\n\nAffichez exactement 14.",
             "hint": "return prix * quantite",
             "starterCode": "public class Main {\n    static int produit(int prix, int quantite) {\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(produit(8, 1) + produit(3, 2));\n    }\n}",
             "validate": {
@@ -2214,7 +2206,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Additionner deux résultats ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Additionner deux résultats »."
             },
             {
               "type": "prose",
@@ -2228,12 +2220,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "La clé est entre guillemets, parce que c'est un texte. La table rend le nombre associé. Une clé absente est une erreur d'exécution."
+              "body": "La clé est un texte, entre guillemets. ages[\"Sam\"] vaut 11. Une clé absente est une erreur."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "La clé Lea vaut 18."
+              "body": "La Sortie de l'exemple est 11. L'exercice lit une autre clé, qui vaut 18."
             },
             {
               "type": "prose",
@@ -2242,12 +2234,12 @@
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "18 écrit tout seul ne consulte pas la table. Max vaudrait 12, ce n'est pas la clé demandée."
+              "body": "Écrire 18 directement ne consulte pas la table."
             }
           ],
           "exercise": {
             "id": "java-c3-ex-lookup",
-            "prompt": "Objectif. Lire une valeur à partir d'une clé texte, pas d'un index.\n\nMarche à suivre. La table notes contient déjà Lea = 18 et Max = 12. notes.get(\"Max\") lit la mauvaise clé. Remplacez \"Max\" par \"Lea\". Gardez les guillemets. N'écrivez pas 18 tout seul. Le contrôle vérifie que vous lisez la clé Lea.\n\nContraintes. La sortie comparée est exactement « 18 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 18.",
+            "prompt": "La table notes contient déjà Lea = 18 et Max = 12. notes.get(\"Max\") lit la mauvaise clé. Remplacez \"Max\" par \"Lea\". Gardez les guillemets. N'écrivez pas 18 tout seul. Le contrôle vérifie que vous lisez la clé Lea.\n\nLa Sortie doit être exactement : 18.\n\nAffichez exactement 18.",
             "hint": "notes.get(\"Max\") lit la mauvaise clé. Remplacez \"Max\" par \"Lea\". Gardez les guillemets.",
             "starterCode": "import java.util.HashMap;\n\npublic class Main {\n    public static void main(String[] args) {\n        HashMap<String, Integer> notes = new HashMap<>();\n        notes.put(\"Lea\", 18);\n        notes.put(\"Max\", 12);\n        System.out.println(notes.get(\"Max\"));\n    }\n}",
             "validate": {
@@ -2284,7 +2276,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Associer une clé et une valeur ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Associer une clé et une valeur »."
             },
             {
               "type": "prose",
@@ -2298,12 +2290,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "La boucle visite chaque entrée. total augmente de la valeur, pas de la clé. L'affichage du total est après la boucle."
+              "body": "La boucle visite chaque entrée et ajoute la valeur au total, pas la clé. L'affichage est après la boucle."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "4 et 2 font 6. Une seule ligne : 6."
+              "body": "La Sortie de l'exemple est 2. L'exercice additionne d'autres valeurs et doit afficher 6."
             },
             {
               "type": "prose",
@@ -2312,12 +2304,12 @@
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Laisser l'affichage avant la boucle montre 0. Il faut le déplacer après."
+              "body": "Un affichage avant la boucle montrerait 0."
             }
           ],
           "exercise": {
             "id": "java-c3-ex-sum",
-            "prompt": "Objectif. Parcourir une table et additionner ses valeurs.\n\nMarche à suivre. stock contient pomme = 4 et pain = 2. total vaut 0, et il est affiché trop tôt : sans boucle, la sortie reste 0. Avant System.out.println(total); ajoutez for (int valeur : stock.values()) { total = total + valeur; }. 4 + 2 = 6. N'écrivez pas 6 directement.\n\nContraintes. La sortie comparée est exactement « 6 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 6.",
+            "prompt": "stock contient pomme = 4 et pain = 2. total vaut 0, et il est affiché trop tôt : sans boucle, la sortie reste 0. Avant System.out.println(total); ajoutez for (int valeur : stock.values()) { total = total + valeur; }. 4 + 2 = 6. N'écrivez pas 6 directement.\n\nLa Sortie doit être exactement : 6.\n\nAffichez exactement 6.",
             "hint": "Avant System.out.println(total); ajoutez for (int valeur : stock.values()) { total = total + valeur; }.",
             "starterCode": "import java.util.HashMap;\n\npublic class Main {\n    public static void main(String[] args) {\n        HashMap<String, Integer> stock = new HashMap<>();\n        stock.put(\"pomme\", 4);\n        stock.put(\"pain\", 2);\n        int total = 0;\n        System.out.println(total);\n    }\n}",
             "validate": {
@@ -2360,7 +2352,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Parcourir toutes les valeurs ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Parcourir toutes les valeurs »."
             },
             {
               "type": "prose",
@@ -2369,17 +2361,17 @@
             },
             {
               "type": "code",
-              "code": "int n = 2;\nwhile (n > 0) {\n    System.out.println(n);\n    n = n - 1;\n}"
+              "code": "int n = 3;\nwhile (n > 0) {\n    System.out.println(n);\n    n = n - 1;\n}"
             },
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "while teste, exécute le corps, puis reteste. Si le compteur ne change pas, la boucle ne s'arrête pas et le délai coupe le programme."
+              "body": "n commence à 3. Tant que n > 0, on affiche n puis on retire 1."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "En affichant n puis en retirant 1, vous obtenez 3, 2, 1."
+              "body": "Trois lignes : 3, puis 2, puis 1."
             },
             {
               "type": "prose",
@@ -2388,12 +2380,12 @@
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "L'affichage est dans la boucle. La diminution aussi. L'un sans l'autre ne convient pas."
+              "body": "L'affichage et la diminution sont dans la boucle. L'un sans l'autre ne convient pas."
             }
           ],
           "exercise": {
             "id": "java-c3-ex-while",
-            "prompt": "Objectif. Répéter tant qu'une condition reste vraie, et modifier ce qui la rendra fausse.\n\nMarche à suivre. n vaut 3. Écrivez while (n > 0) { System.out.println(n); n = n - 1; }. Sans n = n - 1, la boucle ne s'arrête jamais. Ordre à chaque tour : d'abord afficher n, ensuite retirer 1. Vous devez voir 3, puis 2, puis 1.\n\nContraintes. La sortie comparée est exactement « 3↵2↵1 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez 3, puis 2, puis 1, chacun sur sa ligne.",
+            "prompt": "n vaut 3. Écrivez while (n > 0) { System.out.println(n); n = n - 1; }. Sans n = n - 1, la boucle ne s'arrête jamais. Ordre à chaque tour : d'abord afficher n, ensuite retirer 1. Vous devez voir 3, puis 2, puis 1.\n\nLa Sortie doit être exactement : 3 puis 2 puis 1.\n\nAffichez 3, puis 2, puis 1, chacun sur sa ligne.",
             "hint": "Écrivez while (n > 0) { System.out.println(n); n = n - 1; }. Sans n = n - 1, la boucle ne s'arrête jamais.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int n = 3;\n        \n    }\n}",
             "validate": {
@@ -2424,7 +2416,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Répéter tant qu'une condition est vraie ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Répéter tant qu'une condition est vraie »."
             },
             {
               "type": "prose",
@@ -2438,12 +2430,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "Les cas sont testés dans l'ordre. Le cas par défaut ne doit pas passer devant le cas 3, sinon il vole l'exécution."
+              "body": "couleur vaut 1, le premier cas affiche Rouge. Le cas par défaut ne s'exécute pas."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "jour vaut 3, donc Mercredi."
+              "body": "La Sortie de l'exemple est Rouge. L'exercice ajoute le cas 3 pour afficher Mercredi."
             },
             {
               "type": "prose",
@@ -2452,12 +2444,12 @@
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "Un affichage de Mercredi hors du cas 3 ne répond pas à la consigne."
+              "body": "Le cas précis se place avant le cas par défaut, sinon le défaut vole l'exécution."
             }
           ],
           "exercise": {
             "id": "java-c3-ex-branch",
-            "prompt": "Objectif. Ajouter un cas précis avant le cas par défaut.\n\nMarche à suivre. jour vaut 3. Le cas 1 et le cas par défaut sont déjà écrits. Avant default, ajoutez case 3: puis System.out.println(\"Mercredi\"); puis break; Placez ce cas avant le cas par défaut, sinon le défaut s'exécute avant.\n\nContraintes. La sortie comparée est exactement « Mercredi ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement Mercredi.",
+            "prompt": "jour vaut 3. Le cas 1 et le cas par défaut sont déjà écrits. Avant default, ajoutez case 3: puis System.out.println(\"Mercredi\"); puis break; Placez ce cas avant le cas par défaut, sinon le défaut s'exécute avant.\n\nLa Sortie doit être exactement : Mercredi.\n\nAffichez exactement Mercredi.",
             "hint": "Avant default, ajoutez case 3: puis System.out.println(\"Mercredi\"); puis break;",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        int jour = 3;\n        switch (jour) {\n            case 1:\n                System.out.println(\"Lundi\");\n                break;\n            default:\n                System.out.println(\"Autre\");\n                break;\n        }\n    }\n}",
             "validate": {
@@ -2508,7 +2500,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Choisir avec switch ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Choisir avec switch »."
             },
             {
               "type": "prose",
@@ -2522,12 +2514,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "La variable garde codeflow. La méthode de mise en majuscules fabrique un nouveau texte pour l'affichage."
+              "body": "toUpperCase() fabrique un nouveau texte en majuscules. ok devient OK. La variable d'origine ne change pas."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "La Sortie est CODEFLOW."
+              "body": "La Sortie de l'exemple est OK. L'exercice part de codeflow et doit afficher CODEFLOW."
             },
             {
               "type": "prose",
@@ -2541,7 +2533,7 @@
           ],
           "exercise": {
             "id": "java-c3-ex-text",
-            "prompt": "Objectif. Transformer un texte avec l'outil du langage, sans réécrire le résultat à la main.\n\nMarche à suivre. mot vaut codeflow et il est affiché tel quel. Remplacez System.out.println(mot); par System.out.println(mot.toUpperCase());. N'écrivez pas CODEFLOW à la main entre guillemets.\n\nContraintes. La sortie comparée est exactement « CODEFLOW ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement CODEFLOW.",
+            "prompt": "mot vaut codeflow et il est affiché tel quel. Remplacez System.out.println(mot); par System.out.println(mot.toUpperCase());. N'écrivez pas CODEFLOW à la main entre guillemets.\n\nLa Sortie doit être exactement : CODEFLOW.\n\nAffichez exactement CODEFLOW.",
             "hint": "System.out.println(mot.toUpperCase());",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        String mot = \"codeflow\";\n        System.out.println(mot);\n    }\n}",
             "validate": {
@@ -2578,7 +2570,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Mettre un texte en majuscules ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Mettre un texte en majuscules »."
             },
             {
               "type": "prose",
@@ -2592,12 +2584,12 @@
             {
               "type": "prose",
               "heading": "Comment ça marche",
-              "body": "Le découpage produit une liste de mots. La longueur de cette liste est le nombre de mots, pas le nombre de lettres."
+              "body": "Le découpage coupe sur les espaces. « un deux » donne deux mots. On compte les morceaux, pas les lettres."
             },
             {
               "type": "prose",
               "heading": "Résultat attendu",
-              "body": "un deux trois fait 3."
+              "body": "La Sortie de l'exemple est 2. L'exercice compte une phrase de 3 mots."
             },
             {
               "type": "prose",
@@ -2606,12 +2598,12 @@
             {
               "type": "prose",
               "heading": "À retenir",
-              "body": "print(3) ne découpe rien. L'outil de découpage doit rester visible."
+              "body": "Écrire 3 directement ne découpe rien. L'outil de découpage doit rester visible."
             }
           ],
           "exercise": {
             "id": "java-c3-ex-words",
-            "prompt": "Objectif. Compter les mots d'une phrase en la découpant sur les espaces.\n\nMarche à suivre. texte vaut « un deux trois ». Remplacez System.out.println(texte); par System.out.println(texte.split(\" \").length);. N'écrivez pas 3 directement.\n\nContraintes. La sortie comparée est exactement « 3 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 3.",
+            "prompt": "texte vaut « un deux trois ». Remplacez System.out.println(texte); par System.out.println(texte.split(\" \").length);. N'écrivez pas 3 directement.\n\nLa Sortie doit être exactement : 3.\n\nAffichez exactement 3.",
             "hint": "Remplacez System.out.println(texte); par System.out.println(texte.split(\" \").length);.",
             "starterCode": "public class Main {\n    public static void main(String[] args) {\n        String texte = \"un deux trois\";\n        System.out.println(texte);\n    }\n}",
             "validate": {
@@ -2656,7 +2648,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Découper une phrase ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Découper une phrase »."
             },
             {
               "type": "prose",
@@ -2681,7 +2673,7 @@
           ],
           "exercise": {
             "id": "java-c3-ex-ligne",
-            "prompt": "Objectif. Changer les arguments d'un appel pour changer le résultat, sans toucher à la formule.\n\nMarche à suivre. La fonction produit est correcte. L'affichage appelle encore produit(2, 2), donc la sortie est 4. Changez produit(2, 2) en produit(3, 3). N'écrivez pas System.out.println(9);.\n\nContraintes. La sortie comparée est exactement « 9 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement 9.",
+            "prompt": "La fonction produit est correcte. L'affichage appelle encore produit(2, 2), donc la sortie est 4. Changez produit(2, 2) en produit(3, 3). N'écrivez pas System.out.println(9);.\n\nLa Sortie doit être exactement : 9.\n\nAffichez exactement 9.",
             "hint": "Changez produit(2, 2) en produit(3, 3). N'écrivez pas System.out.println(9);.",
             "starterCode": "public class Main {\n    static int produit(int prix, int quantite) {\n        return prix * quantite;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(produit(2, 2));\n    }\n}",
             "validate": {
@@ -2718,7 +2710,7 @@
             {
               "type": "prose",
               "heading": "Prérequis",
-              "body": "Prérequis : la leçon « Préparer une ligne ». Aucune autre notion n'est utilisée."
+              "body": "À lire avant : la leçon « Préparer une ligne »."
             },
             {
               "type": "prose",
@@ -2747,7 +2739,7 @@
           ],
           "exercise": {
             "id": "java-c3-ex-project",
-            "prompt": "Objectif. Calculer un total de ticket à partir d'une table de prix et de quantités.\n\nMarche à suivre. Dans ligne, remplacez return 0; par return grille.get(nom) * quantite;. Affichez \"Total \" + total, pas \"Total \" + 0. Ne tapez pas Total 9 en un seul texte. Le contrôle vérifie le calcul dans ligne.\n\nContraintes. La sortie comparée est exactement « Total 9 ». Majuscules, espaces, accents et retours à la ligne comptent. Afficher ce texte sans la notion de la leçon est refusé quand un contrôle de structure est prévu.\n\nAffichez exactement Total 9.",
+            "prompt": "Dans ligne, remplacez return 0; par return grille.get(nom) * quantite;. Affichez \"Total \" + total, pas \"Total \" + 0. Ne tapez pas Total 9 en un seul texte. Le contrôle vérifie le calcul dans ligne.\n\nLa Sortie doit être exactement : Total 9.\n\nAffichez exactement Total 9.",
             "hint": "Dans ligne, remplacez return 0; par return grille.get(nom) * quantite;. Affichez \"Total \" + total, pas \"Total \" + 0.",
             "starterCode": "import java.util.HashMap;\n\npublic class Main {\n    static int ligne(HashMap<String, Integer> grille, String nom, int quantite) {\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        HashMap<String, Integer> prix = new HashMap<>();\n        prix.put(\"pomme\", 2);\n        prix.put(\"pain\", 3);\n        prix.put(\"lait\", 1);\n        int total = ligne(prix, \"pomme\", 2) + ligne(prix, \"pain\", 1) + ligne(prix, \"lait\", 2);\n        System.out.println(\"Total \" + 0);\n    }\n}",
             "validate": {

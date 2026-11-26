@@ -540,31 +540,21 @@ pub fn cloud_social_delete_message(
         .and_then(|list| list.iter().find(|item| item.id == message_id))
         .cloned()
         .ok_or_else(|| "Message introuvable.".to_string())?;
-    if message.from != me.id {
-        return Err("Seul l'auteur peut supprimer ce message.".into());
-    }
-    if message.read_at.is_some() {
-        return Err("Ce message a déjà été lu.".into());
-    }
-    if let Ok(peer_doc) = load_social(&peer_id) {
-        if let Some(list) = peer_doc.threads.get(&me.id) {
-            if list.iter().any(|item| item.id == message_id && item.read_at.is_some()) {
-                return Err("Ce message a déjà été lu.".into());
-            }
-        }
-    }
+    let authored = message.from == me.id;
     update_social(&me.id, |doc| {
         if let Some(list) = doc.threads.get_mut(&peer_id) {
             list.retain(|item| item.id != message_id);
         }
         Ok(())
     })?;
-    let _ = update_social(&peer_id, |doc| {
-        if let Some(list) = doc.threads.get_mut(&me.id) {
-            list.retain(|item| item.id != message_id);
-        }
-        Ok(())
-    });
+    if authored {
+        let _ = update_social(&peer_id, |doc| {
+            if let Some(list) = doc.threads.get_mut(&me.id) {
+                list.retain(|item| item.id != message_id);
+            }
+            Ok(())
+        });
+    }
     snapshot_for(&me)
 }
 
@@ -672,6 +662,28 @@ pub fn cloud_social_block(token: String, user_id: String) -> Result<SocialSnapsh
         doc.outgoing.retain(|item| item.user_id != me.id);
         doc.threads.remove(&me.id);
         doc.incoming_typing.remove(&me.id);
+        Ok(())
+    });
+    snapshot_for(&me)
+}
+
+#[tauri::command]
+pub fn cloud_social_remove_friend(token: String, user_id: String) -> Result<SocialSnapshot, String> {
+    let me = require_me(token)?;
+    let user_id = user_id.trim().to_string();
+    if user_id.is_empty() || user_id == me.id {
+        return Err("Action impossible.".into());
+    }
+    update_social(&me.id, |doc| {
+        doc.friends.retain(|id| id != &user_id);
+        doc.incoming.retain(|item| item.user_id != user_id);
+        doc.outgoing.retain(|item| item.user_id != user_id);
+        Ok(())
+    })?;
+    let _ = update_social(&user_id, |doc| {
+        doc.friends.retain(|id| id != &me.id);
+        doc.incoming.retain(|item| item.user_id != me.id);
+        doc.outgoing.retain(|item| item.user_id != me.id);
         Ok(())
     });
     snapshot_for(&me)

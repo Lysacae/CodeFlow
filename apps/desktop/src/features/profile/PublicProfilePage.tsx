@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ACHIEVEMENTS, achievementIcon, rarityLabel, unlockHint } from "@/shared/lib/achievements";
+import { ACHIEVEMENTS, achievementIcon, rarityBorder, rarityLabel, unlockHint, type Rarity } from "@/shared/lib/achievements";
 import { apiPublicProfile, type PublicProfile } from "@/shared/lib/api";
 import { countLessons } from "@/shared/lib/content";
 import { rankById, rankIcon, rankProgress } from "@/shared/lib/ranks";
@@ -67,7 +67,7 @@ export function PublicProfilePage() {
   const lessonPercent = totalLessons ? Math.min(100, Math.round((profile.lessons / totalLessons) * 100)) : 0;
 
   return (
-    <div className="page">
+    <div className="mx-auto max-w-4xl space-y-6">
       <button type="button" className="cursor-pointer text-sm text-[var(--text-secondary)]" onClick={() => navigate(-1)}>
         ← Retour
       </button>
@@ -148,29 +148,82 @@ export function PublicProfilePage() {
           </div>
         ) : null}
       </GlassCard>
-      <div>
-        <h2 className="text-lg font-semibold">Succès</h2>
-        <div className="ach-grid">
-          {ACHIEVEMENTS.map((item) => {
-            const owned = unlocked.has(item.id);
-            const percent = rates[item.id] ?? 0;
-            return (
-              <div key={item.id} className={`ach ${item.rarity} ${owned ? "got" : "locked"}`}>
-                <div className="ach-ico">
-                  <img className="px" src={achievementIcon(item.id)} alt="" width={64} height={64} />
-                </div>
-                <div className="ach-meta">
-                  <div className="row gap-2">
-                    <b>{item.title}</b>
-                    <span className={`badge ${item.rarity}`}>{rarityLabel(item.rarity)}</span>
-                  </div>
-                  <p>{owned ? item.description : unlockHint(item)}</p>
-                  <span className="ach-pct">{percent} % des utilisateurs ont obtenu ce succès</span>
-                </div>
+      <div className="space-y-8">
+        <h2 className="text-lg font-semibold">
+          Succès
+          <span className="ml-2 text-sm font-normal text-[var(--text-secondary)]">
+            {unlocked.size}/{ACHIEVEMENTS.length}
+          </span>
+        </h2>
+        {(["commun", "rare", "ardu"] as Rarity[]).map((rarity) => {
+          const items = ACHIEVEMENTS.filter((item) => item.rarity === rarity);
+          const ownedCount = items.filter((item) => unlocked.has(item.id)).length;
+          return (
+            <section key={rarity} className="space-y-3">
+              <div className="flex items-center justify-between gap-3">
+                <h3 className="text-base font-semibold" style={{ color: rarityBorder(rarity) }}>
+                  {rarityLabel(rarity)}
+                </h3>
+                <span className="text-xs text-[var(--text-secondary)]">
+                  {ownedCount}/{items.length}
+                </span>
               </div>
-            );
-          })}
-        </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {items.map((item) => {
+                  const owned = unlocked.has(item.id);
+                  const percent = rates[item.id] ?? 0;
+                  return (
+                    <div
+                      key={item.id}
+                      className={
+                        owned
+                          ? "relative flex gap-3 rounded-[16px] border border-solid bg-[var(--surface)] p-3"
+                          : "relative flex gap-3 rounded-[16px] border border-dashed bg-[var(--surface)] p-3 grayscale"
+                      }
+                      style={{
+                        borderColor: owned ? rarityBorder(item.rarity) : "var(--border)",
+                        opacity: owned ? 1 : 0.45,
+                      }}
+                    >
+                      <div className="relative shrink-0">
+                        <img
+                          src={achievementIcon(item.id)}
+                          alt=""
+                          draggable={false}
+                          className="cf-plain-icon h-12 w-12 rounded-[10px] object-contain"
+                        />
+                        <span
+                          className={
+                            owned
+                              ? "absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[var(--success)] text-[11px] font-bold text-[#102016]"
+                              : "absolute inset-0 flex items-center justify-center rounded-[10px] bg-black/55 text-sm"
+                          }
+                          aria-hidden
+                        >
+                          {owned ? "✓" : "🔒"}
+                        </span>
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-medium">
+                          {item.title}
+                          <span className="ml-2 text-xs text-[var(--text-secondary)]">
+                            {owned ? "Obtenu" : "Verrouillé"}
+                          </span>
+                        </p>
+                        <p className="text-sm text-[var(--text-secondary)]">
+                          {owned ? item.description : unlockHint(item)}
+                        </p>
+                        <p className="mt-1 text-xs text-[var(--text-secondary)]">
+                          {percent} % des utilisateurs ont obtenu ce succès !
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
       </div>
       {me && me.id === profile.id ? (
         <ProfileModal open={editOpen} onClose={() => setEditOpen(false)} />

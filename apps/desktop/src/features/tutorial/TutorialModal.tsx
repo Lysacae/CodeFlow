@@ -1,4 +1,3 @@
-import { lessonIntro } from "@/shared/lib/lessonIntro";
 import { getLanguage } from "@/shared/lib/content";
 import { Button } from "@/shared/ui/Button";
 import { GlassCard } from "@/shared/ui/GlassCard";
@@ -19,7 +18,6 @@ type Props = {
 
 export function TutorialModal({ languageId, canSkip, onDone, onClose }: Props) {
   const language = languageId ? getLanguage(languageId) : null;
-  const extra = languageId ? lessonIntro(languageId) : [];
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/55 px-4 py-8">
@@ -35,15 +33,6 @@ export function TutorialModal({ languageId, canSkip, onDone, onClose }: Props) {
           {STEPS.map((step) => (
             <p key={step}>{step}</p>
           ))}
-          {extra.map((section, index) =>
-            section.type === "code" && section.code ? (
-              <pre key={index} className="overflow-x-auto rounded-[12px] bg-[var(--surface-strong)] p-3 font-mono text-xs text-[var(--text)]">
-                {section.code}
-              </pre>
-            ) : (
-              <p key={index}>{section.body}</p>
-            ),
-          )}
         </div>
         <div className="mt-5 flex flex-wrap justify-end gap-2">
           {canSkip ? (

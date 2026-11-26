@@ -45,6 +45,7 @@ type ProgressionState = {
   openTutorial: (languageId?: string | null) => void;
   closeTutorial: () => void;
   dismissUnlock: (key: string) => void;
+  adopt: (raw: unknown) => Promise<void>;
   reset: () => void;
 };
 
@@ -124,17 +125,21 @@ export const useProgressionStore = create<ProgressionState>((set, get) => ({
   reviewTutorial: false,
   tutorialLanguage: null,
   load: async (id) => {
+    const ticket = ++seq;
     userId = id;
     const local = readLocal(id) ?? emptyProgression();
+    if (ticket !== seq) return;
     set({ doc: local, ready: false, bootstrapped: false, reviewTutorial: false, unlocks: [], rankUps: [] });
     try {
       const remote = normalizeProgression(await apiGetProgression());
+      if (ticket !== seq || userId !== id) return;
       const merged = mergeProgression(local, remote);
       set({ doc: merged });
       writeLocal(id, merged);
     } catch {
       /* hors ligne : cache local */
     }
+    if (ticket !== seq || userId !== id) return;
     set({ ready: true });
     await get().reconcile();
     if (userId === id) set({ bootstrapped: true });
@@ -221,6 +226,15 @@ export const useProgressionStore = create<ProgressionState>((set, get) => ({
     set({ reviewTutorial: true, tutorialLanguage: languageId ?? null }),
   closeTutorial: () => set({ reviewTutorial: false }),
   dismissUnlock: (key) => set({ unlocks: get().unlocks.filter((item) => item.key !== key) }),
+  adopt: async (raw) => {
+    const currentUser = userId;
+    if (!currentUser) return;
+    seq += 1;
+    const doc = normalizeProgression(raw);
+    set({ doc, ready: true, bootstrapped: true });
+    writeLocal(currentUser, doc);
+    await get().reconcile();
+  },
   reset: () => {
     seq += 1;
     userId = "";

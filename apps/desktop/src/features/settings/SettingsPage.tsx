@@ -116,53 +116,42 @@ export function SettingsPage() {
     }
   };
 
-  const swatch: Record<string, { bg: string; dot: string }> = {
-    dark: { bg: "#05060b", dot: "#6b7cff" },
-    light: { bg: "#f3f4fa", dot: "#4f5ff0" },
-    prune: { bg: "#0a0510", dot: "#b07cff" },
-    salad: { bg: "#040a08", dot: "#3ee0a8" },
-  };
-
   return (
-    <div className="page">
-      <div className="page-head">
-        <div>
-          <div className="label kicker">Système</div>
-          <h1>Paramètres</h1>
-          <p className="sub">Personnalisez l'interface et les environnements.</p>
-        </div>
+    <div className="mx-auto max-w-4xl space-y-6">
+      <div className="text-center sm:text-left">
+        <h1 className="text-3xl font-semibold">Paramètres</h1>
+        <p className="mt-2 text-[var(--text-secondary)]">
+          Personnalisez l'interface et les environnements.
+        </p>
       </div>
 
-      <div className="settings">
-        <GlassCard>
-          <div className="card-title"><h3>Apparence</h3></div>
-          <p className="muted" style={{ fontSize: 14 }}>
-            Thème actuel : <span style={{ color: "var(--text)" }}>{themeLabel(progress.theme)}</span>
+      <div className="grid gap-4 md:grid-cols-2">
+        <GlassCard className="space-y-4">
+          <h2 className="text-lg font-semibold">Apparence</h2>
+          <p className="text-sm text-[var(--text-secondary)]">
+            Thème actuel : {themeLabel(progress.theme)}
           </p>
-          <div className="theme-row">
+          <div className="flex flex-wrap gap-2">
             {THEME_OPTIONS.map((option) => (
-              <button
+              <Button
                 key={option.id}
-                type="button"
-                className={progress.theme === option.id ? "theme-chip on" : "theme-chip"}
+                variant={progress.theme === option.id ? "primary" : "secondary"}
                 disabled={themeBusy !== null}
                 onClick={() => {
                   setThemeBusy(option.id);
                   void updateTheme(option.id).finally(() => setThemeBusy(null));
                 }}
               >
-                <span className="sw" style={{ background: swatch[option.id]?.bg }}>
-                  <i style={{ background: swatch[option.id]?.dot }} />
-                </span>
-                {themeBusy === option.id ? "…" : option.label}
-              </button>
+                {themeBusy === option.id ? <Spinner size="sm" /> : null}
+                {option.label}
+              </Button>
             ))}
           </div>
         </GlassCard>
 
-        <GlassCard>
-          <div className="card-title"><h3>Environnements</h3></div>
-          <p className="muted" style={{ fontSize: 14 }}>
+        <GlassCard className="space-y-3">
+          <h2 className="text-lg font-semibold">Environnements</h2>
+          <p className="text-sm text-[var(--text-secondary)]">
             Détectez et installez Python, .NET, un compilateur C++ et le JDK.
           </p>
           <Link to="/settings/runtimes">
@@ -170,8 +159,8 @@ export function SettingsPage() {
           </Link>
         </GlassCard>
 
-        <GlassCard className="span2">
-          <div className="card-title"><h3>Aide</h3></div>
+        <GlassCard className="space-y-3 md:col-span-2">
+          <h2 className="text-lg font-semibold">Aide</h2>
           <p className="text-sm text-[var(--text-secondary)]">
             Questions et retours : coordonnées de l'auteur.
           </p>
@@ -195,13 +184,16 @@ export function SettingsPage() {
           </dl>
         </GlassCard>
 
-        <GlassCard className="span2 update">
-          <div>
-          <div className="card-title"><h3>Mises à jour</h3></div>
+        <GlassCard className="space-y-3 md:col-span-2">
+          <h2 className="text-lg font-semibold">Mises à jour</h2>
           <p className="text-sm text-[var(--text-secondary)]">
             Version installée : <span className="font-semibold text-[var(--text)]">{APP_VERSION}</span>
           </p>
           <div className="flex flex-wrap gap-2">
+            <Button onClick={() => void checkUpdates()} disabled={updateBusy}>
+              {updateBusy && !downloadUrl ? <Spinner size="sm" /> : null}
+              {updateBusy && !downloadUrl ? "Vérification…" : "Vérifier les mises à jour"}
+            </Button>
             {downloadUrl ? (
               <Button variant="secondary" onClick={() => void installUpdate()} disabled={updateBusy}>
                 {updateBusy ? <Spinner size="sm" /> : null}
@@ -215,20 +207,13 @@ export function SettingsPage() {
           {updateError ? (
             <p className="text-sm text-[var(--error)]">{updateError}</p>
           ) : null}
-          </div>
-          <Button onClick={() => void checkUpdates()} disabled={updateBusy}>
-            {updateBusy && !downloadUrl ? <Spinner size="sm" /> : null}
-            {updateBusy && !downloadUrl ? "Vérification…" : "Vérifier les mises à jour"}
-          </Button>
         </GlassCard>
 
-        <GlassCard className="span2 danger-card">
-          <div>
-          <div className="card-title"><h3 style={{ color: "var(--danger)" }}>Supprimer mon compte</h3></div>
+        <GlassCard className="space-y-3 md:col-span-2">
+          <h2 className="text-lg font-semibold text-[var(--error)]">Supprimer mon compte</h2>
           <p className="text-sm text-[var(--text-secondary)]">
             La suppression est définitive : pseudo, progression, projets et photo.
           </p>
-          </div>
           <Button
             variant="danger"
             disabled={deleting}
@@ -244,8 +229,8 @@ export function SettingsPage() {
         </GlassCard>
 
         {dev ? (
-          <GlassCard className="span2">
-            <div className="card-title"><h3>Logs</h3></div>
+          <GlassCard className="space-y-3 md:col-span-2">
+            <h2 className="text-lg font-semibold">Logs</h2>
             <p className="text-sm text-[var(--text-secondary)]">
               Version, chemins, détection des environnements et erreurs récentes.
             </p>
@@ -272,7 +257,7 @@ export function SettingsPage() {
           <GlassCard className="w-full max-w-md space-y-4">
             <div>
               <h2 className="text-xl font-semibold">Supprimer mon compte</h2>
-              <p className="mt-2 text-sm text-[var(--text-secondary)]">
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
                 Deuxième vérification. Saisissez votre mot de passe, puis recopiez :{" "}
                 <span className="font-medium text-[var(--text)]">{DELETE_PHRASE}</span>
               </p>
@@ -289,7 +274,7 @@ export function SettingsPage() {
               onChange={(event) => setDeletePhrase(event.target.value)}
               placeholder={DELETE_PHRASE}
               disabled={deleting}
-              className="allow-select h-11 w-full rounded-[12px] border border-[var(--border-strong)] bg-[var(--surface-2)] px-4 text-sm text-[var(--text)] outline-none focus:border-[var(--accent)]"
+              className="allow-select h-11 w-full rounded-[12px] border border-[var(--border-strong)] bg-[var(--bg-secondary)] px-4 text-sm text-[var(--text)] outline-none focus:border-[var(--accent)]"
             />
             {deleteError ? <p className="text-sm text-[var(--error)]">{deleteError}</p> : null}
             <div className="flex gap-2">

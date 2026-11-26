@@ -1,17 +1,19 @@
 import { useState, type ReactNode } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import clsx from "clsx";
 import { AchievementToasts } from "@/features/profile/AchievementToasts";
 import { RankUpToast } from "@/features/profile/RankUpToast";
 import { FriendsPanel } from "@/features/social/FriendsPanel";
 import { MessagesPanel } from "@/features/social/MessagesPanel";
 import { TutorialModal } from "@/features/tutorial/TutorialModal";
-import { rankById, rankIcon } from "@/shared/lib/ranks";
+import { levelProgress, rankById, rankIcon } from "@/shared/lib/ranks";
 import { useAuthStore } from "@/shared/store/authStore";
 import { useProgressStore } from "@/shared/store/progressStore";
 import { useProgressionStore } from "@/shared/store/progressionStore";
 import { useSocialStore } from "@/shared/store/socialStore";
 import { isDevTesting } from "@/shared/lib/devAccess";
 import { useUpdateStore } from "@/shared/store/updateStore";
+import { Button } from "@/shared/ui/Button";
 import { ConfirmDialog } from "@/shared/ui/ConfirmDialog";
 import { Spinner } from "@/shared/ui/Spinner";
 
@@ -23,11 +25,110 @@ const links = [
   { to: "/notebook", label: "Carnet", end: false },
 ];
 
-function Stroke({ children, size = 18 }: { children: ReactNode; size?: number }) {
+function DownloadIcon() {
   return (
-    <svg className="icon" width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
-      {children}
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 3a1 1 0 0 1 1 1v8.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.42L11 12.59V4a1 1 0 0 1 1-1Zm-7 14a1 1 0 0 1 1 1v1h12v-1a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1Z" />
     </svg>
+  );
+}
+
+function ProfileButton({
+  username,
+  avatarData,
+  xp,
+  onClick,
+}: {
+  username: string;
+  avatarData?: string | null;
+  xp: number;
+  onClick: () => void;
+}) {
+  const { level, into, need, ratio } = levelProgress(xp);
+  const size = 36;
+  const stroke = 2.5;
+  const radius = (size - stroke) / 2;
+  const center = size / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference * (1 - ratio);
+  const label = `${username} · niveau ${level} · ${into}/${need} XP`;
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      title={label}
+      aria-label={label}
+      className="flex min-w-0 cursor-pointer items-center gap-2 rounded-[14px] border border-transparent px-2 py-1 transition hover:border-[var(--border)] hover:bg-[var(--surface)]"
+    >
+      <span className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center">
+        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true" className="absolute">
+          <circle
+            cx={center}
+            cy={center}
+            r={radius}
+            fill="none"
+            stroke="var(--border)"
+            strokeWidth={stroke}
+          />
+          {ratio > 0 ? (
+            <circle
+              cx={center}
+              cy={center}
+              r={radius}
+              fill="none"
+              stroke="var(--accent)"
+              strokeWidth={stroke}
+              strokeLinecap="round"
+              strokeDasharray={circumference}
+              strokeDashoffset={offset}
+              transform={`rotate(-90 ${center} ${center})`}
+            />
+          ) : null}
+        </svg>
+        {avatarData ? (
+          <img src={avatarData} alt="" className="h-7 w-7 rounded-full object-cover" />
+        ) : (
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--surface-strong)] text-xs font-medium">
+            {username.slice(0, 1).toUpperCase()}
+          </span>
+        )}
+      </span>
+      <span className="max-w-[8rem] truncate text-sm text-[var(--text-secondary)]">{username}</span>
+    </button>
+  );
+}
+
+function IconButton({
+  label,
+  onClick,
+  badge,
+  dot,
+  children,
+}: {
+  label: string;
+  onClick: () => void;
+  badge?: number;
+  dot?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      title={label}
+      onClick={onClick}
+      className="relative flex h-10 w-10 items-center justify-center rounded-[14px] border border-transparent text-[var(--text-secondary)] transition hover:border-[var(--border)] hover:bg-[var(--surface)] hover:text-[var(--text)]"
+    >
+      {children}
+      {badge && badge > 0 ? (
+        <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--accent)] px-1 text-[10px] font-semibold leading-none text-white">
+          {badge > 9 ? "9+" : badge}
+        </span>
+      ) : dot ? (
+        <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-[var(--accent)]" />
+      ) : null}
+    </button>
   );
 }
 
@@ -50,15 +151,13 @@ export function AppShell() {
   const markTutorial = useProgressionStore((s) => s.markTutorial);
   const closeTutorial = useProgressionStore((s) => s.closeTutorial);
   const rank = rankById(useProgressionStore((s) => s.doc.rankId));
+  const xp = useProgressionStore((s) => s.doc.xp);
   const updateAvailable = useUpdateStore((s) => s.available);
   const openUpdate = useUpdateStore((s) => s.openDialog);
   const updateButton = updateAvailable ? (
-    <button type="button" className="icon-btn" title="Mise à jour disponible" aria-label="Mise à jour disponible" onClick={openUpdate}>
-      <Stroke>
-        <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-      </Stroke>
-      <span className="dot" />
-    </button>
+    <IconButton label="Mise à jour disponible" dot onClick={openUpdate}>
+      <DownloadIcon />
+    </IconButton>
   ) : null;
   const navLinks = isDevTesting(user?.username)
     ? [...links, { to: "/admin", label: "Admin", end: false }]
@@ -79,72 +178,67 @@ export function AppShell() {
   return (
     <div className="flex h-full w-full min-h-0 min-w-0 flex-col overflow-hidden">
       {!focusMode ? (
-        <header className="topbar shrink-0">
-          <div className="tb-left">
-            <div className="pill-group">
-              <button
-                type="button"
-                className="user-chip"
-                title="Profil et succès"
-                onClick={() => user && navigate(`/profil/${user.id}`)}
-              >
-                <span className="avatar orbit c1" style={{ ["--s" as string]: "30px" }}>
-                  {user?.avatarData ? (
-                    <img src={user.avatarData} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "50%" }} />
-                  ) : (
-                    user?.username.slice(0, 1).toUpperCase()
-                  )}
-                </span>
-                <span className="name" style={{ color: "var(--text)" }}>{user?.username}</span>
-                <img className="rank" src={rankIcon(rank.id)} width={24} height={24} alt={`Rang ${rank.name}`} />
-              </button>
-              <button type="button" className="icon-btn" title="Amis" aria-label="Amis" onClick={openFriends}>
-                <Stroke>
-                  <path d="M16 19v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 17.5V19" />
-                  <circle cx="10" cy="7.5" r="3.5" />
-                  <path d="M20 19v-1.5a3.5 3.5 0 0 0-2.5-3.35M15.5 4.2a3.5 3.5 0 0 1 0 6.6" />
-                </Stroke>
-              </button>
-              <button type="button" className="icon-btn" title="Messagerie" aria-label="Messagerie" onClick={() => openMessages()}>
-                <Stroke>
-                  <path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12Z" />
-                  <path d="M8.5 11h7M8.5 14h4.5" />
-                </Stroke>
-                {incoming > 0 ? <span className="dot" /> : null}
-              </button>
+        <header className="z-20 w-full shrink-0 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur-xl">
+          <div className="flex w-full items-center justify-between gap-3 px-4 py-3 sm:px-6">
+            <div className="flex min-w-0 items-center gap-1">
+              {user ? (
+                <ProfileButton
+                  username={user.username}
+                  avatarData={user.avatarData}
+                  xp={xp}
+                  onClick={() => navigate(`/profil/${user.id}`)}
+                />
+              ) : null}
+              <IconButton label="Amis" onClick={openFriends}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M9 11a3.5 3.5 0 1 0-3.5-3.5A3.5 3.5 0 0 0 9 11Zm0-5a1.5 1.5 0 1 1-1.5 1.5A1.5 1.5 0 0 1 9 6Zm6.5 5a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm0-4a1 1 0 1 1-1 1 1 1 0 0 1 1-1ZM9 12.5c-3.04 0-6 1.54-6 4.25V19h8.2a6.7 6.7 0 0 1-.2-1.5c0-1.9.8-3.4 2.1-4.5-1.1-.3-2.5-.5-4.1-.5Zm6.5 1c-2.5 0-5 1.2-5 3.4V19h10v-2.1c0-2.2-2.5-3.4-5-3.4Z" />
+                </svg>
+              </IconButton>
+              <IconButton label="Messagerie" badge={incoming} onClick={() => openMessages()}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M4 5h16a2 2 0 0 1 2 2v8.5a2 2 0 0 1-2 2H9.2L4 21.5V7a2 2 0 0 1 2-2Zm2 3.2v.1l6 3.7 6-3.7V8.2H6Zm12 6.8V10.4l-5.4 3.3a1.2 1.2 0 0 1-1.2 0L6 10.4V15h12Z" />
+                </svg>
+              </IconButton>
             </div>
-          </div>
 
-          <nav className="pill-group nav-pill">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end={link.end}
-                className={({ isActive }) => (isActive ? "active" : undefined)}
+            <nav className="flex shrink items-center gap-1 overflow-x-auto rounded-[16px] border border-[var(--border)] bg-[var(--surface)] p-1">
+              <span
+                title={`Rang ${rank.name}`}
+                aria-label={`Rang ${rank.name}`}
+                className="flex h-9 shrink-0 items-center pl-1.5 pr-0.5"
               >
-                {link.label}
-              </NavLink>
-            ))}
-          </nav>
+                <img src={rankIcon(rank.id)} alt="" className="cf-plain-icon h-7 w-7 object-contain" />
+              </span>
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  end={link.end}
+                  className={({ isActive }) =>
+                    clsx(
+                      "whitespace-nowrap rounded-[12px] px-3 py-2 text-sm transition",
+                      isActive
+                        ? "bg-[var(--surface-strong)] text-[var(--text)]"
+                        : "text-[var(--text-secondary)] hover:text-[var(--text)]",
+                    )
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+            </nav>
 
-          <div className="tb-right">
-            <div className="pill-group">
+            <div className="flex shrink-0 items-center gap-2">
               {updateButton}
-              <button type="button" className="icon-btn" title="Paramètres" aria-label="Paramètres" onClick={() => navigate("/settings")}>
-                <Stroke>
-                  <circle cx="12" cy="12" r="3" />
-                  <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z" />
-                </Stroke>
-              </button>
-              <button type="button" className="logout" disabled={leaving} onClick={() => setConfirmLogout(true)}>
-                {leaving ? <Spinner size="sm" /> : (
-                  <Stroke size={16}>
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
-                  </Stroke>
-                )}
+              <IconButton label="Paramètres" onClick={() => navigate("/settings")}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 0 0-.12-.61l-2.03-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z" />
+                </svg>
+              </IconButton>
+              <Button variant="ghost" disabled={leaving} onClick={() => setConfirmLogout(true)}>
+                {leaving ? <Spinner size="sm" /> : null}
                 Déconnexion
-              </button>
+              </Button>
             </div>
           </div>
         </header>
@@ -152,7 +246,7 @@ export function AppShell() {
         <div className="fixed right-4 top-3 z-30">{updateButton}</div>
       ) : null}
 
-      <main className="cf-scroll">
+      <main className="min-h-0 w-full flex-1 overflow-y-auto overflow-x-auto px-6 py-8">
         <Outlet />
       </main>
 

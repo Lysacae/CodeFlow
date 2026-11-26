@@ -76,16 +76,15 @@ export function NotebookPage() {
   const language = selected ? getLanguage(selected.language) : null;
 
   return (
-    <div className="page wide">
-      <div className="page-head">
-        <div>
-          <div className="label kicker">Archives</div>
-          <h1>Carnet de programmation</h1>
-          <p className="sub">Retrouvez les programmes que vous avez créés et sauvegardés.</p>
-        </div>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-semibold">Carnet de programmation</h1>
+        <p className="mt-2 text-[var(--text-secondary)]">
+          Retrouvez les programmes que vous avez créés et sauvegardés.
+        </p>
       </div>
 
-      <div className="carnet">
+      <div className="grid gap-6 lg:grid-cols-[0.8fr_1.4fr]">
         <div className="space-y-3">
           <GlassCard className="space-y-3">
             <h2 className="text-lg font-semibold">Projets cloud</h2>

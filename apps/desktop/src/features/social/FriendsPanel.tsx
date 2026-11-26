@@ -23,7 +23,9 @@ export function FriendsPanel({ onClose }: { onClose: () => void }) {
   const openMessages = useSocialStore((s) => s.openMessages);
   const blockUser = useSocialStore((s) => s.blockUser);
   const unblockUser = useSocialStore((s) => s.unblockUser);
+  const removeFriend = useSocialStore((s) => s.removeFriend);
   const [username, setUsername] = useState("");
+  const [pendingId, setPendingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState<string | null>(null);
@@ -44,8 +46,8 @@ export function FriendsPanel({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="modal-layer" onClick={onClose}>
-      <div className="modal" onClick={(event) => event.stopPropagation()}>
+    <div className="fixed inset-0 z-40 flex items-start justify-center bg-black/45 px-4 py-16" onClick={onClose}>
+      <div className="w-full max-w-lg" onClick={(event) => event.stopPropagation()}>
       <GlassCard className="max-h-[80vh] overflow-y-auto">
         <div className="flex items-center justify-between gap-3">
           <h2 className="text-xl font-semibold">Amis</h2>
@@ -88,26 +90,58 @@ export function FriendsPanel({ onClose }: { onClose: () => void }) {
                   <Avatar src={friend.avatarData} name={friend.username} />
                   <span className="truncate font-medium">{friend.username}</span>
                 </button>
-                <div className="flex shrink-0 gap-1">
-                  <Button variant="ghost" className="!px-2 !py-1" onClick={() => openMessages(friend.id)}>Écrire</Button>
-                  <Button
-                    variant="ghost"
-                    className="!px-2 !py-1"
-                    onClick={() =>
-                      void blockUser(friend.id)
-                        .then(() => setSent(`${friend.username} a été bloqué.`))
-                        .catch((e) => setError(e instanceof Error ? e.message : String(e)))
-                    }
-                  >
-                    Bloquer
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="!px-2 !py-1"
-                    onClick={() => setSent("Signalement envoyé. Merci.")}
-                  >
-                    Signaler
-                  </Button>
+                <div className="flex shrink-0 flex-wrap justify-end gap-1">
+                  {pendingId === friend.id ? (
+                    <>
+                      <span className="self-center text-xs text-[var(--text-secondary)]">Retirer cet ami ?</span>
+                      <Button
+                        variant="danger"
+                        className="!px-2 !py-1"
+                        disabled={busy}
+                        onClick={() => {
+                          setBusy(true);
+                          setError(null);
+                          void removeFriend(friend.id)
+                            .then(() => {
+                              setPendingId(null);
+                              setSent(`${friend.username} a été retiré.`);
+                            })
+                            .catch((e) => setError(e instanceof Error ? e.message : String(e)))
+                            .finally(() => setBusy(false));
+                        }}
+                      >
+                        Retirer
+                      </Button>
+                      <Button variant="ghost" className="!px-2 !py-1" onClick={() => setPendingId(null)}>
+                        Annuler
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button variant="ghost" className="!px-2 !py-1" onClick={() => openMessages(friend.id)}>Écrire</Button>
+                      <Button variant="ghost" className="!px-2 !py-1" onClick={() => setPendingId(friend.id)}>
+                        Retirer
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        className="!px-2 !py-1"
+                        onClick={() =>
+                          void blockUser(friend.id)
+                            .then(() => setSent(`${friend.username} a été bloqué.`))
+                            .catch((e) => setError(e instanceof Error ? e.message : String(e)))
+                        }
+                      >
+                        Bloquer
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        className="!px-2 !py-1"
+                        onClick={() => setSent("Signalement envoyé. Merci.")}
+                      >
+                        Signaler
+                      </Button>
+                    </>
+                  )}
                 </div>
               </div>
             ))

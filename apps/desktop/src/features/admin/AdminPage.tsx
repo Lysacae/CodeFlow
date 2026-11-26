@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { ACHIEVEMENTS, RARITY_XP, rarityLabel } from "@/shared/lib/achievements";
 import { isDevTesting } from "@/shared/lib/devAccess";
-import { devDeleteAccount, devListAccounts, devResetRank, devResetSession } from "@/shared/lib/tauri";
+import {
+  devDeleteAccount,
+  devGetProgression,
+  devListAccounts,
+  devResetRank,
+  devResetSession,
+  devUnlockAchievements,
+} from "@/shared/lib/tauri";
 import { useProgressionStore } from "@/shared/store/progressionStore";
 import { apiPutProgress } from "@/shared/lib/api";
 import { useAuthStore } from "@/shared/store/authStore";
@@ -11,6 +19,10 @@ import { ConfirmDialog } from "@/shared/ui/ConfirmDialog";
 import { GlassCard } from "@/shared/ui/GlassCard";
 import { Spinner } from "@/shared/ui/Spinner";
 import type { UserPublic } from "@/shared/lib/tauri";
+
+const ACHIEVEMENT_XP = Object.fromEntries(
+  ACHIEVEMENTS.map((item) => [item.id, RARITY_XP[item.rarity]]),
+) as Record<string, number>;
 
 export function AdminPage() {
   const user = useAuthStore((s) => s.user);
@@ -23,6 +35,10 @@ export function AdminPage() {
   const [rankTarget, setRankTarget] = useState<UserPublic | null>(null);
   const [resetting, setResetting] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const [grantUserId, setGrantUserId] = useState("");
+  const [grantQuery, setGrantQuery] = useState("");
+  const [ownedIds, setOwnedIds] = useState<string[]>([]);
+  const [grantLoading, setGrantLoading] = useState(false);
 
   const load = async () => {
     setLoading(true);
@@ -40,6 +56,33 @@ export function AdminPage() {
     if (!isDevTesting(user?.username)) return;
     void load();
   }, [user?.username]);
+
+  useEffect(() => {
+    if (!grantUserId && accounts[0]) setGrantUserId(accounts[0].id);
+  }, [accounts, grantUserId]);
+
+  useEffect(() => {
+    if (!isDevTesting(user?.username) || !grantUserId) return;
+    let cancelled = false;
+    setGrantLoading(true);
+    void devGetProgression(grantUserId)
+      .then((raw) => {
+        if (cancelled) return;
+        const list = (raw as { achievements?: unknown })?.achievements;
+        setOwnedIds(
+          Array.isArray(list) ? list.filter((item): item is string => typeof item === "string") : [],
+        );
+      })
+      .catch((e) => {
+        if (!cancelled) setError(e instanceof Error ? e.message : String(e));
+      })
+      .finally(() => {
+        if (!cancelled) setGrantLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [grantUserId, user?.username]);
 
   if (!isDevTesting(user?.username)) {
     return <Navigate to="/" replace />;
@@ -61,22 +104,56 @@ export function AdminPage() {
     }
   };
 
+  const readOwned = (raw: unknown) => {
+    if (!raw || typeof raw !== "object") return [];
+    const list = (raw as { achievements?: unknown }).achievements;
+    return Array.isArray(list) ? list.filter((item): item is string => typeof item === "string") : [];
+  };
+
   const resetRank = async (account: UserPublic) => {
     setBusyId(account.id);
     setError(null);
     setNotice(null);
     try {
-      await devResetRank(account.id);
+      const saved = await devResetRank(
+        account.id,
+        ACHIEVEMENTS.map((item) => item.id),
+      );
       try {
         localStorage.removeItem(`cf-prog-${account.id}`);
       } catch {
         /* quota ou mode privé */
       }
       if (account.id === user?.id) {
-        await useProgressionStore.getState().load(account.id);
+        await useProgressionStore.getState().adopt(saved);
       }
+      if (grantUserId === account.id) setOwnedIds([]);
       setRankTarget(null);
       setNotice(`Rang et succès de ${account.username} réinitialisés.`);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setBusyId(null);
+    }
+  };
+
+  const unlockIds = async (ids: string[]) => {
+    const account = accounts.find((item) => item.id === grantUserId);
+    if (!account || ids.length === 0) return;
+    setBusyId(account.id);
+    setError(null);
+    setNotice(null);
+    try {
+      const saved = await devUnlockAchievements(account.id, ids, ACHIEVEMENT_XP);
+      if (account.id === user?.id) {
+        await useProgressionStore.getState().adopt(saved);
+      }
+      setOwnedIds(readOwned(saved));
+      setNotice(
+        ids.length === 1
+          ? `Succès débloqué pour ${account.username}.`
+          : `${ids.length} succès débloqués pour ${account.username}.`,
+      );
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -108,8 +185,20 @@ export function AdminPage() {
     }
   };
 
+  const ownedSet = new Set(ownedIds);
+  const query = grantQuery.trim().toLowerCase();
+  const filtered = ACHIEVEMENTS.filter((item) => {
+    if (!query) return true;
+    return (
+      item.title.toLowerCase().includes(query) ||
+      item.description.toLowerCase().includes(query) ||
+      rarityLabel(item.rarity).toLowerCase().includes(query)
+    );
+  });
+  const filteredLocked = filtered.filter((item) => !ownedSet.has(item.id));
+
   return (
-    <div className="page">
+    <div className="mx-auto max-w-4xl space-y-6">
       <div>
         <h1 className="text-3xl font-semibold">Admin</h1>
         <p className="mt-2 text-[var(--text-secondary)]">Comptes enregistrés sur CodeFlow.</p>
@@ -195,6 +284,90 @@ export function AdminPage() {
         )}
         {notice ? <p className="text-sm text-[var(--success)]">{notice}</p> : null}
         {error ? <p className="text-sm text-[var(--error)]">{error}</p> : null}
+      </GlassCard>
+
+      <GlassCard className="space-y-4">
+        <div>
+          <h2 className="text-lg font-semibold">Succès</h2>
+          <p className="mt-1 text-sm text-[var(--text-secondary)]">
+            Débloque un succès, ceux de la recherche, ou toute la liste.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <select
+            value={grantUserId}
+            onChange={(event) => setGrantUserId(event.target.value)}
+            className="rounded-[14px] border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-2 text-sm"
+          >
+            {accounts.map((account) => (
+              <option key={account.id} value={account.id}>
+                {account.username}
+              </option>
+            ))}
+          </select>
+          <input
+            value={grantQuery}
+            onChange={(event) => setGrantQuery(event.target.value)}
+            placeholder="Rechercher un succès"
+            className="min-w-[14rem] flex-1 rounded-[14px] border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-2 text-sm outline-none focus:border-[var(--accent)]"
+          />
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            variant="secondary"
+            disabled={!grantUserId || busyId !== null || filteredLocked.length === 0}
+            onClick={() => void unlockIds(filteredLocked.map((item) => item.id))}
+          >
+            Débloquer les résultats
+          </Button>
+          <Button
+            disabled={!grantUserId || busyId !== null}
+            onClick={() => void unlockIds(ACHIEVEMENTS.map((item) => item.id))}
+          >
+            Tout débloquer
+          </Button>
+        </div>
+        {grantLoading ? (
+          <div className="flex justify-center py-4">
+            <Spinner size="sm" />
+          </div>
+        ) : (
+          <div className="max-h-80 space-y-2 overflow-y-auto pr-1">
+            {filtered.map((item) => {
+              const owned = ownedSet.has(item.id);
+              return (
+                <div
+                  key={item.id}
+                  className="flex items-center justify-between gap-3 rounded-[14px] border border-[var(--border)] px-3 py-2"
+                >
+                  <div className="min-w-0">
+                    <p className="font-medium">
+                      {item.title}
+                      <span className="ml-2 text-xs text-[var(--text-secondary)]">
+                        {rarityLabel(item.rarity)}
+                      </span>
+                    </p>
+                    <p className="truncate text-xs text-[var(--text-secondary)]">{item.description}</p>
+                  </div>
+                  {owned ? (
+                    <span className="shrink-0 text-xs text-[var(--success)]">Obtenu</span>
+                  ) : (
+                    <Button
+                      variant="secondary"
+                      disabled={busyId !== null}
+                      onClick={() => void unlockIds([item.id])}
+                    >
+                      Débloquer
+                    </Button>
+                  )}
+                </div>
+              );
+            })}
+            {filtered.length === 0 ? (
+              <p className="text-sm text-[var(--text-secondary)]">Aucun succès ne correspond.</p>
+            ) : null}
+          </div>
+        )}
       </GlassCard>
 
       {rankTarget ? (

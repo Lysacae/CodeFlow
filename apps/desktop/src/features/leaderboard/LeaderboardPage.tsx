@@ -2,19 +2,18 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiLeaderboard, type LeaderboardEntry } from "@/shared/lib/api";
 import { rankById, rankIcon } from "@/shared/lib/ranks";
-import { countLessons, countQuizQuestions } from "@/shared/lib/content";
+import { countLessons } from "@/shared/lib/content";
 import { formatDuration } from "@/shared/lib/quiz";
 import { useAuthStore } from "@/shared/store/authStore";
 import { useProgressionStore } from "@/shared/store/progressionStore";
 import { GlassCard } from "@/shared/ui/GlassCard";
 import { Spinner } from "@/shared/ui/Spinner";
 
-type BoardTab = "progress" | "success" | "time";
+type BoardTab = "progress" | "time";
 
 const tabs: { id: BoardTab; label: string }[] = [
   { id: "progress", label: "Progression" },
-  { id: "success", label: "Réussite Q/R" },
-  { id: "time", label: "Temps Q/R" },
+  { id: "time", label: "Speedrun Q/A" },
 ];
 
 const REFRESH_COOLDOWN_MS = 30_000;
@@ -32,7 +31,6 @@ export function LeaderboardPage() {
   const [now, setNow] = useState(() => Date.now());
   const [cooldownNotice, setCooldownNotice] = useState(false);
   const totalLessons = countLessons();
-  const totalQuestions = countQuizQuestions();
 
   useEffect(() => {
     let cancelled = false;
@@ -92,17 +90,7 @@ export function LeaderboardPage() {
 
   const ranked = useMemo(() => {
     const copy = [...entries];
-    if (tab === "success") {
-      copy.sort((a, b) => {
-        const percent = (entry: LeaderboardEntry) =>
-          totalQuestions ? (entry.qaMastered ?? 0) / totalQuestions : 0;
-        return (
-          percent(b) - percent(a) ||
-          (b.qaMastered ?? 0) - (a.qaMastered ?? 0) ||
-          a.username.localeCompare(b.username, "fr")
-        );
-      });
-    } else if (tab === "time") {
+    if (tab === "time") {
       copy.sort((a, b) => {
         const completeA = Boolean(a.qaComplete);
         const completeB = Boolean(b.qaComplete);
@@ -112,22 +100,19 @@ export function LeaderboardPage() {
       });
     }
     return copy;
-  }, [entries, tab, totalQuestions]);
+  }, [entries, tab]);
 
   const intro =
-    tab === "success"
-      ? "Pourcentage de questions maîtrisées, sur l'ensemble des langages."
-      : tab === "time"
-        ? "Temps pour terminer toutes les séries Q/R. Le plus rapide est devant."
-        : "Progression des apprenants CodeFlow, triée par leçons et exercices validés.";
+    tab === "time"
+      ? "Speedrun Q/A : temps pour terminer toutes les séries. Le plus rapide est devant."
+      : "Progression des apprenants CodeFlow, triée par leçons et exercices validés.";
 
   return (
-    <div className="page">
-      <div className="page-head">
+    <div className="mx-auto max-w-4xl space-y-6">
+      <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="label kicker">Constellation</div>
-          <h1>Classement</h1>
-          <p className="sub">{intro}</p>
+          <h1 className="text-3xl font-semibold">Classement</h1>
+          <p className="mt-2 text-[var(--text-secondary)]">{intro}</p>
         </div>
         <div className="flex flex-col items-end gap-1">
           <button
@@ -136,7 +121,7 @@ export function LeaderboardPage() {
             title={remaining > 0 ? `Patientez ${remaining} s` : "Recharger le classement"}
             onClick={() => void refresh()}
             disabled={loading || refreshing}
-            className="btn btn-secondary"
+            className="flex h-10 w-10 items-center justify-center rounded-[14px] border border-[var(--border)] text-[var(--text-secondary)] transition hover:bg-[var(--surface)] hover:text-[var(--text)] disabled:opacity-50"
           >
             {refreshing ? (
               <Spinner size="sm" />
@@ -177,13 +162,17 @@ export function LeaderboardPage() {
         </div>
       </div>
 
-      <div className="tabs">
+      <div className="flex flex-wrap gap-2">
         {tabs.map((item) => (
           <button
             key={item.id}
             type="button"
             onClick={() => setTab(item.id)}
-            className={tab === item.id ? "tab active" : "tab"}
+            className={
+              tab === item.id
+                ? "rounded-[14px] bg-[var(--surface-strong)] px-4 py-2 text-sm font-medium text-[var(--text)]"
+                : "rounded-[14px] border border-[var(--border)] px-4 py-2 text-sm text-[var(--text-secondary)]"
+            }
           >
             {item.label}
           </button>
@@ -199,10 +188,10 @@ export function LeaderboardPage() {
       {error ? <GlassCard className="text-sm text-[var(--error)]">{error}</GlassCard> : null}
 
       {!loading && !error ? (
-        <GlassCard className="!p-2" >
+        <GlassCard className="overflow-hidden !p-0">
           <div className="overflow-x-auto">
-            <table className="tbl">
-              <thead>
+            <table className="w-full min-w-[36rem] text-left text-sm">
+              <thead className="border-b border-[var(--border)] bg-[var(--surface)] text-[var(--text-secondary)]">
                 <tr>
                   <th className="px-4 py-3 font-medium">#</th>
                   <th className="px-4 py-3 font-medium">Apprenant</th>
@@ -213,24 +202,19 @@ export function LeaderboardPage() {
                       <th className="px-4 py-3 font-medium">Progression</th>
                     </>
                   ) : null}
-                  {tab === "success" ? (
-                    <>
-                      <th className="px-4 py-3 font-medium">Maîtrisées</th>
-                      <th className="px-4 py-3 font-medium">Réussite</th>
-                    </>
-                  ) : null}
                   {tab === "time" ? (
                     <>
                       <th className="px-4 py-3 font-medium">Temps</th>
                       <th className="px-4 py-3 font-medium">Série</th>
                     </>
                   ) : null}
+                  <th className="px-4 py-3 text-right font-medium">Rang</th>
                 </tr>
               </thead>
               <tbody>
                 {ranked.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="px-4 py-10 text-center text-[var(--text-secondary)]">
+                    <td colSpan={tab === "progress" ? 6 : 5} className="px-4 py-10 text-center text-[var(--text-secondary)]">
                       Aucun joueur pour le moment.
                     </td>
                   </tr>
@@ -240,19 +224,19 @@ export function LeaderboardPage() {
                     const percent = totalLessons
                       ? Math.min(100, Math.round((entry.lessons / totalLessons) * 100))
                       : 0;
-                    const success = totalQuestions
-                      ? Math.min(100, Math.round(((entry.qaMastered ?? 0) / totalQuestions) * 100))
-                      : 0;
                     return (
                       <tr
                         key={entry.id}
                         onClick={() => navigate(`/profil/${entry.id}`)}
-                        className={isMe ? "me" : undefined}
-                        style={{ cursor: "pointer" }}
+                        className={
+                          isMe
+                            ? "cursor-pointer border-b border-[var(--border)] bg-[color-mix(in_srgb,var(--accent)_14%,transparent)]"
+                            : "cursor-pointer border-b border-[var(--border)] last:border-b-0 hover:bg-[var(--surface)]"
+                        }
                       >
-                        <td><span className={`pos pos${Math.min(index + 1, 6)}`}>{String(index + 1).padStart(2, "0")}</span></td>
-                        <td>
-                          <div className="row gap-3">
+                        <td className="px-4 py-3 font-semibold tabular-nums">{index + 1}</td>
+                        <td className="px-4 py-3">
+                          <div className="flex items-center gap-3">
                             {entry.avatarData ? (
                               <img
                                 src={entry.avatarData}
@@ -265,15 +249,7 @@ export function LeaderboardPage() {
                               </div>
                             )}
                             <div className="font-medium text-[var(--text)]">
-                              <span className="inline-flex items-center gap-2">
-                                <img
-                                  src={rankIcon(rankById(entry.rankId).id)}
-                                  alt=""
-                                  title={rankById(entry.rankId).name}
-                                  className="cf-plain-icon h-6 w-6 object-contain"
-                                />
-                                {entry.username}
-                              </span>
+                              {entry.username}
                               {isMe ? (
                                 <span className="ml-2 text-xs text-[var(--accent)]">(vous)</span>
                               ) : null}
@@ -299,26 +275,6 @@ export function LeaderboardPage() {
                             </td>
                           </>
                         ) : null}
-                        {tab === "success" ? (
-                          <>
-                            <td className="px-4 py-3 tabular-nums">
-                              {entry.qaMastered ?? 0}/{totalQuestions}
-                            </td>
-                            <td className="px-4 py-3">
-                              <div className="flex items-center gap-3">
-                                <div className="h-2 w-24 overflow-hidden rounded-full bg-[var(--surface-strong)]">
-                                  <div
-                                    className="h-full rounded-full bg-[linear-gradient(90deg,var(--accent),var(--accent-secondary))]"
-                                    style={{ width: `${success}%` }}
-                                  />
-                                </div>
-                                <span className="tabular-nums text-[var(--text-secondary)]">
-                                  {success}%
-                                </span>
-                              </div>
-                            </td>
-                          </>
-                        ) : null}
                         {tab === "time" ? (
                           <>
                             <td className="px-4 py-3 tabular-nums">
@@ -329,6 +285,14 @@ export function LeaderboardPage() {
                             </td>
                           </>
                         ) : null}
+                        <td className="px-4 py-3 text-right">
+                          <img
+                            src={rankIcon(rankById(entry.rankId).id)}
+                            alt=""
+                            title={rankById(entry.rankId).name}
+                            className="cf-plain-icon ml-auto h-7 w-7 object-contain"
+                          />
+                        </td>
                       </tr>
                     );
                   })

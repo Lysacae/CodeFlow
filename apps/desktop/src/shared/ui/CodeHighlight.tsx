@@ -118,7 +118,7 @@ const COLORS: Record<Token["kind"], string> = {
 export function CodeHighlight({ code }: { code: string }) {
   const tokens = tokenize(code);
   return (
-    <pre className="overflow-auto rounded-[16px] border border-[var(--border)] bg-[var(--bg-secondary)] p-4 text-left font-mono text-sm leading-relaxed">
+    <pre className="overflow-x-auto whitespace-pre-wrap break-words rounded-[16px] border border-[var(--border)] bg-[var(--bg-secondary)] p-4 text-left font-mono text-sm leading-relaxed">
       <code>
         {tokens.map((t, idx) => (
           <span key={idx} style={{ color: COLORS[t.kind] }}>
